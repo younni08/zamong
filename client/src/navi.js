@@ -22,7 +22,7 @@ const Navi = () => {
         <div className="navi">
             <div className="navi_level1">
                 <Link to="/">이루자몽</Link>
-                <span onClick={expandmenu}>ㅁ</span>
+                <span onClick={expandmenu}><i class="xi-bars xi-x"></i></span>
             </div>
             <div className="navi_level2" id="navi_list">
                 <Link onClick={close} to="/visit"><span>방문</span><span>map</span></Link>

@@ -32,7 +32,7 @@ code {
 .navi_level1{
   display:flex;
   justify-content: space-between;
-  border-bottom:solid 1px #173f5f;
+  border-bottom:solid 2px #173f5f;
 }
 .navi_level1 > span{
   color:#173f5f;
@@ -51,7 +51,7 @@ code {
   text-decoration: none;
 }
 .navi_level1 > span:last-child{
-  border-left:solid 1px #173f5f;
+  border-left:solid 2px #173f5f;
 }
 .navi_level2{
   display:flex;
