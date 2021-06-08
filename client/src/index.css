@@ -5,9 +5,102 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background:#f6d55c
 }
-
+/* 
+#173f5f
+#20639b
+#3caea3
+#f6d55c
+#ed553b
+*/
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.root{
+  display:flex;
+  flex-direction: column;
+  width:100%;
+}
+/* -------------------------------------- navi ------------------------------------------ */
+.navi{
+  display:flex;
+  width:100%;
+  flex-direction: column;
+}
+.navi_level1{
+  display:flex;
+  justify-content: space-between;
+  border-bottom:solid 1px #173f5f;
+}
+.navi_level1 > span{
+  color:#173f5f;
+  font-size:1.5em;
+  font-weight: bold;
+  padding:15px 20px;
+  cursor: pointer;
+}
+.navi_level1 > a{
+  color:#173f5f;
+  font-size:1.5em;
+  font-weight: bold;
+  padding:15px 20px;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+}
+.navi_level1 > span:last-child{
+  border-left:solid 1px #173f5f;
+}
+.navi_level2{
+  display:flex;
+  flex-direction: column;
+  background:#fff;
+  height:0px;
+  overflow: hidden;
+  transition:all 0.3s;
+  cursor: pointer;
+}
+.navi_level2 > a{
+  display:flex;
+  justify-content: flex-start;
+  /* margin:5px 0px; */
+  padding:10px 15px;
+  font-size:0.9em;
+  font-weight:bold;
+  color:#ed553b;
+  border-bottom:solid 1px #173f5f;
+  text-decoration: none;
+}
+.navi_level2 > a > span:first-child{
+  display:flex;
+  margin:0px 15px 0px 0px;
+}
+/* -------------------------------------- navi ------------------------------------------ */
+.tempbody{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position:relative;
+  color:#173f5f;
+}
+.tempbody > div{
+  display:flex;
+  justify-content: space-between;
+  position:absolute;
+  top:200px;
+  font-size:3em;
+  font-weight: bold;
+  width:160px;
+  transition: all 0.3s;
+}
+.tempbody > span{
+  display:flex;
+  margin:400px 0px 0px 0px;
+  padding:10px;
+  border:solid 2px #000;
+  font-size:1.5em;
+  font-weight: bold;;
 }
