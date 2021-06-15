@@ -104,6 +104,18 @@ code {
   font-size:1.5em;
   font-weight: bold;;
 }
+/* -------------------------------------- article ------------------------------------------ */
+.article{
+  display:flex;
+  justify-content: center;
+  width:100%;
+}
+.article > div{
+  display:flex;
+  flex-direction: column;
+  width:100%;
+}
+
 /* -------------------------------------- item ------------------------------------------ */
 .item{
   display:flex;
@@ -264,5 +276,5 @@ code {
   padding:3px 8px;
   border-radius: 5px;
   background:#fff;
-  margin:0px 5px;
+  margin:0px 3px;
 }

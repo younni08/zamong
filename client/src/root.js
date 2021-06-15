@@ -9,6 +9,7 @@ import T6 from "./temp6"
 import T7 from "./temp7"
 import Workshop from "./components/workshop/workshop"
 import Item from "./components/item/item"
+import Article from "./components/article/article"
 
 const Root = () => {
     return (
@@ -23,6 +24,7 @@ const Root = () => {
                 <Route path ="/workshop" component={Workshop} />
                 <Route path ="/about" component={T6} />
                 <Route path ="/hope" component={T7} />
+                <Route path ="/article" component={Article} />
             </Switch>
         </div>
     )
