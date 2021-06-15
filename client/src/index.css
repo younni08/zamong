@@ -115,7 +115,45 @@ code {
   flex-direction: column;
   width:100%;
 }
-
+.article_header{
+  display:flex;
+  flex-direction: column;
+  /* margin:20px 0px 0px 0px; */
+}
+.article_header_level1{
+  display:flex;
+  border-bottom:solid 1px #000;
+  padding:5px;
+  border-top:solid 1px #000;
+}
+.article_header_level1 > span{
+  font-size:1em;
+  font-weight: bold;
+}
+.article_header_level2{
+  display:flex;
+  justify-content: space-between;
+  font-size:0.9em;
+  border-bottom:solid 1px #000;
+  padding:5px;
+}
+.article_header_level2 > div{
+  display:flex;
+}
+.article_header_level2 > div > span:nth-child(1){
+  display:flex;
+  margin:0px 10px 0px 0px;
+  font-weight: bold;
+}
+.article_header_level2 > div > span:nth-child(2){
+  color:#7f7f7f;
+}
+.article_header_level3{
+  display:flex;
+  font-size:0.9em;
+  border-bottom:solid 1px #000;
+  padding:5px;
+}
 /* -------------------------------------- item ------------------------------------------ */
 .item{
   display:flex;

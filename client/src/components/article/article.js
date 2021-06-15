@@ -26,7 +26,7 @@ const Article = () => {
                     </div>
                 </div>
                 <div className="article_body">
-
+                    본문
                 </div>
                 <div className="article_footer">
 
