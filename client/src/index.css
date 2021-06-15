@@ -104,3 +104,165 @@ code {
   font-size:1.5em;
   font-weight: bold;;
 }
+/* -------------------------------------- item ------------------------------------------ */
+.item{
+  display:flex;
+  justify-content: center;
+  width:100%;
+}
+.item > div{
+  display:flex;
+  flex-direction: column;
+  width:100%;
+}
+.item > div > span{
+  display:flex;
+  /* justify-content: center; */
+  padding:10px;
+  font-size:1.1em;
+  font-weight: bold;
+}
+.item_main{
+  display:flex;
+  border-top:solid 2px #000;
+  flex-direction: column;
+  padding:20px;
+}
+.itembox{
+  display:flex;
+  flex-direction: column;
+  width:100%;
+  border:solid 1px #000;
+  margin:10px 0px 20px 0px;
+  box-shadow: 0px 0px 5px 5px rgb(32 33 36 / 28%);
+  background:#173f5f;
+}
+.itembox > div:nth-child(1){
+  height:calc(100vw - 20px)
+}
+.itembox > div:nth-child(2){
+  display:none;
+}
+/* -------------------------------------- workshop ------------------------------------------ */
+.workshop{
+  display:flex;
+  justify-content: center;
+  width:100%;
+}
+.workshop > div{
+  display:flex;
+  flex-direction: column;
+  width:100%;
+}
+.workshop_navi{
+  display: flex;
+  flex-wrap: wrap;
+  width:calc(100% - 20px);
+  padding:10px;
+}
+.workshop_navi > span{
+  display:flex;
+  border:solid 1px #000;
+  padding:3px 8px;
+  margin:5px;
+  font-size:0.9em;
+  background:#fff;
+  font-weight: bold;
+  border-radius: 5px;
+}
+.workshop_searchbar{
+  display:flex;
+  align-items: center;
+  width:100%;
+}
+.workshop_searchbar > div{
+  display:flex;
+  justify-content: flex-start;
+  width:calc(100% - 80px);
+  margin:0px 0px 0px 10px;
+  border:solid 1px #000;
+  margin:0px 10px 0px 10px;
+  padding:5px;
+  background:#fff;
+}
+.workshop_searchbar > div select{
+  width:70px;
+  margin:0px 5px 0px 0px;
+}
+.workshop_searchbar > div input{
+  border:none;
+  width:calc(100% - 75px);
+}
+.workshop_searchbar > div input:focus{
+  outline: none;
+}
+.workshop_searchbar > span{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  font-size:0.8em;
+  color:#fff;
+  border-radius: 5px;
+  width:50px;
+  background:#173f5f;
+  margin:0px 10px 0px 0px;
+  height:30px;
+}
+.workshop_body{
+  display:flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin:10px 0px 20px 0px;
+}
+.workshopbox{
+  display:flex;
+  flex-direction: column;
+  border:solid 1px #000;
+  background:#fff;
+  width:170px;
+  margin:5px 7px;
+}
+.workshopbox > div{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height:170px;
+  padding:5px;
+  background:#ed553b;
+}
+.workshopbox > span:nth-child(2){
+  display:block;
+  margin:5px 0px;
+  font-size:0.9em;
+  padding:0px 5px;
+  width:calc(100% - 10px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: bold;
+}
+.workshopbox > span:nth-child(3){
+  display:flex;
+  font-size:0.8em;
+  margin:0px 0px 5px 0px;
+  padding:0px 5px;
+  color:#7f7f7f;
+}
+.workshop_paging{
+  display:flex;
+  width:100%;
+  justify-content: center;
+}
+.workshop_paging > div{
+  display:flex;
+  justify-content: center;
+  width:100%;
+}
+.workshop_paging > div > span{
+  font-size:0.8em;
+  border:solid 1px #000;
+  padding:3px 8px;
+  border-radius: 5px;
+  background:#fff;
+  margin:0px 5px;
+}
