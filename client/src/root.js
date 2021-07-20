@@ -11,6 +11,7 @@ import Workshop from "./components/workshop/workshop"
 import Items from "./components/items/items"
 import Item from "./components/item/item"
 import Article from "./components/article/article"
+import Board from "./components/board/board"
 
 const Root = () => {
     return (
@@ -18,7 +19,7 @@ const Root = () => {
             <Navi />
             <Switch>
                 <Route exact path="/" component={Index} />
-                <Route path ="/visit" component={T1} />
+                <Route path ="/board" component={Board} />
                 <Route path ="/items" component={Items} />
                 <Route path ="/item" component={Item} />
                 <Route path ="/togather" component={T3} />
