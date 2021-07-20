@@ -6,7 +6,7 @@ const Navi = () => {
     const expandmenu = () => {
         if(expand===false){
             setExpand(true)
-            document.getElementById("navi_list").style.height = "356px";
+            document.getElementById("navi_list").style.height = "360px";
             // document.getElementById("navi_list").style.height = "287px";
         }else{
             setExpand(false)
