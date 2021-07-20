@@ -16,20 +16,71 @@ const Item = () => {
                             <img src="./pics/test.png" alt="test" />
                         </div>
                     </Link>
-                    <Itembox />
-                    <Itembox />
-                    <Itembox />
-                    <Itembox />
-                    <Itembox />
-                    <Itembox />
-                    <Itembox />
-                    <Itembox />
-                    <Itembox />
-                    <Itembox />
-                    <Itembox />
-                    <Itembox />
-                    <Itembox />
-                    <Itembox />
+                    <Link to="/item" className="itembox">
+                        <div>
+                            <img src="./pics/test.png" alt="test" />
+                        </div>
+                    </Link>
+                    <Link to="/item" className="itembox">
+                        <div>
+                            <img src="./pics/test.png" alt="test" />
+                        </div>
+                    </Link>
+                    <Link to="/item" className="itembox">
+                        <div>
+                            <img src="./pics/test.png" alt="test" />
+                        </div>
+                    </Link>
+                    <Link to="/item" className="itembox">
+                        <div>
+                            <img src="./pics/test.png" alt="test" />
+                        </div>
+                    </Link>
+                    <Link to="/item" className="itembox">
+                        <div>
+                            <img src="./pics/test.png" alt="test" />
+                        </div>
+                    </Link>
+                    <Link to="/item" className="itembox">
+                        <div>
+                            <img src="./pics/test.png" alt="test" />
+                        </div>
+                    </Link>
+                    <Link to="/item" className="itembox">
+                        <div>
+                            <img src="./pics/test.png" alt="test" />
+                        </div>
+                    </Link>
+                    <Link to="/item" className="itembox">
+                        <div>
+                            <img src="./pics/test.png" alt="test" />
+                        </div>
+                    </Link>
+                    <Link to="/item" className="itembox">
+                        <div>
+                            <img src="./pics/test.png" alt="test" />
+                        </div>
+                    </Link>
+                    <Link to="/item" className="itembox">
+                        <div>
+                            <img src="./pics/test.png" alt="test" />
+                        </div>
+                    </Link>
+                    <Link to="/item" className="itembox">
+                        <div>
+                            <img src="./pics/test.png" alt="test" />
+                        </div>
+                    </Link>
+                    <Link to="/item" className="itembox">
+                        <div>
+                            <img src="./pics/test.png" alt="test" />
+                        </div>
+                    </Link>
+                    <Link to="/item" className="itembox">
+                        <div>
+                            <img src="./pics/test.png" alt="test" />
+                        </div>
+                    </Link>
                     <Itembox />
                     <Itembox />
                 </div>
