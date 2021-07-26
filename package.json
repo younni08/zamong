@@ -1,0 +1,39 @@
+{
+  "name": "zamong",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "cd client && yarn start",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/younni08/zamong.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/younni08/zamong/issues"
+  },
+  "dependencies": {
+    "atob": "^2.1.2",
+    "aws-sdk": "^2.927.0",
+    "bcryptjs": "^2.4.3",
+    "btoa": "^1.2.1",
+    "concurrently": "^6.2.0",
+    "crypto-js": "^4.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.2",
+    "nodemailer": "^6.6.1",
+    "nodemon": "^2.0.7",
+    "pg": "^8.6.0",
+    "qrcode.react": "^1.0.1",
+    "react-wordcloud": "^1.2.7"
+  },
+  "homepage": "https://github.com/younni08/zamong#readme"
+}

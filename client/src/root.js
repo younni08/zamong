@@ -10,6 +10,7 @@ import Item from "./components/item/item"
 import Article from "./components/article/article"
 import Board from "./components/board/board"
 import Map from "./components/map/map"
+import Zamong from "./components/zamong/zamong"
 
 const Root = () => {
     return (
@@ -25,6 +26,7 @@ const Root = () => {
                 <Route path ="/about" component={T6} />
                 <Route path ="/map" component={Map} />
                 <Route path ="/article" component={Article} />
+                <Route path ="/zamong" component={Zamong} />
             </Switch>
         </div>
     )
