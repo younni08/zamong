@@ -877,6 +877,7 @@ code {
   flex-direction: column;
   border:solid 1px #707070;
   background:#fff;
+  margin:0px 0px 100px 0px;
 }
 .mong_item_general{
   display:flex;
@@ -894,15 +895,237 @@ code {
   font-size: 1.1em;
   font-weight: 700;
 }
+.mong_item_general > div:first-child > span.addon{
+  font-size: 0.8em;
+  padding:3px 8px;
+  background:#2A5EBC;
+  cursor: pointer;
+  border-radius: 5px;
+  color:#fff;
+}
 .mong_item_general > div:first-child > span:last-child{
   font-size: 0.8em;
 }
 .mong_item_general > div:last-child{
   display: flex;
-  width: calc(100% - 20px);
+  flex-wrap: wrap;
+  width: calc(100% - 22px);
   padding: 10px;
   border: 1px solid #c1cdcd;
   background: #f4f4f4;
+}
+.mong_item_general > div.r10:last-child{
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.mong_item_general_element{
+  display:flex;
+  align-items: center;
+  margin:0px 10px 0px 0px;
+}
+.mong_item_general_element > label{
+  display: flex;
+  margin: 0 5px 2px 0;
+  font-size: .9em;
+  font-weight: 700;
+  color: #7f7f7f;
+  cursor: pointer;
+  user-select: none;
+}
+.mong_genenal_inputbox{
+  width:100%;
+}
+.mong_genenal_inputbox > input{
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  background: #f4f4f4;
+}
+.mong_genenal_quill{
+  height:200px;
+  overflow:hidden
+}
+.mong_genenal_quill > div.quill{
+  width:100%;
+}
+.mong_genenal_quill div.ql-editor{
+  min-height: 100px !important;
+  max-height: 300px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.mong_item_manager1{
+  display:flex;
+  justify-content: space-between;
+  margin:10px 0px 0px 0px;
+}
+.mong_item_manager1 > div{
+  width:calc(50% - 10px)
+}
+.mong_item_manager2{
+  display:flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin:20px 0px 0px 0px;
+}
+.mong_item_manager2 > div{
+  width:calc(33% - 10px)
+}
+.mong_add_newbig{
+  margin:10px 0px;
+  display:flex;
+  justify-content: space-between;
+  width:100%;
+  height:0px;
+  transition:all 0.3s;
+  overflow: hidden;
+  /* 67 */
+}
+.mong_add_newbig > div{
+  display:flex;
+  flex-direction: column;
+  width:calc(50% - 10px)
+}
+.mong_add_newbig > div > span{
+  font-weight: bold;
+}
+.mong_add_newbig > div > div{
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin:2px 0px 0px 0px;
+  border: 1px solid #c1cdcd;
+  background: #f4f4f4;
+}
+.mong_add_newbig > div > div input{
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  background: #f4f4f4;
+}
+.mong_add_newbig > div > div input.image{
+  font-size: 0.6rem;
+}
+.mong_add_newmedium{
+  display:flex;
+  flex-direction: column;
+  width:100%;
+  height:0px;
+  transition:all 0.3s;
+  overflow: hidden;
+  margin:0px 0px 10px 0px;
+  /*  */
+}
+.mong_add_newmedium > div:first-child{
+  display:flex;
+  justify-content: space-between;
+  margin:10px 0px 0px 0px;
+}
+.mong_add_newmedium > div:first-child > div{
+  display:flex;
+  flex-direction: column;
+  width:calc(50% - 10px)
+}
+.mong_add_newmedium > div:first-child > div > span{
+  font-weight: bold;
+}
+.mong_add_newmedium > div:first-child > div > div{
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin:2px 0px 0px 0px;
+  border: 1px solid #c1cdcd;
+  background: #f4f4f4;
+}
+.mong_add_newmedium > div:first-child > div > div input{
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  background: #f4f4f4;
+}
+.mong_add_newmedium > div:first-child > div > div input.image{
+  font-size: 0.6rem;
+}
+.mong_add_newsmall{
+  display:flex;
+  flex-direction: column;
+  width:100%;
+  height:0px;
+  transition:all 0.3s;
+  overflow: hidden;
+  margin:0px 0px 10px 0px;
+  /*  */
+}
+.mong_add_newsmall > div:first-child{
+  display:flex;
+  justify-content: space-between;
+  margin:10px 0px 0px 0px;
+}
+.mong_add_newsmall > div:first-child > div{
+  display:flex;
+  flex-direction: column;
+  width:calc(50% - 10px)
+}
+.mong_add_newsmall > div:first-child > div > span{
+  font-weight: bold;
+}
+.mong_add_newsmall > div:first-child > div > div{
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin:2px 0px 0px 0px;
+  border: 1px solid #c1cdcd;
+  background: #f4f4f4;
+}
+.mong_add_newsmall > div:first-child > div > div input{
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  background: #f4f4f4;
+}
+.mong_add_newsmall > div:first-child > div > div input.image{
+  font-size: 0.6rem;
+}
+.mong_item_manager3{
+  display:flex;
+  justify-content: space-between;
+}
+.mong_item_manager3 > div{
+  display:flex;
+  flex-direction: column;
+  width:calc(50% - 10px)
+}
+.general_input > input{
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  background: #f4f4f4;
+}
+.general_input > input:focus{
+  outline: none;
+}
+.mong_item_general_submit{
+  width:100%;
+  margin:20px 0px 0px 0px;
+}
+.mong_item_general_submit > span{
+  display:flex;
+  justify-content: center;
+  padding:20px 0px;
+  width:100%;
+  background:#2A5EBC;
+  border-radius: 5px;
+  font-weight: bold;
+  color:#fff;
+  cursor: pointer;
 }
 /* --------------------------------------- board --------------------------------------- */
 .board{

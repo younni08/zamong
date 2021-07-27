@@ -42,15 +42,9 @@ let client = new Pool ({
 
 
 // JWT generator
-// const jwt = require("jsonwebtoken");
-// const jwtkey = fs.readFileSync(path.resolve(__dirname,"./../jwt_key.json"));
-// const jwtConfig = JSON.parse(jwtkey);
-// const setJWT = (user_pk) => {
-//     let token = jwt.sign(
-//         {user_pk: user_pk}, jwtConfig.key, { expiresIn : "7d"}
-//     )
-//     return token;
-// }
+const jwt = require("jsonwebtoken");
+const jwtkey = fs.readFileSync(path.resolve(__dirname,"./../jwt_key.json"));
+const jwtConfig = JSON.parse(jwtkey);
 
 // const uploadtoS3 = (file,name,type) => {
 //     let param ={
@@ -69,11 +63,27 @@ let client = new Pool ({
 
 router.post("/login", async (req,res) => {
     try{
+        if(req.body.input1===undefined||req.body.input1===""||req.body.input2===undefined||req.body.input2==="") return res.send("fail")
         console.log(req.body)
         const db = await client.connect();
-        
+        let date = new Date();
+        let result = await db.query(`select user_id,user_pw from users where user_id=$1`,[req.body.input1])
+        if(result.rows[0]===undefined){await db.release(); return res.send('fail2')}
+        let comparePass = await bcrypt.compareSync(req.body.input2,result.rows[0].user_pw);
+        if(comparePass !== true){await db.release(); return res.send('fail3')}
+
+        let session = Math.floor(Math.random()*4398046511104)+".date"+date.setHours(date.getHours() + 4);
+        let ip = req.headers['x-forwarded-for'] ||  req.connection.remoteAddress;
+        await db.query(`update users set session=$1,user_id=$2 where user_id=$3`,[session,ip,req.body.input2])
+        await db.query(`insert into users_history(user_id,login_date,user_ip) values ($1,$2,$3)`,[req.body.input1,date,ip])
         await db.release();
-        return res.send("registered");
+        let temp_token = jwt.sign({user_pk:result.rows[0].user_id},jwtConfig.key);
+        let returnSession = jwt.sign({session:session},jwtConfig.key);
+        let data = {
+            token:temp_token,
+            session:returnSession,
+        }
+        return res.send(data);
     }catch(err){
         console.log("error on register")
         console.log(err)

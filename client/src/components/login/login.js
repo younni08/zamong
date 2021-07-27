@@ -1,12 +1,27 @@
 import React,{useState} from "react";
 import axios from "axios"
+import {Redirect} from "react-router-dom"
+
+// const bcrypt = require('bcryptjs');
+// const saltRounds = 10;
+const setCookie = (name, value, exp) => {
+    var date = new Date();
+    date.setTime(date.getTime() + exp*60*60*1000*2);
+    document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
+};
 
 const Login = () => {
     const [input1,setInput1] = useState("")
     const [input2,setInput2] = useState("")
+    const [redirect,setRedirect] = useState(false)
     
     const handleinput1 = (e) => {setInput1(e.target.value)}
     const handleinput2 = (e) => {setInput2(e.target.value)}
+    // const handleinput2 = (e) => {
+    //     bcrypt.hash(e.target.value, saltRounds, (err,hash) => {
+    //         setInput2(hash)
+    //     })
+    // }
 
     const loginSubmit = async() => {
         let url = "/api/mong/login"
@@ -20,7 +35,10 @@ const Login = () => {
             }
         }
         let res = await axios.post(url,params,config)
-        console.log(res.data)
+        if(res.data==="fail") return alert("로그인 정보가 일치하지 않습니다.")
+        await setCookie('token',res.data.token,2);
+        await setCookie('session',res.data.session,2);
+        if(res.data!=="fail") return setRedirect(true)
     }
 
     return(
@@ -45,6 +63,9 @@ const Login = () => {
                     <span>로그인</span>
                 </div>
             </div>
+            {
+                redirect?<Redirect to="/zamong" />:""
+            }
         </div>
     )
 }

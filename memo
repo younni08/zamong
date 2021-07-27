@@ -3,3 +3,17 @@ keeperchan@gmail.com
 이루자몽 aws 비밀번호
 Irooza11##
 
+
+create table users (
+    id serial primary key,
+    user_id varchar(100),
+    user_pw varchar(1000),
+    session varchar(1000),
+    login_date timestamp
+)
+
+create table users_history (
+    id serial primary key,
+    user_id varchar(100)
+    login_date timestamp
+)
