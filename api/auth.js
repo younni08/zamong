@@ -67,12 +67,13 @@ let client = new Pool ({
 // }
 
 
-router.post("/register", async (req,res) => {
-    let t1 = new Date();
+router.post("/login", async (req,res) => {
     try{
+        console.log(req.body)
+        const db = await client.connect();
         
+        await db.release();
         return res.send("registered");
-        // 이거 찾아야함 
     }catch(err){
         console.log("error on register")
         console.log(err)

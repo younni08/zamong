@@ -11,6 +11,7 @@ import Article from "./components/article/article"
 import Board from "./components/board/board"
 import Map from "./components/map/map"
 import Zamong from "./components/zamong/zamong"
+import Login from "./components/login/login"
 
 const Root = () => {
     return (
@@ -27,6 +28,7 @@ const Root = () => {
                 <Route path ="/map" component={Map} />
                 <Route path ="/article" component={Article} />
                 <Route path ="/zamong" component={Zamong} />
+                <Route path ="/login" component={Login} />
             </Switch>
         </div>
     )
