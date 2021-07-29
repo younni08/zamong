@@ -124,6 +124,83 @@ code {
 .map_expand > div:nth-child(2n-1){
   border-right: solid 1px #000;
 }
+/* -------------------------------------- rtem ------------------------------------------ */
+.rtem{
+  display:flex;
+  justify-content: center;
+  width:100%;
+}
+.rtem > div{
+  display:flex;
+  flex-direction: column;
+  width:100%;
+}
+.rtem > div > div:first-child{
+  display:flex;
+  justify-content: space-between;
+  padding:15px;
+  font-weight: bold;
+  color:#001717;
+}
+.rtem > div > div:first-child > span{
+  font-size:20px;
+}
+.rtem_main{
+  display:flex;
+  flex-direction: column;
+  border-top:solid 2px #000;
+  width:100%;
+}
+.rtem_level1{
+  display:flex;
+  justify-content: space-between;
+  padding:15px 20px;
+  width:calc(100% - 40px);
+  background:#00B775;
+}
+.rtem_level1 > input{
+  width:calc(100% - 25px);
+  border:none;
+  background:#00B775;
+}
+.rtem_level1 > input:focus{
+  outline: none;
+}
+.rtem_level1 > input::placeholder{
+  color:#fff;
+}
+.rtem_level1 > span{
+  color:#fff;
+}
+.rtem_level2{
+  display:flex;
+  flex-direction: column;
+  width:100%;
+}
+.rtem_level2 > div:first-child{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  background:#eaeaea;
+  width:100vw;
+  height:50vw;
+}
+.rtem_level2 > div:last-child{
+  display:flex;
+  justify-content: space-between;
+  padding:0px 20px;
+  margin:15px 0px;
+  width:calc(100% - 40px);
+}
+.rtem_level2 > div:last-child > span{
+  display:flex;
+  border-bottom:2px #eaeaea solid;
+  width:calc(25vw - 15px);
+}
+.rtem_level2 > div:last-child > span.on{
+  border-bottom:2px #00B775 solid;
+}
 /* -------------------------------------- index ------------------------------------------ */
 .index{
   display:flex;

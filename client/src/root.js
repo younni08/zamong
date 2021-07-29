@@ -12,6 +12,7 @@ import Board from "./components/board/board"
 import Map from "./components/map/map"
 import Zamong from "./components/zamong/zamong"
 import Login from "./components/login/login"
+import Rtem from "./components/rtem/rtme"
 
 const Root = () => {
     return (
@@ -20,6 +21,7 @@ const Root = () => {
             <Switch>
                 <Route exact path="/" component={Index} />
                 <Route path ="/board" component={Board} />
+                <Route path ="/Rtem" component={Rtem} />
                 <Route path ="/items" component={Items} />
                 <Route path ="/item" component={Item} />
                 <Route path ="/togather" component={T3} />
