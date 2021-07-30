@@ -76,3 +76,18 @@ create table rtem_t4(
     rtem_t4_zamong_pick boolean default false,
     rtem_t4_date timestamp
 )
+
+create table rka_article(
+    id serial primary key,
+    rka_title varchar(1000),
+    rka_tag varchar(1000),
+    rka_content varchar(50000),
+    rka_cover_key varchar(1000),
+    rka_cover_type varchar(100),
+    rka_image_key varchar(2000),
+    rka_image_type varchar(500),
+    rka_file_key varchar(2000),
+    rka_file_type varchar(500),
+    rka_vote int,
+    rka_date timestamp
+)

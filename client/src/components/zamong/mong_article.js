@@ -69,7 +69,7 @@ const MongArticle = () => {
         let token = getCookie('token');
         let session = getCookie('session');
         if(token === null||session===null) return alert("로그인 후 이용해주세요.")
-        const url = "/api/viewvote/bbsWrite";
+        const url = "/api/mong/rka_article_write";
         const formData = new FormData();
         let imgCnt =0;
         const config = {
