@@ -71,7 +71,7 @@ const Map = () => {
                     </div>
                 </div>
                 <div className="map_main">
-
+                    <img src="./pics/sample2.png" alt="map" />
                 </div>
             </div>
         </div>

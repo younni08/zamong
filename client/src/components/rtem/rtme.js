@@ -1,5 +1,5 @@
 import React from "react";
-
+import {Link} from "react-router-dom"
 
 const Rtem = () => {
     return (
@@ -26,13 +26,66 @@ const Rtem = () => {
                         </div>
                     </div>
                     <div className="rtem_level3">
-                        <span></span>
+                        <span>이루자몽 PICK</span>
                         <div>
-
+                            <Link to="/items">
+                                <img src="./pics/test.png" alt="text" />
+                            </Link>
+                            <Link to="/items">
+                                <img src="./pics/test.png" alt="text" />
+                            </Link>
                         </div>
                     </div>
                     <div className="rtem_level4">
-
+                        <span>부엌</span>
+                        <div>
+                            <Link to="/items?c=부엌">
+                                <img src="./pics/test.png" alt="text" />
+                            </Link>
+                            <Link to="/items?c=부엌">
+                                <img src="./pics/test.png" alt="text" />
+                            </Link>
+                            <Link to="/items?c=부엌">
+                                <img src="./pics/test.png" alt="text" />
+                            </Link>
+                            <Link to="/items?c=부엌">
+                                <img src="./pics/test.png" alt="text" />
+                            </Link>
+                        </div>
+                    </div>
+                    <div className="rtem_level4">
+                        <span>화장실</span>
+                        <div>
+                            <Link to="/items?c=화장실">
+                                <img src="./pics/test.png" alt="text" />
+                            </Link>
+                            <Link to="/items?c=화장실">
+                                <img src="./pics/test.png" alt="text" />
+                            </Link>
+                            <Link to="/items?c=화장실">
+                                <img src="./pics/test.png" alt="text" />
+                            </Link>
+                            <Link to="/items?c=화장실">
+                                <img src="./pics/test.png" alt="text" />
+                            </Link>
+                        </div>
+                    </div>
+                    <div className="rtem_level4">
+                        <span>생활</span>
+                        <div>
+                            <Link to="/items?c=생활">
+                                <img src="./pics/test.png" alt="text" />
+                            </Link>
+                            <Link to="/items?c=생활">
+                                <img src="./pics/test.png" alt="text" />
+                            </Link>
+                            <Link to="/items?c=생활">
+                                <img src="./pics/test.png" alt="text" />
+                            </Link>
+                            <Link to="/items?c=생활">
+                                <img src="./pics/test.png" alt="text" />
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>

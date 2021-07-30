@@ -3,11 +3,7 @@ import React from "react";
 const Temp = () => {
     return (
         <div className="tempbody">
-            <div id="tempbody">
-                <span>3</span>
-                <span>page</span>
-            </div>
-            <span>3 page</span>
+            <span>개발중인 페이지입니다.</span>
         </div>
     )
 }

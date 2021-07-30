@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Itembox from "./itembox"
 import {Link} from "react-router-dom"
 
-const Item = () => {
+const Item = (props) => {
+    const [cate,setCate] = useState("생활용품")
+
+    useEffect(()=>{
+        init();
+    },[props])
+
+    const init = () => {
+        let getCate = window.location.href
+        getCate = getCate.split("items?c=")[1]
+        getCate = decodeURI(getCate)
+        setCate(getCate)
+    }
+
     return (
         <div className="item">
             <div>
@@ -10,79 +23,102 @@ const Item = () => {
                     <span>알-템</span>
                     <span><i className="xi-caret-down-min"></i></span>
                 </div>
+                <div className="rtem_level1">
+                    <input type="text" placeholder="예) 대나무 칫솔" />
+                    <span><i className="xi-search"></i></span>
+                </div>
+                <div className="rtem_level2">
+                    <div>
+                        <span>광고 배너</span>
+                    </div>
+                    <div>
+                        <span className="on"></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
                 <div className="item_main">
-                    <Link to="/item" className="itembox">
-                        <div>
-                            <img src="./pics/test.png" alt="test" />
-                        </div>
-                    </Link>
-                    <Link to="/item" className="itembox">
-                        <div>
-                            <img src="./pics/test.png" alt="test" />
-                        </div>
-                    </Link>
-                    <Link to="/item" className="itembox">
-                        <div>
-                            <img src="./pics/test.png" alt="test" />
-                        </div>
-                    </Link>
-                    <Link to="/item" className="itembox">
-                        <div>
-                            <img src="./pics/test.png" alt="test" />
-                        </div>
-                    </Link>
-                    <Link to="/item" className="itembox">
-                        <div>
-                            <img src="./pics/test.png" alt="test" />
-                        </div>
-                    </Link>
-                    <Link to="/item" className="itembox">
-                        <div>
-                            <img src="./pics/test.png" alt="test" />
-                        </div>
-                    </Link>
-                    <Link to="/item" className="itembox">
-                        <div>
-                            <img src="./pics/test.png" alt="test" />
-                        </div>
-                    </Link>
-                    <Link to="/item" className="itembox">
-                        <div>
-                            <img src="./pics/test.png" alt="test" />
-                        </div>
-                    </Link>
-                    <Link to="/item" className="itembox">
-                        <div>
-                            <img src="./pics/test.png" alt="test" />
-                        </div>
-                    </Link>
-                    <Link to="/item" className="itembox">
-                        <div>
-                            <img src="./pics/test.png" alt="test" />
-                        </div>
-                    </Link>
-                    <Link to="/item" className="itembox">
-                        <div>
-                            <img src="./pics/test.png" alt="test" />
-                        </div>
-                    </Link>
-                    <Link to="/item" className="itembox">
-                        <div>
-                            <img src="./pics/test.png" alt="test" />
-                        </div>
-                    </Link>
-                    <Link to="/item" className="itembox">
-                        <div>
-                            <img src="./pics/test.png" alt="test" />
-                        </div>
-                    </Link>
-                    <Link to="/item" className="itembox">
-                        <div>
-                            <img src="./pics/test.png" alt="test" />
-                        </div>
-                    </Link>
-                    <Itembox />
-                    <Itembox />
+                    <div>
+                        <span>알-템 - {cate}</span>
+                        <select>
+                            <option>업로드순</option>
+                        </select>
+                    </div>
+                    <div>
+                        <Link to="/item" className="itembox">
+                            <div>
+                                <img src="./pics/test.png" alt="test" />
+                            </div>
+                        </Link>
+                        <Link to="/item" className="itembox">
+                            <div>
+                                <img src="./pics/test.png" alt="test" />
+                            </div>
+                        </Link>
+                        <Link to="/item" className="itembox">
+                            <div>
+                                <img src="./pics/test.png" alt="test" />
+                            </div>
+                        </Link>
+                        <Link to="/item" className="itembox">
+                            <div>
+                                <img src="./pics/test.png" alt="test" />
+                            </div>
+                        </Link>
+                        <Link to="/item" className="itembox">
+                            <div>
+                                <img src="./pics/test.png" alt="test" />
+                            </div>
+                        </Link>
+                        <Link to="/item" className="itembox">
+                            <div>
+                                <img src="./pics/test.png" alt="test" />
+                            </div>
+                        </Link>
+                        <Link to="/item" className="itembox">
+                            <div>
+                                <img src="./pics/test.png" alt="test" />
+                            </div>
+                        </Link>
+                        <Link to="/item" className="itembox">
+                            <div>
+                                <img src="./pics/test.png" alt="test" />
+                            </div>
+                        </Link>
+                        <Link to="/item" className="itembox">
+                            <div>
+                                <img src="./pics/test.png" alt="test" />
+                            </div>
+                        </Link>
+                        <Link to="/item" className="itembox">
+                            <div>
+                                <img src="./pics/test.png" alt="test" />
+                            </div>
+                        </Link>
+                        <Link to="/item" className="itembox">
+                            <div>
+                                <img src="./pics/test.png" alt="test" />
+                            </div>
+                        </Link>
+                        <Link to="/item" className="itembox">
+                            <div>
+                                <img src="./pics/test.png" alt="test" />
+                            </div>
+                        </Link>
+                        <Link to="/item" className="itembox">
+                            <div>
+                                <img src="./pics/test.png" alt="test" />
+                            </div>
+                        </Link>
+                        <Link to="/item" className="itembox">
+                            <div>
+                                <img src="./pics/test.png" alt="test" />
+                            </div>
+                        </Link>
+                        <Itembox />
+                        <Itembox />
+                    </div>
                 </div>
             </div>
         </div>

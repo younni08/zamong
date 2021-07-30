@@ -80,7 +80,7 @@ const Item = () => {
                                 <div>
                                     <div className="item_ex_level63_element">
                                         <div>
-                                            <span>a</span>
+                                            <img src="./pics/r1.png" alt="r10" />
                                         </div>
                                         <div>
                                             <span>Replace / 대체하기</span>
@@ -91,7 +91,7 @@ const Item = () => {
                                     </div>
                                     <div className="item_ex_level63_element">
                                         <div>
-                                            <span>a</span>
+                                            <img src="./pics/r3.png" alt="r10" />
                                         </div>
                                         <div>
                                             <span>Rot / 퇴비화하기</span>
@@ -102,7 +102,7 @@ const Item = () => {
                                     </div>
                                     <div className="item_ex_level63_element">
                                         <div>
-                                            <span>a</span>
+                                            <img src="./pics/r2.png" alt="r10" />
                                         </div>
                                         <div>
                                             <span>Recycle / 재활용 분리수거 하기</span>

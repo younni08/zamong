@@ -27,7 +27,7 @@ const Navi = () => {
             </div>
             <div className="navi_level2" id="navi_list">
                 <Link onClick={close} to="/visit"><span>알-텐데</span></Link>
-                <Link onClick={close} to="/items"><span>알-템</span></Link>
+                <Link onClick={close} to="/rtem"><span>알-템</span></Link>
                 <Link onClick={close} to="/map"><span>알-지도</span></Link>
                 <Link onClick={close} to="/Board"><span>알-까</span></Link>
                 <Link onClick={close} to="/project"><span>쓸떼 프로젝트</span></Link>

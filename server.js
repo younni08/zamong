@@ -10,8 +10,8 @@ const port = process.env.port || 6000;
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}));
 
-// const path = require("path");
-// app.use(express.static(__dirname+"./../html"));
+const path = require("path");
+app.use(express.static(__dirname+"./../html"));
 
 // Import Routes
 const authRoute = require("./api/auth");

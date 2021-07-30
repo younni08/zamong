@@ -47,19 +47,19 @@ const Board = () => {
                 </div>
                 <div className="board_main">
                     <div className="board_level1">
-                        <span>주목할만한 이야기</span>
+                        <input type="text" placeholder="예) 대나무 칫솔" />
+                        <span><i className="xi-search"></i></span>
+                    </div>
+                    <div className="board_level12">
                         <div>
-                            <div className="board_level1_element">
-                                <div>
-                                </div>
-                                <span>[알-템] 재활용 안되는 예쁜 쓰레기, 화장품 포장 쓰레기는 이제 그만.</span>
-                            </div>
-                            <div className="board_level1_element">
-                                <div>
-                                </div>
-                                <span>[알-지도] 청정 제주도의 제로웨이스트 바람. 제주도의 환경을 지키는 사람들.</span>
-                            </div>
-
+                            <div>이미지</div>
+                            <span>[알-템] 재활용 안되는 예쁜 쓰레기</span>
+                        </div>
+                        <div>
+                            <span className="on"></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
                         </div>
                     </div>
                     <div className="board_level2">
