@@ -418,10 +418,61 @@ router.post("/rka_article_write",async(req,res)=>{
             await db.release();
             return res.send("fail")
         }
+        let date = new Date();
 
+        let mana_pk = "";
+        let random_pk = Math.floor(Math.random()*4398046511104);
+        mana_pk = "rka"+btoa(random_pk);
+        mana_pk = mana_pk.replace(/=/g,'_')
+        let check_pk = await db.query("select rka_pk from rka_article where rka_pk=$1;",[mana_pk]);
+        if(check_pk.rows[0]!==undefined){
+            let pk_check = false
+            while(pk_check===true){
+                random_pk = Math.floor(Math.random()*4398046511104);
+                mana_pk = "rka"+btoa(random_pk);
+                mana_pk = mana_pk.replace(/=/g,'_')
+                check_pk = await db.query("select rka_pk from rka_article where rka_pk=$1;",[mana_pk]);
+                if(check_pk.rows[0]===undefined){
+                    checkPk = true
+                }
+            }
+        }
+
+        let cover_type = "default"
+        let cover_key = "default"
+        let attached_type = null
+        let attached_key = null
+        let img_key = [];
+        let img_type = [];
+        let img_cnt = 0;
+        if(req.body.imgCnt!==undefined) img_cnt = req.body.imgCnt
+        for(let i=0;i<req.files.length;i++){
+            if(req.files[i]!==undefined){
+                if(req.files[i].fieldname === "cover"){
+                    let name = "#rka_c"+ I + date.getTime();
+                    cover_type=req.files[i].mimetype;
+                    cover_key=name;
+                    await uploadtoS3(req.files[i].buffer,name,req.files[i].mimetype)
+                }
+                if(req.files[i].fieldname === "attached"){
+                    let name = "#rka_a"+ i + date.getTime();
+                    attached_type=req.files[i].mimetype;
+                    attached_key=name;
+                    await uploadtoS3(req.files[i].buffer,name,req.files[i].mimetype)
+                }
+                if(req.files[i].fieldname === "image"){
+                    let name = "#rka_i"+ i + date.getTime();
+                    img_key[i] = name;
+                    img_type[i] = req.files[i].mimetype;
+                    await uploadtoS3(req.files[i].buffer,name,req.files[i].mimetype);
+                }
+            }
+        }
+
+        await db.query(`insert into rka_article(rka_pk,rka_title,rka_tag,rka_content,rka_cover_key,rka_cover_type,rka_image_cnt,rka_image_key,rka_image_type,rka_file_key,rka_file_type,rka_date) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`,[mana_pk,req.body.title,req.body.tag,req.body.content,cover_key,cover_type,img_cnt,img_key,img_type,attached_key,attached_type,date])
 
         await db.release();
-        return res.send(returnArray)
+        return res.send("success")
     }catch(err){
         console.log("error on mong_item_init")
         console.log(err)

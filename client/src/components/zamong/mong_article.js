@@ -71,7 +71,7 @@ const MongArticle = () => {
         if(token === null||session===null) return alert("로그인 후 이용해주세요.")
         const url = "/api/mong/rka_article_write";
         const formData = new FormData();
-        let imgCnt =0;
+        let imgCnt = 0;
         const config = {
             headers : {
                 "content-type" : "multipart/form-data"
@@ -100,6 +100,7 @@ const MongArticle = () => {
                 let imagetype = getImgType(substring)
                 let fontImage = base64ToBlob(byteString,imagetype);
                 formData.append('image',fontImage)
+                formData.append('imgCnt',imgCnt)
             }
             formData.append("title",title);
             formData.append("tag",tag);
