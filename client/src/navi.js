@@ -26,7 +26,7 @@ const Navi = () => {
                 <span onClick={expandmenu}><i class="xi-bars xi-x"></i></span>
             </div>
             <div className="navi_level2" id="navi_list">
-                <Link onClick={close} to="/visit"><span>알-텐데</span></Link>
+                <Link onClick={close} to="/rtende"><span>알-텐데</span></Link>
                 <Link onClick={close} to="/rtem"><span>알-템</span></Link>
                 <Link onClick={close} to="/map"><span>알-지도</span></Link>
                 <Link onClick={close} to="/Board"><span>알-까</span></Link>

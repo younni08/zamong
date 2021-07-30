@@ -11,6 +11,7 @@ import Map from "./components/map/map"
 import Zamong from "./components/zamong/zamong"
 import Login from "./components/login/login"
 import Rtem from "./components/rtem/rtme"
+import Rtende from "./components/rtende/rtende"
 
 const Root = () => {
     return (
@@ -18,6 +19,7 @@ const Root = () => {
             <Navi />
             <Switch>
                 <Route exact path="/" component={Index} />
+                <Route path ="/rtende" component={Rtende} />
                 <Route path ="/board" component={Board} />
                 <Route path ="/Rtem" component={Rtem} />
                 <Route path ="/items" component={Items} />
