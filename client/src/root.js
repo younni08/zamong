@@ -8,10 +8,14 @@ import Item from "./components/item/item"
 import Article from "./components/article/article"
 import Board from "./components/board/board"
 import Map from "./components/map/map"
-import Zamong from "./components/zamong/zamong"
+
 import Login from "./components/login/login"
 import Rtem from "./components/rtem/rtme"
 import Rtende from "./components/rtende/rtende"
+
+import Zamong1 from "./components/zamong/rtem_item"
+import Zamong2 from "./components/zamong/rtem_cate"
+import Zamong3 from "./components/zamong/rtende_article"
 
 const Root = () => {
     return (
@@ -31,7 +35,9 @@ const Root = () => {
                 <Route path ="/article" component={Article} />
 
                 <Route path ="/login" component={Login} />
-                <Route path ="/zamong" component={Zamong} />
+                <Route path ="/rtem_item" component={Zamong1} />
+                <Route path ="/rtem_cate" component={Zamong2} />
+                <Route path ="/rtende_article" component={Zamong3} />
                 <Route component={T3} />
             </Switch>
         </div>

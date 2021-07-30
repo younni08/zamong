@@ -64,7 +64,7 @@ const Login = () => {
                 </div>
             </div>
             {
-                redirect?<Redirect to="/zamong" />:""
+                redirect?<Redirect to="/rtem_item" />:""
             }
         </div>
     )

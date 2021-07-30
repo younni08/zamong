@@ -4,183 +4,88 @@ import { Redirect } from "react-router-dom";
 // quill
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
+import axios from "axios";
 
 const MongItem = () => {
+    const [t1list,setT1list] = useState([])
+    const [t2list,setT2list] = useState([])
+    const [t3list,setT3list] = useState([])
     useEffect(()=>{
-        
+        init();
     },[])
-    const [q00,setq00] = useState("")
-    const [q0,setq0] = useState("")
-    const [q1,setq1] = useState("")
-    const [q2,setq2] = useState("")
-    const [q3,setq3] = useState("")
-    const [q4,setq4] = useState("")
-    const [q5,setq5] = useState("")
-    const [q6,setq6] = useState("")
-    const [q7,setq7] = useState("")
-    const [q8,setq8] = useState("")
-    const [q9,setq9] = useState("")
-    const [q10,setq10] = useState("")
-    const [q11,setq11] = useState("")
-    const [q12,setq12] = useState("")
-    const handleBody00 = (html) => setq00(html)
-    const handleBody0 = (html) => setq0(html)
-    const handleBody1 = (html) => setq1(html)
-    const handleBody2 = (html) => setq2(html)
-    const handleBody3 = (html) => setq3(html)
-    const handleBody4 = (html) => setq4(html)
-    const handleBody5 = (html) => setq5(html)
-    const handleBody6 = (html) => setq6(html)
-    const handleBody7 = (html) => setq7(html)
-    const handleBody8 = (html) => setq8(html)
-    const handleBody9 = (html) => setq9(html)
-    const handleBody10 = (html) => setq10(html)
-    const handleBody11 = (html) => setq11(html)
-    const handleBody12 = (html) => setq12(html)
 
-    const [saddnewbig,setsaddnewbig] = useState(false)
-    const addNewBig = () => {
-        if(saddnewbig===false){
-            setsaddnewbig(true)
-            document.getElementById("mong_add_newbig").style.height = "67px"
-        }else{
-            setsaddnewbig(false)
-            document.getElementById("mong_add_newbig").style.height = "0px"
+    const init = async() => {
+        let url = "/api/mong/mong_item_init";
+        let params = {
+            secret:"secret?"
         }
+        const config = {
+            headers:{
+                "content-type":"application/json"
+            }
+        }
+        let res = await axios.post(url,params,config)
+        console.log(res.data)
+        if(res.data==="fail") return alert("잘못된 접근입니다.")
+        setT1list(res.data.t1)
+        setT2list(res.data.t2)
+        setT3list(res.data.t3)
     }
 
-    const [saddnewmedium,setsaddnewmedium] = useState(false)
-    const addNewMedium = () => {
-        if(saddnewmedium===false){
-            setsaddnewmedium(true)
-            document.getElementById("mong_add_newmedium").style.height = "343px"
-        }else{
-            setsaddnewmedium(false)
-            document.getElementById("mong_add_newmedium").style.height = "0px"
+    const [t4name,setT4name] = useState("")
+    const handleT4 = (e) => {setT4name(e.target.value)}
+    const [t4tag,setT4tag] = useState("")
+    const handleT4tag = (e) => {setT4tag(e.target.value)}
+    const [t4addr,setT4addr] = useState("")
+    const handleT4ddr = (e) => {setT4addr(e.target.value)}
+
+    const handleT1checkbox = () => {
+        let tempString = ""
+        for(let i=0;i<t1list.length;i++){
+            if(document.getElementById(t1list[i].rtem_t1_pk).checked===true){tempString = tempString + t1list[i].rtem_t1_pk +","}
         }
+        return tempString
+    }
+    const handleT2checkbox = () => {
+        let tempString = ""
+        for(let i=0;i<t2list.length;i++){
+            if(document.getElementById(t2list[i].rtem_t2_pk).checked===true){tempString = tempString + t2list[i].rtem_t2_pk +","}
+        }
+        return tempString
+    }
+    const handleT3checkbox = () => {
+        let tempString = ""
+        for(let i=0;i<t3list.length;i++){
+            if(document.getElementById(t3list[i].rtem_t3_pk).checked===true){tempString = tempString + t3list[i].rtem_t3_pk +","}
+        }
+        return tempString
     }
 
-    const [saddnewsmall,setsaddnewsmall] = useState(false)
-    const addNewsmall = () => {
-        if(saddnewsmall===false){
-            setsaddnewsmall(true)
-            document.getElementById("mong_add_newsmall").style.height = "355px"
-        }else{
-            setsaddnewsmall(false)
-            document.getElementById("mong_add_newsmall").style.height = "0px"
-        }
-    }
-
-    const [smong_r1,setsmong_r1] = useState(false)
-    const mong_r1 = () => {
-        if(smong_r1===false){
-            setsmong_r1(true)
-        }else{
-            setsmong_r1(false)
-        }
-    }
-    const [smong_r2,setsmong_r2] = useState(false)
-    const mong_r2 = () => {
-        if(smong_r2===false){
-            setsmong_r2(true)
-        }else{
-            setsmong_r2(false)
-        }
-    }
-    const [smong_r3,setsmong_r3] = useState(false)
-    const mong_r3 = () => {
-        if(smong_r3===false){
-            setsmong_r3(true)
-        }else{
-            setsmong_r3(false)
-        }
-    }
-    const [smong_r4,setsmong_r4] = useState(false)
-    const mong_r4 = () => {
-        if(smong_r4===false){
-            setsmong_r4(true)
-        }else{
-            setsmong_r4(false)
-        }
-    }
-    const [smong_r5,setsmong_r5] = useState(false)
-    const mong_r5 = () => {
-        if(smong_r5===false){
-            setsmong_r5(true)
-        }else{
-            setsmong_r5(false)
-        }
-    }
-    const [smong_r6,setsmong_r6] = useState(false)
-    const mong_r6 = () => {
-        if(smong_r6===false){
-            setsmong_r6(true)
-        }else{
-            setsmong_r6(false)
-        }
-    }
-    const [smong_r7,setsmong_r7] = useState(false)
-    const mong_r7 = () => {
-        if(smong_r7===false){
-            setsmong_r7(true)
-        }else{
-            setsmong_r7(false)
-        }
-    }
-    const [smong_r8,setsmong_r8] = useState(false)
-    const mong_r8 = () => {
-        if(smong_r8===false){
-            setsmong_r8(true)
-        }else{
-            setsmong_r8(false)
-        }
-    }
-    const [smong_r9,setsmong_r9] = useState(false)
-    const mong_r9 = () => {
-        if(smong_r9===false){
-            setsmong_r9(true)
-        }else{
-            setsmong_r9(false)
-        }
-    }
-    const [smong_r10,setsmong_r10] = useState(false)
-    const mong_r10 = () => {
-        if(smong_r10===false){
-            setsmong_r10(true)
-        }else{
-            setsmong_r10(false)
-        }
-    }
-
-    const [t1name,setT1name] = useState("")
-    const handleT1 = (e) => {setT1name(e.target.value)}
-
-    const [t2name,setT2name] = useState("")
-    const handleT2 = (e) => {setT2name(e.target.value)}
-    
-    const handleSubmit = () => {
+    const handleSubmit = async() => {
         let url = "/api/mong/additem"
         const formData = new FormData();
+        let token = getCookie("token")
+        let session = getCookie("session")
+        if(token===null||session===null) return alert("로그인 후 이용하세요")
+        formData.append("token",token);
+        formData.append("session",session);
+        // t4
+        formData.append("t4name",t4name);
+        formData.append("t4addres",t4addr);
+        formData.append("t4tag",t4tag);
 
-        // t1
-        formData.append("t1",saddnewbig);
-        formData.append("t1name",t1name)
-        let t1_image = document.getElementById("mong_t1_image");
-        if(t1_image.files.length!==0&&t1_image.files.length!==undefined&&saddnewbig===true){
-            formData.append("t1image",t1_image.files[0])
+        let checkt1 = handleT1checkbox();
+        let checkt2 = handleT2checkbox();
+        let checkt3 = handleT3checkbox();
+
+        formData.append("t1item",checkt1)
+        formData.append("t2item",checkt2)
+        formData.append("t3item",checkt3)
+
+        let t4_image = document.getElementById("mong_t4_image");
+        if(t4_image.files.length!==0&&t4_image.files.length!==undefined){
+            formData.append("t4image",t4_image.files[0])
         }
-
-        // t2
-        formData.append("t2",saddnewmedium);
-        formData.append("t2name",t2name)
-        formData.append("t2body",q00)
-        let t2_image = document.getElementById("mong_t2_image");
-        if(t2_image.files.length!==0&&t2_image.files.length!==undefined&&saddnewbig===true){
-            formData.append("t2image",t2_image.files[0])
-        }
-
-        // t3
-
 
         const config = {
             headers:{
@@ -188,6 +93,10 @@ const MongItem = () => {
             }
         }
 
+        let res = await axios.post(url,formData,config)
+        console.log(res.data)
+        if(res.data==="success") return alert("등록되었습니다.")
+        if(res.data!=="success") return alert("잘못된 경로입니다.")
     }
 
     return (
@@ -197,428 +106,59 @@ const MongItem = () => {
                 <div className="mong_item_general">
                     <div>
                         <span>대분류*</span>
-                        <span className="addon" onClick={addNewBig}>추가하기</span>
+                        <span></span>
                     </div>
                     <div>
-                        <div className="mong_item_general_element">
-                            <label for="dd">ㅁㅁㅁㅁㅁ</label>
-                            <input type="checkbox" id="dd" />
-                        </div>
+                        {
+                            t1list?t1list.map(c=>{
+                                return (
+                                <div className="mong_item_general_element" key={c.rtem_t1_pk}>
+                                    <label for={c.rtem_t1_pk}>{c.rtem_t1_name}</label>
+                                    <input type="checkbox" id={c.rtem_t1_pk} />
+                                </div>
+                                )
+                            }):""
+                        }
                     </div>
                 </div>
-                <div className="mong_add_newbig" id="mong_add_newbig">
-                    <div>
-                        <span>이름</span>
-                        <div>
-                            <input type="text" onChange={handleT1} />
-                        </div>
-                    </div>
-                    <div>
-                        <span>사진</span>
-                        <div>
-                            <input type="file" className="image" id="mong_t1_image" />
-                        </div>
-                    </div>
-                </div>
-
                 <div className="mong_item_general">
                     <div>
                         <span>중분류*</span>
-                        <span className="addon" onClick={addNewMedium}>추가하기</span>
+                        <span></span>
                     </div>
                     <div>
-                        <div className="mong_item_general_element">
-                            <label for="dd">ㅁㅁㅁㅁㅁ</label>
-                            <input type="checkbox" id="dd" />
-                        </div>
-                    </div>
-                </div>
-                <div className="mong_add_newmedium" id="mong_add_newmedium">
-                    <div>
-                        <div>
-                            <span>이름</span>
-                            <div>
-                                <input type="text" onChange={handleT2}/>
-                            </div>
-                        </div>
-                        <div>
-                            <span>사진</span>
-                            <div>
-                                <input type="file" className="image" id="mong_t1_image" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="mong_item_general">
-                        <div>
-                            <span>중분류 아이템 소재*</span>
-                            <span></span>
-                        </div>
-                        <div className="mong_genenal_quill">
-                            <ReactQuill 
-                            onChange={handleBody00}
-                            modules={{
-                                toolbar: {
-                                    container: [
-                                        [{ header: [1,2,false]}],
-                                        ['bold', 'italic', 'underline'],
-                                        [{ color: [] }, { background: [] }],
-                                    ]
-                                }
-                            }}
-                        />
-                        </div>
+                        {
+                            t2list?t2list.map(c=>{
+                                return (
+                                <div className="mong_item_general_element" key={c.rtem_t2_pk}>
+                                    <label for={c.rtem_t2_pk}>{c.rtem_t2_name}</label>
+                                    <input type="checkbox" id={c.rtem_t2_pk} />
+                                </div>
+                                )
+                            }):""
+                        }
                     </div>
                 </div>
                 <div className="mong_item_general">
                     <div>
                         <span>소분류*</span>
-                        <span className="addon" onClick={addNewsmall}>추가하기</span>
+                        <span></span>
                     </div>
                     <div>
-                        <div className="mong_item_general_element">
-                            <label for="dd">ㅁㅁㅁㅁㅁ</label>
-                            <input type="checkbox" id="dd" />
-                        </div>
-                        <div className="mong_item_general_element">
-                            <label for="dd">ㄷㄷㄷㄷㄷ</label>
-                            <input type="checkbox" id="dd" />
-                        </div>
-                        <div className="mong_item_general_element">
-                            <label for="dd">ㄷㄷㄷㄷ</label>
-                            <input type="checkbox" id="dd" />
-                        </div>
-                    </div>
-                </div>
-                <div className="mong_add_newsmall" id="mong_add_newsmall">
-                    <div>
-                        <div>
-                            <span>이름</span>
-                            <div>
-                                <input type="text" />
-                            </div>
-                        </div>
-                        <div>
-                            <span>사진</span>
-                            <div>
-                                <input type="file" className="image" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="mong_item_manager1">
-                        <div className="mong_item_general">
-                            <div>
-                                <span>소분류 아이템 소재*</span>
-                                <span></span>
-                            </div>
-                            <div className="mong_genenal_quill">
-                                <ReactQuill 
-                                onChange={handleBody0}
-                                modules={{
-                                    toolbar: {
-                                        container: [
-                                            [{ header: [1,2,false]}],
-                                            ['bold', 'italic', 'underline'],
-                                            [{ color: [] }, { background: [] }],
-                                        ]
-                                    }
-                                }}
-                            />
-                            </div>
-                        </div>
-                        <div className="mong_item_general">
-                            <div>
-                                <span>소분류 아이템 특징*</span>
-                                <span></span>
-                            </div>
-                            <div className="mong_genenal_quill">
-                                <ReactQuill 
-                                onChange={handleBody1}
-                                modules={{
-                                    toolbar: {
-                                        container: [
-                                            [{ header: [1,2,false]}],
-                                            ['bold', 'italic', 'underline'],
-                                            [{ color: [] }, { background: [] }],
-                                        ]
-                                    }
-                                }}
-                            />
-                            </div>
-                        </div>
+                        {
+                            t3list?t3list.map(c=>{
+                                return (
+                                <div className="mong_item_general_element" key={c.rtem_t3_pk}>
+                                    <label for={c.rtem_t3_pk}>{c.rtem_t3_name}</label>
+                                    <input type="checkbox" id={c.rtem_t3_pk} />
+                                </div>
+                                )
+                            }):""
+                        }
                     </div>
                 </div>
                 
-                <div className="mong_item_general">
-                    <div>
-                        <span>R10*</span>
-                        <span>선택해주세요</span>
-                    </div>
-                    <div className="r10">
-                        <div className="mong_item_general_element">
-                            <label for="mong_r1">관계짓기</label>
-                            <input type="checkbox" id="mong_r1" onClick={mong_r1} />
-                        </div>
-                        <div className="mong_item_general_element">
-                            <label for="mong_r2">다시 생각하기</label>
-                            <input type="checkbox" id="mong_r2" onClick={mong_r2} />
-                        </div>
-                        <div className="mong_item_general_element">
-                            <label for="mong_r3">거절하기</label>
-                            <input type="checkbox" id="mong_r3" onClick={mong_r3} />
-                        </div>
-                        <div className="mong_item_general_element">
-                            <label for="mong_r4">줄이기</label>
-                            <input type="checkbox" id="mong_r4" onClick={mong_r4} />
-                        </div>
-                        <div className="mong_item_general_element">
-                            <label for="mong_r5">재사용하기</label>
-                            <input type="checkbox" id="mong_r5" onClick={mong_r5} />
-                        </div>
-                        <div className="mong_item_general_element">
-                            <label for="mong_r6">수리하기</label>
-                            <input type="checkbox" id="mong_r6" onClick={mong_r6} />
-                        </div>
-                        <div className="mong_item_general_element">
-                            <label for="mong_r7">교체하기</label>
-                            <input type="checkbox" id="mong_r7" onClick={mong_r7} />
-                        </div>
-                        <div className="mong_item_general_element">
-                            <label for="mong_r8">새 용도 찾기</label>
-                            <input type="checkbox" id="mong_r8" onClick={mong_r8} />
-                        </div>
-                        <div className="mong_item_general_element">
-                            <label for="mong_r9">퇴비화하기</label>
-                            <input type="checkbox" id="mong_r9" onClick={mong_r9} />
-                        </div>
-                        <div className="mong_item_general_element">
-                            <label for="mong_r10">재활용하기</label>
-                            <input type="checkbox" id="mong_r10" onClick={mong_r10} />
-                        </div>
-                    </div>
-                </div>
-                <div className="mong_item_manager2">
-                    {
-                        smong_r1?
-                        <div className="mong_item_general">
-                        <div>
-                            <span>관계짓기</span>
-                            <span></span>
-                        </div>
-                        <div className="mong_genenal_quill">
-                            <ReactQuill 
-                            onChange={handleBody2}
-                            modules={{
-                                toolbar: {
-                                    container: [
-                                        [{ header: [1,2,false]}],
-                                        ['bold', 'italic', 'underline'],
-                                        [{ color: [] }, { background: [] }],
-                                    ]
-                                }
-                            }}
-                        />
-                        </div>
-                        </div>:""
-                    }
-                    {
-                        smong_r2?<div className="mong_item_general">
-                        <div>
-                            <span>다시 생각하기</span>
-                            <span></span>
-                        </div>
-                        <div className="mong_genenal_quill">
-                            <ReactQuill 
-                            onChange={handleBody3}
-                            modules={{
-                                toolbar: {
-                                    container: [
-                                        [{ header: [1,2,false]}],
-                                        ['bold', 'italic', 'underline'],
-                                        [{ color: [] }, { background: [] }],
-                                    ]
-                                }
-                            }}
-                        />
-                        </div>
-                        </div>:""
-                    }
-                    {
-                        smong_r3?<div className="mong_item_general">
-                        <div>
-                            <span>거절하기</span>
-                            <span></span>
-                        </div>
-                        <div className="mong_genenal_quill">
-                            <ReactQuill 
-                            onChange={handleBody4}
-                            modules={{
-                                toolbar: {
-                                    container: [
-                                        [{ header: [1,2,false]}],
-                                        ['bold', 'italic', 'underline'],
-                                        [{ color: [] }, { background: [] }],
-                                    ]
-                                }
-                            }}
-                        />
-                        </div>
-                        </div>:""
-                    }
-                    {
-                        smong_r4?<div className="mong_item_general">
-                        <div>
-                            <span>줄이기</span>
-                            <span></span>
-                        </div>
-                        <div className="mong_genenal_quill">
-                            <ReactQuill 
-                            onChange={handleBody5}
-                            modules={{
-                                toolbar: {
-                                    container: [
-                                        [{ header: [1,2,false]}],
-                                        ['bold', 'italic', 'underline'],
-                                        [{ color: [] }, { background: [] }],
-                                    ]
-                                }
-                            }}
-                        />
-                        </div>
-                        </div>:""
-                    }
-                    {
-                        smong_r5?<div className="mong_item_general">
-                        <div>
-                            <span>재사용하기</span>
-                            <span></span>
-                        </div>
-                        <div className="mong_genenal_quill">
-                            <ReactQuill 
-                            onChange={handleBody6}
-                            modules={{
-                                toolbar: {
-                                    container: [
-                                        [{ header: [1,2,false]}],
-                                        ['bold', 'italic', 'underline'],
-                                        [{ color: [] }, { background: [] }],
-                                    ]
-                                }
-                            }}
-                        />
-                        </div>
-                        </div>:""
-                    }
-                    {
-                        smong_r6?<div className="mong_item_general">
-                        <div>
-                            <span>수리하기</span>
-                            <span></span>
-                        </div>
-                        <div className="mong_genenal_quill">
-                            <ReactQuill 
-                            onChange={handleBody7}
-                            modules={{
-                                toolbar: {
-                                    container: [
-                                        [{ header: [1,2,false]}],
-                                        ['bold', 'italic', 'underline'],
-                                        [{ color: [] }, { background: [] }],
-                                    ]
-                                }
-                            }}
-                        />
-                        </div>
-                        </div>:""
-                    }
-                    {
-                        smong_r7?<div className="mong_item_general">
-                        <div>
-                            <span>교체하기</span>
-                            <span></span>
-                        </div>
-                        <div className="mong_genenal_quill">
-                            <ReactQuill 
-                            onChange={handleBody8}
-                            modules={{
-                                toolbar: {
-                                    container: [
-                                        [{ header: [1,2,false]}],
-                                        ['bold', 'italic', 'underline'],
-                                        [{ color: [] }, { background: [] }],
-                                    ]
-                                }
-                            }}
-                        />
-                        </div>
-                        </div>:""
-                    }
-                    {
-                        smong_r8?<div className="mong_item_general">
-                        <div>
-                            <span>새 용도 찾기</span>
-                            <span></span>
-                        </div>
-                        <div className="mong_genenal_quill">
-                            <ReactQuill 
-                            onChange={handleBody9}
-                            modules={{
-                                toolbar: {
-                                    container: [
-                                        [{ header: [1,2,false]}],
-                                        ['bold', 'italic', 'underline'],
-                                        [{ color: [] }, { background: [] }],
-                                    ]
-                                }
-                            }}
-                        />
-                        </div>
-                        </div>:""
-                    }
-                    {
-                        smong_r9?<div className="mong_item_general">
-                        <div>
-                            <span>퇴비화하기</span>
-                            <span></span>
-                        </div>
-                        <div className="mong_genenal_quill">
-                            <ReactQuill 
-                            onChange={handleBody10}
-                            modules={{
-                                toolbar: {
-                                    container: [
-                                        [{ header: [1,2,false]}],
-                                        ['bold', 'italic', 'underline'],
-                                        [{ color: [] }, { background: [] }],
-                                    ]
-                                }
-                            }}
-                        />
-                        </div>
-                        </div>:""
-                    }
-                    {
-                        smong_r10?<div className="mong_item_general">
-                        <div>
-                            <span>재활용하기</span>
-                            <span></span>
-                        </div>
-                        <div className="mong_genenal_quill">
-                            <ReactQuill 
-                            onChange={handleBody11}
-                            modules={{
-                                toolbar: {
-                                    container: [
-                                        [{ header: [1,2,false]}],
-                                        ['bold', 'italic', 'underline'],
-                                        [{ color: [] }, { background: [] }],
-                                    ]
-                                }
-                            }}
-                        />
-                        </div>
-                        </div>:""
-                    }
-                </div>
+                
                 <div className="mong_item_manager3">
                     <div className="mong_item_general">
                         <div>
@@ -626,7 +166,7 @@ const MongItem = () => {
                             <span></span>
                         </div>
                         <div className="general_input">
-                            <input type="text" />
+                            <input type="text" onChange={handleT4} />
                         </div>
                     </div>
                     <div className="mong_item_general">
@@ -635,39 +175,32 @@ const MongItem = () => {
                             <span></span>
                         </div>
                         <div className="general_input">
-                            <input type="text" />
+                            <input type="text" onChange={handleT4ddr} />
                         </div>
                     </div>
                 </div>
-                <div className="mong_item_general">
-                    <div>
-                        <span>테그*</span>
-                        <span>,로 분리해주세요</span>
+                <div className="mong_item_manager3">
+                    <div className="mong_item_general">
+                        <div>
+                            <span>테그*</span>
+                            <span>,로 분리해주세요</span>
+                        </div>
+                        <div className="general_input">
+                            <input type="text" onChange={handleT4tag} />
+                        </div>
                     </div>
-                    <div className="general_input">
-                        <input type="text" />
-                    </div>
-                </div>
-                <div className="mong_item_general">
-                    <div>
-                        <span>feat 이루자몽*</span>
-                        <span></span>
-                    </div>
-                    <div className="mong_genenal_quill">
-                        <ReactQuill 
-                        onChange={handleBody12}
-                        modules={{
-                            toolbar: {
-                                container: [
-                                    [{ header: [1,2,false]}],
-                                    ['bold', 'italic', 'underline'],
-                                    [{ color: [] }, { background: [] }],
-                                ]
-                            }
-                        }}
-                    />
+                    <div className="mong_item_general">
+                        <div>
+                            <span>판매 아이템 사진*</span>
+                            <span></span>
+                        </div>
+                        <div className="general_input">
+                            <input type="file" className="image" id="mong_t4_image" />
+                        </div>
                     </div>
                 </div>
+                
+                
                 <div className="mong_item_general_submit">
                     <span onClick={handleSubmit}>입력하기</span>
                 </div>
