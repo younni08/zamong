@@ -972,13 +972,30 @@ code {
   display:flex;
   flex-direction: column;
   border-right:solid 1px #000;
-  height: 100vh;
+  min-height: 100vh;
 }
 .mong_sidenavi > div{
   display:flex;
-  width:100%;
-  justify-content: center;
-  padding:20px 0px;
+  justify-content: flex-start;
+  width:calc(100% - 40px);
+  padding:20px;
+  cursor: pointer;
+  border-bottom:solid 1px #eaeaea;
+}
+.mong_sidenavi > div > span:first-child{
+  display:flex;
+  margin:0px 10px 0px 0px;
+  font-weight: bold;
+  color:#fff;
+  padding:3px;
+  font-size:0.8rem;
+  border-radius: 5px;
+}
+.mong_sidenavi > div > span.mong_rtem{
+  background:#00B775;
+}
+.mong_sidenavi > div > span.mong_rka{
+  background:#2A5EBC;
 }
 .mong_body{
   display:flex;
@@ -1158,7 +1175,7 @@ code {
   margin:20px 0px 0px 0px;
 }
 .mong_item_manager2 > div{
-  width:calc(33% - 10px)
+  width:calc(50% - 10px)
 }
 .mong_add_newbig{
   margin:10px 0px;

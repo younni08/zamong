@@ -29,8 +29,9 @@ const Root = () => {
                 <Route path ="/about" component={T3} />
                 <Route path ="/map" component={Map} />
                 <Route path ="/article" component={Article} />
-                <Route path ="/zamong" component={Zamong} />
+
                 <Route path ="/login" component={Login} />
+                <Route path ="/zamong" component={Zamong} />
                 <Route component={T3} />
             </Switch>
         </div>

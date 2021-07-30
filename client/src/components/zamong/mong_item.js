@@ -9,7 +9,6 @@ const MongItem = () => {
     useEffect(()=>{
         
     },[])
-
     const [q00,setq00] = useState("")
     const [q0,setq0] = useState("")
     const [q1,setq1] = useState("")
@@ -152,7 +151,44 @@ const MongItem = () => {
             setsmong_r10(false)
         }
     }
+
+    const [t1name,setT1name] = useState("")
+    const handleT1 = (e) => {setT1name(e.target.value)}
+
+    const [t2name,setT2name] = useState("")
+    const handleT2 = (e) => {setT2name(e.target.value)}
     
+    const handleSubmit = () => {
+        let url = "/api/mong/additem"
+        const formData = new FormData();
+
+        // t1
+        formData.append("t1",saddnewbig);
+        formData.append("t1name",t1name)
+        let t1_image = document.getElementById("mong_t1_image");
+        if(t1_image.files.length!==0&&t1_image.files.length!==undefined&&saddnewbig===true){
+            formData.append("t1image",t1_image.files[0])
+        }
+
+        // t2
+        formData.append("t2",saddnewmedium);
+        formData.append("t2name",t2name)
+        formData.append("t2body",q00)
+        let t2_image = document.getElementById("mong_t2_image");
+        if(t2_image.files.length!==0&&t2_image.files.length!==undefined&&saddnewbig===true){
+            formData.append("t2image",t2_image.files[0])
+        }
+
+        // t3
+
+
+        const config = {
+            headers:{
+                "content-type":"application/mu"
+            }
+        }
+
+    }
 
     return (
         <div className="mong_item">
@@ -174,13 +210,13 @@ const MongItem = () => {
                     <div>
                         <span>이름</span>
                         <div>
-                            <input type="text" />
+                            <input type="text" onChange={handleT1} />
                         </div>
                     </div>
                     <div>
                         <span>사진</span>
                         <div>
-                            <input type="file" className="image" />
+                            <input type="file" className="image" id="mong_t1_image" />
                         </div>
                     </div>
                 </div>
@@ -195,14 +231,6 @@ const MongItem = () => {
                             <label for="dd">ㅁㅁㅁㅁㅁ</label>
                             <input type="checkbox" id="dd" />
                         </div>
-                        <div className="mong_item_general_element">
-                            <label for="dd">ㄷㄷㄷㄷㄷ</label>
-                            <input type="checkbox" id="dd" />
-                        </div>
-                        <div className="mong_item_general_element">
-                            <label for="dd">ㄷㄷㄷㄷ</label>
-                            <input type="checkbox" id="dd" />
-                        </div>
                     </div>
                 </div>
                 <div className="mong_add_newmedium" id="mong_add_newmedium">
@@ -210,13 +238,13 @@ const MongItem = () => {
                         <div>
                             <span>이름</span>
                             <div>
-                                <input type="text" />
+                                <input type="text" onChange={handleT2}/>
                             </div>
                         </div>
                         <div>
                             <span>사진</span>
                             <div>
-                                <input type="file" className="image" />
+                                <input type="file" className="image" id="mong_t1_image" />
                             </div>
                         </div>
                     </div>
@@ -622,7 +650,7 @@ const MongItem = () => {
                 </div>
                 <div className="mong_item_general">
                     <div>
-                        <span>자몽쌤의 한마디*</span>
+                        <span>feat 이루자몽*</span>
                         <span></span>
                     </div>
                     <div className="mong_genenal_quill">
@@ -641,7 +669,7 @@ const MongItem = () => {
                     </div>
                 </div>
                 <div className="mong_item_general_submit">
-                    <span>입력하기</span>
+                    <span onClick={handleSubmit}>입력하기</span>
                 </div>
             </div>
         </div>

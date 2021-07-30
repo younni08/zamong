@@ -28,10 +28,10 @@ const Rtem = () => {
                     <div className="rtem_level3">
                         <span>이루자몽 PICK</span>
                         <div>
-                            <Link to="/items">
+                            <Link to="/items?c=부엌">
                                 <img src="./pics/test.png" alt="text" />
                             </Link>
-                            <Link to="/items">
+                            <Link to="/items?c=부엌">
                                 <img src="./pics/test.png" alt="text" />
                             </Link>
                         </div>

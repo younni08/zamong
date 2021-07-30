@@ -91,6 +91,16 @@ router.post("/login", async (req,res) => {
     }
 })
 
+router.post("/additem", upload.any(),async(req,res)=>{
+    try{
+        return res.send("sucess")
+    }catch(err){
+        console.log("error on additem")
+        console.log(err)
+        return res.send("fail")
+    }
+})
+
 
 
 module.exports = router;

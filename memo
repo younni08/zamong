@@ -17,3 +17,65 @@ create table users_history (
     user_id varchar(100)
     login_date timestamp
 )
+
+create table rtem_t1(
+    id serial primary key,
+    rtem_t1_pk varchar(100),
+    rtem_t1_cnt varchar(100),
+    rtem_t1_name varchar(500),
+    rtem_t1_key varchar(500),
+    rtem_t1_type varchar(100),
+    rtem_t1_zamong_pick boolean default false,
+    rtem_t1_date timestamp
+)
+create table rtem_t2(
+    id serial primary key,
+    rtem_t2_pk varchar(100),
+    rtem_t2_cnt varchar(100),
+    rtem_t2_name varchar(500),
+    rtem_t2_key varchar(500),
+    rtem_t2_type varchar(100),
+    rtem_t2_zamong_pick boolean default false,
+    rtem_desc varchar(10000),
+    rtem_t2_date timestamp
+)
+create table rtem_t3(
+    id serial primary key,
+    rtem_t3_pk varchar(100),
+    rtem_t3_cnt varchar(100),
+    rtem_t3_name varchar(500),
+    rtem_t3_key varchar(500),
+    rtem_t3_type varchar(100),
+    rtem_t3_zamong_pick boolean default false,
+    rtem_desc varchar(1000),
+    rtem_desc2 varchar(10000),
+    rtem_t3_date timestamp
+)
+create table rtem_t4(
+    id serial primary key,
+    rtem_t1_pk varchar(100),
+    rtem_t2_pk varchar(100),
+    rtem_t3_pk varchar(100),
+    rtem_t4_pk varchar(100),
+    rtem_t4_cnt varchar(100),
+    rtem_t4_name varchar(500),
+    rtem_t4_key varchar(500),
+    rtem_t4_type varchar(100),
+    rtem_t4_r10list varchar(100),
+    rtem_t4_r1 varchar(50000),
+    rtem_t4_r2 varchar(50000),
+    rtem_t4_r3 varchar(50000),
+    rtem_t4_r4 varchar(50000),
+    rtem_t4_r5 varchar(50000),
+    rtem_t4_r6 varchar(50000),
+    rtem_t4_r7 varchar(50000),
+    rtem_t4_r8 varchar(50000),
+    rtem_t4_r9 varchar(50000),
+    rtem_t4_r10 varchar(50000),
+    rtem_tag varchar(3000),
+    rtem_address varchar(3000),
+    rtem_t4_zamong_pick boolean default false,
+    rtem_desc varchar(1000),
+    rtem_desc2 varchar(10000),
+    rtem_t3_date timestamp
+)
