@@ -1432,7 +1432,7 @@ code {
 .mong_write_article > div.quill{
   width:100%;
 }
-.mong_write_article > div.ql-editor{
+.mong_write_article div.ql-editor{
   height:500px;
 }
 

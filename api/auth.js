@@ -393,9 +393,9 @@ router.post("/mong_item_init",async(req,res)=>{
     }
 })
 
-router.post("/rka_article_write",async(req,res)=>{
+router.post("/rka_article_write",upload.any(),async(req,res)=>{
     try{
-        if(req.body.token===null||req.body.token===undefined||req.body.session===null||req.body.session===undefined) return res.send("fail")
+        if(req.body.token===null||req.body.token===undefined||req.body.session===null||req.body.session===undefined) return res.send("fail2")
         jwt.verify(req.body.token,jwtConfig.key);
         jwt.verify(req.body.session,jwtConfig.key);
         let user_pk = req.body.token;

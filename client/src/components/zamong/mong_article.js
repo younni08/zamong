@@ -144,8 +144,8 @@ const MongArticle = () => {
         let res = await axios.post(url, formData, config);
         console.log(res.data)
         setBlockClick(false)
-        if(res.data==="success") return res.send("등록되었습니다.")
-        if(res.data!=="success") return res.send("잘못된 경로입니다.")
+        if(res.data==="success") return alert("등록되었습니다.")
+        if(res.data!=="success") return alert("잘못된 경로입니다.")
     }
 
     return (
