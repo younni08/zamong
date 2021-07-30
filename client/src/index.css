@@ -1423,6 +1423,19 @@ code {
   border: solid 1px #707070;
   background: #fff;
 }
+.mong_write_article{
+  display:flex;
+  width:100%;
+  margin:30px 0px 55px 0px;
+  background:#f4f4f4;
+}
+.mong_write_article > div.quill{
+  width:100%;
+}
+.mong_write_article > div.ql-editor{
+  height:500px;
+}
+
 /* --------------------------------------- map --------------------------------------- */
 .rtende{
   display:flex;
