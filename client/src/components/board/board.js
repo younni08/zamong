@@ -149,14 +149,22 @@ const Board = () => {
                     </div>
                     <div className="board_level12">
                         <div>
-                            <Link to={"/article?a="+pick.rka_pk} key={pick.rka_pk}>
-                                <div>
-                                    {
-                                        parser(sample)
-                                    }
-                                </div>
-                                <span>[{pickcate}] {pick.rka_title}</span>
-                            </Link>
+                            {
+                                sample?<Link to={"/article?a="+pick.rka_pk}>
+                                    <div>
+                                        {
+                                            parser(sample)
+                                        }
+                                    </div>
+                                    <span>[{pickcate}] {pick.rka_title}</span>
+                                </Link>:
+                                <Link to={"/article?a="}>
+                                    <div>
+                                        이미지
+                                    </div>
+                                    <span>[알-템] 테스트</span>
+                                </Link>
+                            }
                         </div>
                         <div>
                             <span className="on"></span>
