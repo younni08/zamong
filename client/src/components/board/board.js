@@ -7,6 +7,7 @@ const Board = () => {
     const [expand,setExpand] = useState(false)
     const [page,setPage] = useState(1)
     const [pickpage,setPickpage] = useState(1)
+    const [picklist,setPicklist] = useState([])
     const [pick,setPick] = useState([])
     const [pickcate,setPickcate] = useState("")
     const [list,setList] = useState([])
@@ -65,35 +66,38 @@ const Board = () => {
             }
         }
         let res = await axios.post(url,params,config)
+        console.log(res.data)
         if(res.data==="fail") return alert("잘못된 접근입니다.")
-        if(res.data.rka_cover_key!=="default"){
-            getImage(res.data.rka_cover_key,res.data.rka_cover_type)
+        if(res.data.pick.rka_cover_key!=="default"){
+            console.log(res.data.pick.rka_cover_key)
+            getImage(res.data.pick.rka_cover_key,res.data.pick.rka_cover_type)
         }
         let temp = "알-템"
-        if(res.data.rka_cate!==null&&res.data.rka_cate!==undefined&&res.data.rka_cate.split(",")!==undefined){
-            if(res.data.rka_cate.split(",")[0]==="rtende"){
+        if(res.data.pick.rka_cate!==null&&res.data.pick.rka_cate!==undefined&&res.data.pick.rka_cate.split(",")!==undefined){
+            if(res.data.pick.rka_cate.split(",")[0]==="rtende"){
                 temp="알-텐데"
             }
-            if(res.data.rka_cate.split(",")[0]==="rtem"){
+            if(res.data.pick.rka_cate.split(",")[0]==="rtem"){
                 temp="알-템"
             }
-            if(res.data.rka_cate.split(",")[0]==="rka"){
+            if(res.data.pick.rka_cate.split(",")[0]==="rka"){
                 temp="알-까"
             }
-            if(res.data.rka_cate.split(",")[0]==="rmap"){
+            if(res.data.pick.rka_cate.split(",")[0]==="rmap"){
                 temp="지-도"
             }
-            if(res.data.rka_cate.split(",")[0]==="docu"){
+            if(res.data.pick.rka_cate.split(",")[0]==="docu"){
                 temp="자-료"
             }
         }
         setPickcate(temp)
+        setPicklist(res.data.list)
         setPick(res.data.pick)
     }
 
     const [sample,setSample] = useState("")
     const getImage = async(key,type) => {
-        let url = "api/mana/coverimage"
+        let url = "/api/mong/singleimage"
         let params = {
             key:key
         }
@@ -102,11 +106,19 @@ const Board = () => {
                 "content-type":"application/json"
             }
         }
+        console.log(type)
         let res = await axios.post(url,params,config);
         if(res.data!=="fail"){
-            let ttt = '<img src="data:'+type.replace("#",'').replace(",",'')+';base64,'+ res.data.image + '">'
+            let ttt = '<img src="data:'+type.replace("#",'').replace(",",'')+';base64,'+ res.data + '">'
+            console.log(ttt)
             setSample(ttt)
         }
+    }
+
+    const handleDisplayButton = (e) => {
+        let getid = e.currentTarget.getAttribute("id")
+
+        // setPickpage()
     }
 
     return (
@@ -167,10 +179,19 @@ const Board = () => {
                             }
                         </div>
                         <div>
-                            <span className="on"></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                            {
+                                picklist?picklist.map((c,index)=>{
+                                    if(index===0){
+                                        return(
+                                            <span id={c.rka_pk} key={c.rka_pk} className="on" onClick={handleDisplayButton}></span>
+                                        )
+                                    }else{
+                                        return(
+                                            <span id={c.rka_pk} key={c.rka_pk} onClick={handleDisplayButton}></span>
+                                        )
+                                    }
+                                }):""
+                            }
                         </div>
                     </div>
                     <div className="board_level2">
