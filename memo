@@ -91,5 +91,7 @@ create table rka_article(
     rka_file_key varchar(2000),
     rka_file_type varchar(500),
     rka_vote int default 0,
+    zamong_pick boolean default false,
+    rka_cate varchar(500),
     rka_date timestamp
 )

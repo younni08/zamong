@@ -469,12 +469,84 @@ router.post("/rka_article_write",upload.any(),async(req,res)=>{
             }
         }
 
-        await db.query(`insert into rka_article(rka_pk,rka_title,rka_tag,rka_content,rka_cover_key,rka_cover_type,rka_image_cnt,rka_image_key,rka_image_type,rka_file_key,rka_file_type,rka_date) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`,[mana_pk,req.body.title,req.body.tag,req.body.content,cover_key,cover_type,img_cnt,img_key,img_type,attached_key,attached_type,date])
+        await db.query(`insert into rka_article(rka_pk,rka_title,rka_tag,rka_content,rka_cover_key,rka_cover_type,rka_image_cnt,rka_image_key,rka_image_type,rka_file_key,rka_file_type,rka_date,rka_cate) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)`,[mana_pk,req.body.title,req.body.tag,req.body.content,cover_key,cover_type,img_cnt,img_key,img_type,attached_key,attached_type,date,req.body.cate])
 
         await db.release();
         return res.send("success")
     }catch(err){
         console.log("error on mong_item_init")
+        console.log(err)
+        return res.send("fail")
+    }
+})
+
+router.post("/getArticles",async(req,res)=>{
+    try{
+        if(req.body.page===undefined||req.body.page===null) return res.send("fail")
+        const db = await client.connect();
+        let page_param = 0;
+        if(req.body.page!==null){
+            page_param = (Number(req.body.page)*10)-10;
+        }
+        let result = await db.query(`select rka_pk,rka_title,rka_cate,zamong_pick from rka_article order by id desc limit 10 offset ${page_param};`)
+        let returnArray = {
+            list:result.rows
+        }
+        await db.release();
+        return res.send(returnArray)
+    }catch(err){
+        console.log("error on getArticles")
+        console.log(err)
+        return res.send("fail")
+    }
+})
+
+
+router.post("/getArticle_pick",async(req,res)=>{
+    try{
+        if(req.body.page===undefined||req.body.page===null) return res.send("fail")
+        const db = await client.connect();
+        let page_param = 0;
+        if(req.body.page!==null){
+            page_param = (Number(req.body.page)-1);
+        }
+        let result = await db.query(`select rka_pk from rka_article where zamong_pick=true order by id`)
+        let result2 = await db.query(`select rka_pk,rka_cate,rka_title,rka_cover_key,rka_cover_type from rka_article where zamong_pick=true order by id desc limit 1 offset ${page_param}`)
+        let returnArray = {
+            pick:result2.rows[0],
+            length:result.rowCount
+        }
+        await db.release();
+        return res.send(returnArray)
+    }catch(err){
+        console.log("error on getArticles")
+        console.log(err)
+        return res.send("fail")
+    }
+})
+
+router.post("/singleimage", async(req,res)=>{
+    try{
+        if(req.body.key===undefined) return res.send("fail")
+        if(req.body.key === "default") return res.send("fail");
+        let temp_key = req.body.key
+        let params = {
+            'Bucket' : 'zamongs3',
+            'Key' : 'zamongs/ ' + temp_key
+        }
+        await s3.getObject(params,async(err,data) => {
+            if(err){console.log(err);return res.send("no key")};
+            if(data.Body!==null){
+                let sample = data.Body
+                let back = sample.toString("base64");
+                return res.send(back)
+            }else{
+                await db.release();
+                return res.send("fail")
+            }
+        })
+    }catch(err){
+        console.log("error on singleimage")
         console.log(err)
         return res.send("fail")
     }

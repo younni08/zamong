@@ -1041,6 +1041,65 @@ code {
   flex-direction: column;
   width:1200px;
 }
+/* --------------------------------------- mong_article_pick --------------------------------------- */
+.mong_article_pick{
+  display:flex;
+  width:100%;
+  justify-content: center;
+}
+.mong_article_pick > div{
+  display:flex;
+  width:900px;
+  flex-direction: column;
+}
+.mong_article_pick > div > span{
+  font-size:1.5rem;
+  font-weight: bold;
+  display:flex;
+  margin:20px 0px;
+}
+.mong_article_picl_element{
+  display:flex;
+  justify-content: space-between;
+  width:100%;
+  margin:5px 0px;
+  padding:5px 0px;
+  border-top:solid 1px #eaeaea;
+}
+.mong_article_picl_element:last-child{
+  border-bottom:solid 1px #eaeaea;
+}
+.mong_article_picl_element > div:nth-child(1){
+  display:flex;
+}
+.mong_article_picl_element > div:nth-child(1) > span:nth-child(1){
+  display:flex;
+  margin:0px 10px 0px 0px;
+  color:#7f7f7f;
+}
+.mong_article_picl_element > div:nth-child(2){
+  display:flex;
+}
+.mong_article_picl_element > div:nth-child(2) > span:nth-child(1){
+  display:flex;
+  padding:3px 8px;
+  background:#2A5EBC;
+  color:#fff;
+  font-size:0.8rem;
+  border-radius: 5px;
+  margin:0px 0px 0px 10px;
+  cursor: pointer;
+}
+.mong_article_picl_element > div:nth-child(2) > span:nth-child(2){
+  display:flex;
+  padding:3px 8px;
+  background:red;
+  color:#fff;
+  font-size:0.8rem;
+  border-radius: 5px;
+  margin:0px 0px 0px 10px;
+  cursor: pointer;
+}
 /* --------------------------------------- login --------------------------------------- */
 .login{
   display:flex;
@@ -1586,22 +1645,30 @@ code {
 }
 .board_level12 > div:first-child{
   display:flex;
+  width:100%;
+  overflow: hidden;
+}
+.board_level12 > div:first-child > a{
+  display:flex;
   flex-direction: column;  
   font-weight: bold;
   background:#eaeaea;
+  width:100vw;
+  text-decoration: none;
 }
-.board_level12 > div:first-child > div{
+.board_level12 > div:first-child > a > div{
   display:flex;
   justify-content: center;
   align-items: center;
   width:100vw;
   height:100vw;
 }
-.board_level12 > div:first-child > span{
+.board_level12 > div:first-child > a > span{
   display:flex;
   font-size:1.3rem;
   padding:10px 20px 20px 20px;
   width:calc(100% - 40px);
+  color:#000;
 }
 .board_level12 > div:last-child{
   display:flex;

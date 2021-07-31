@@ -62,6 +62,16 @@ const MongArticle = () => {
         return cutString
     }
 
+    const checkCate = () => {
+        let string = ""
+        if(document.getElementById("mong_rtende1").checked===true){string = string + "rtende,"}
+        if(document.getElementById("mong_rtende2").checked===true){string = string + "rtem,"}
+        if(document.getElementById("mong_rtende3").checked===true){string = string + "rka,"}
+        if(document.getElementById("mong_rtende4").checked===true){string = string + "rmap,"}
+        if(document.getElementById("mong_rtende5").checked===true){string = string + "docu,"}
+        return string
+    }
+
     const [blockClick,setBlockClick] = useState(false)
     const handleFormSubmit = async() => {
         if(blockClick===true) return alert("잠시만 기다려주세요.")
@@ -107,6 +117,8 @@ const MongArticle = () => {
             formData.append("content",temp);
             formData.append("token",token);
             formData.append("session",session);
+            let cate = checkCate()
+            formData.append("cate",cate);
 
             let cover = document.getElementById("mong_rtende_image");
             if(cover.files.length!==0&&cover.files.length!==undefined){
@@ -126,6 +138,8 @@ const MongArticle = () => {
             formData.append("content",temphtml);
             formData.append("token",token);
             formData.append("session",session);
+            let cate = checkCate()
+            formData.append("cate",cate);
 
             let cover = document.getElementById("mong_rtende_image");
             if(cover.files.length!==0&&cover.files.length!==undefined){
@@ -189,6 +203,34 @@ const MongArticle = () => {
                         </div>
                         <div className="general_input">
                             <input type="file" multiple className="image" id="mong_rtende_file" />
+                        </div>
+                    </div>
+                </div>
+                <div className="mong_item_general">
+                    <div>
+                        <span>카테고리*</span>
+                        <span></span>
+                    </div>
+                    <div>
+                        <div className="mong_item_general_element">
+                            <label for="mong_rtende1">알-텐데 이야기</label>
+                            <input type="checkbox" id="mong_rtende1" />
+                        </div>
+                        <div className="mong_item_general_element">
+                            <label for="mong_rtende2">알-템 이야기</label>
+                            <input type="checkbox" id="mong_rtende2" />
+                        </div>
+                        <div className="mong_item_general_element">
+                            <label for="mong_rtende3">알-까</label>
+                            <input type="checkbox" id="mong_rtende3" />
+                        </div>
+                        <div className="mong_item_general_element">
+                            <label for="mong_rtende4">알-지도 소식</label>
+                            <input type="checkbox" id="mong_rtende4" />
+                        </div>
+                        <div className="mong_item_general_element">
+                            <label for="mong_rtende5">자료</label>
+                            <input type="checkbox" id="mong_rtende5" />
                         </div>
                     </div>
                 </div>

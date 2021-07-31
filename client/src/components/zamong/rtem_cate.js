@@ -45,6 +45,10 @@ const Zamong = () => {
                     <span className="mong_rka">알-까</span>
                     <span>게시글 작성</span>
                 </Link>
+                <Link to="/rtende_articlelist">
+                    <span className="mong_rka">알-까</span>
+                    <span>게시글 관리</span>
+                </Link>
                 {
                     redirect?<Redirect to="/login" />:""
                 }

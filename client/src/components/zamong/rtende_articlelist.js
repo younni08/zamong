@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from "react";
-import MongItem from "./mong_article";
+import MongItem from "./mong_articlelist";
 import {Redirect,Link} from "react-router-dom"
 import { getCookie,deleteCookie } from "../common/cookie";
 

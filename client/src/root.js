@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Navi from "./navi"
 import Index from "./components/index/index"
 import {Switch,Route} from "react-router-dom"
@@ -16,6 +16,7 @@ import Rtende from "./components/rtende/rtende"
 import Zamong1 from "./components/zamong/rtem_item"
 import Zamong2 from "./components/zamong/rtem_cate"
 import Zamong3 from "./components/zamong/rtende_article"
+import Zamong4 from "./components/zamong/rtende_articlelist"
 
 const Root = () => {
     return (
@@ -38,6 +39,7 @@ const Root = () => {
                 <Route path ="/rtem_item" component={Zamong1} />
                 <Route path ="/rtem_cate" component={Zamong2} />
                 <Route path ="/rtende_article" component={Zamong3} />
+                <Route path ="/rtende_articlelist" component={Zamong4} />
                 <Route component={T3} />
             </Switch>
         </div>

@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from "react";
 import {getCookie} from "./../common/cookie"
-import { Redirect } from "react-router-dom";
 // quill
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
