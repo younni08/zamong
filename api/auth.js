@@ -48,7 +48,7 @@ const jwtConfig = JSON.parse(jwtkey);
 
 const uploadtoS3 = (file,name,type) => {
     let param ={
-        'Bucket':'zamongs3',
+        'Bucket':'zamongs33',
         'Key':'zamong/ '+ name,
         'ACL':'authenticated-read',
         'Body':file,
@@ -395,7 +395,7 @@ router.post("/mong_item_init",async(req,res)=>{
 
 router.post("/rka_article_write",upload.any(),async(req,res)=>{
     try{
-        if(req.body.token===null||req.body.token===undefined||req.body.session===null||req.body.session===undefined) return res.send("fail2")
+        if(req.body.token===null||req.body.token===undefined||req.body.session===null||req.body.session===undefined) return res.send("fail")
         jwt.verify(req.body.token,jwtConfig.key);
         jwt.verify(req.body.session,jwtConfig.key);
         let user_pk = req.body.token;
@@ -449,7 +449,7 @@ router.post("/rka_article_write",upload.any(),async(req,res)=>{
         for(let i=0;i<req.files.length;i++){
             if(req.files[i]!==undefined){
                 if(req.files[i].fieldname === "cover"){
-                    let name = "#rka_c"+ I + date.getTime();
+                    let name = "#rka_c"+ i + date.getTime();
                     cover_type=req.files[i].mimetype;
                     cover_key=name;
                     await uploadtoS3(req.files[i].buffer,name,req.files[i].mimetype)
@@ -474,7 +474,7 @@ router.post("/rka_article_write",upload.any(),async(req,res)=>{
         await db.release();
         return res.send("success")
     }catch(err){
-        console.log("error on mong_item_init")
+        console.log("error on rka_article_write")
         console.log(err)
         return res.send("fail")
     }
@@ -501,6 +501,75 @@ router.post("/getArticles",async(req,res)=>{
     }
 })
 
+router.post("/rka_addpick",async(req,res)=>{
+    try{
+        if(req.body.token===null||req.body.token===undefined||req.body.session===null||req.body.session===undefined) return res.send("fail")
+        jwt.verify(req.body.token,jwtConfig.key);
+        jwt.verify(req.body.session,jwtConfig.key);
+        let user_pk = req.body.token;
+        user_pk = user_pk.split(".")[1];
+        user_pk = user_pk.split(".")[0];
+        user_pk = atob(user_pk);
+        user_pk = user_pk.split('{"user_pk":"')[1];
+        user_pk = user_pk.split('","iat":')[0];
+
+        let session = req.body.session;
+        session = session.split(".")[1];
+        session = session.split(".")[0];
+        session = atob(session);
+        session = session.split('{"session":"')[1];
+        session = session.split('","iat":')[0];
+
+        const db = await client.connect();
+        let checkSession = await db.query(`select from users where session=$1 and user_id=$2`,[session,user_pk])
+        if(checkSession.rows[0]===undefined){
+            await db.release();
+            return res.send("fail")
+        }
+        await db.query(`update rka_article set zamong_pick=true where rka_pk=$1`,[req.body.pk])
+        await db.release();
+        return res.send("success")
+    }catch(err){
+        console.log("error on rka_addpick")
+        console.log(err)
+        return res.send("fail")
+    }
+})
+
+router.post("/rka_delete",async(req,res)=>{
+    try{
+        if(req.body.token===null||req.body.token===undefined||req.body.session===null||req.body.session===undefined) return res.send("fail")
+        jwt.verify(req.body.token,jwtConfig.key);
+        jwt.verify(req.body.session,jwtConfig.key);
+        let user_pk = req.body.token;
+        user_pk = user_pk.split(".")[1];
+        user_pk = user_pk.split(".")[0];
+        user_pk = atob(user_pk);
+        user_pk = user_pk.split('{"user_pk":"')[1];
+        user_pk = user_pk.split('","iat":')[0];
+
+        let session = req.body.session;
+        session = session.split(".")[1];
+        session = session.split(".")[0];
+        session = atob(session);
+        session = session.split('{"session":"')[1];
+        session = session.split('","iat":')[0];
+
+        const db = await client.connect();
+        let checkSession = await db.query(`select from users where session=$1 and user_id=$2`,[session,user_pk])
+        if(checkSession.rows[0]===undefined){
+            await db.release();
+            return res.send("fail")
+        }
+        await db.query(`delete from  rka_article where rka_pk=$1`,[req.body.pk])
+        await db.release();
+        return res.send("success")
+    }catch(err){
+        console.log("error on rka_addpick")
+        console.log(err)
+        return res.send("fail")
+    }
+})
 
 router.post("/getArticle_pick",async(req,res)=>{
     try{
@@ -510,11 +579,11 @@ router.post("/getArticle_pick",async(req,res)=>{
         if(req.body.page!==null){
             page_param = (Number(req.body.page)-1);
         }
-        let result = await db.query(`select rka_pk from rka_article where zamong_pick=true order by id`)
+        let result = await db.query(`select rka_pk from rka_article where zamong_pick=true order by id limit 4`)
         let result2 = await db.query(`select rka_pk,rka_cate,rka_title,rka_cover_key,rka_cover_type from rka_article where zamong_pick=true order by id desc limit 1 offset ${page_param}`)
         let returnArray = {
             pick:result2.rows[0],
-            length:result.rowCount
+            list:result.rows
         }
         await db.release();
         return res.send(returnArray)
@@ -527,12 +596,12 @@ router.post("/getArticle_pick",async(req,res)=>{
 
 router.post("/singleimage", async(req,res)=>{
     try{
-        if(req.body.key===undefined) return res.send("fail")
+        if(req.body.key===undefined) return res.send("fa2il")
         if(req.body.key === "default") return res.send("fail");
         let temp_key = req.body.key
         let params = {
-            'Bucket' : 'zamongs3',
-            'Key' : 'zamongs/ ' + temp_key
+            'Bucket' : 'zamongs33',
+            'Key' : 'zamong/ ' + temp_key
         }
         await s3.getObject(params,async(err,data) => {
             if(err){console.log(err);return res.send("no key")};
