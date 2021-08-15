@@ -282,7 +282,7 @@ router.post("/addcatet2", upload.any(),async(req,res)=>{
             }
         }
 
-        await db.query(`insert into rtem_t2(rtem_t2_pk,rtem_desc,rtem_t2_name,rtem_t2_key,rtem_t2_type,rtem_t2_date) values ($1,$2,$3,$4,$5,$6)`,[mana_pk,req.body.t2body,req.body.t2name,cover_key,cover_type,date])
+        await db.query(`insert into rtem_t2(rtem_t2_pk,rtem_desc,rtem_t2_name,rtem_t2_key,rtem_t2_type,rtem_t2_date,rtem_t1_pk) values ($1,$2,$3,$4,$5,$6,$7)`,[mana_pk,req.body.t2body,req.body.t2name,cover_key,cover_type,date,req.body.t1pk])
         await db.release();
         return res.send("success")
     }catch(err){
@@ -361,7 +361,7 @@ router.post("/addcatet3", upload.any(),async(req,res)=>{
             }
         }
 
-        await db.query(`insert into rtem_t3(rtem_t3_pk,rtem_desc,rtem_desc2,rtem_t3_name,rtem_t3_key,rtem_t3_type,rtem_t3_date,rtem_desc3,rtem_t3_r1,rtem_t3_r2,rtem_t3_r3,rtem_t3_r4,rtem_t3_r5,rtem_t3_r6,rtem_t3_r7,rtem_t3_r8,rtem_t3_r9,rtem_t3_r10) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18)`,[mana_pk,req.body.t3madeof,req.body.t3body,req.body.t3name,cover_key,cover_type,date,req.body.t4cmt,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10])
+        await db.query(`insert into rtem_t3(rtem_t3_pk,rtem_desc,rtem_desc2,rtem_t3_name,rtem_t3_key,rtem_t3_type,rtem_t3_date,rtem_desc3,rtem_t3_r1,rtem_t3_r2,rtem_t3_r3,rtem_t3_r4,rtem_t3_r5,rtem_t3_r6,rtem_t3_r7,rtem_t3_r8,rtem_t3_r9,rtem_t3_r10,rtem_t2_pk) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19)`,[mana_pk,req.body.t3madeof,req.body.t3body,req.body.t3name,cover_key,cover_type,date,req.body.t4cmt,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,req.body.t2pk])
         await db.release();
         return res.send("success")
     }catch(err){
@@ -616,6 +616,80 @@ router.post("/singleimage", async(req,res)=>{
         })
     }catch(err){
         console.log("error on singleimage")
+        console.log(err)
+        return res.send("fail")
+    }
+})
+
+router.post("/mongcateinit",async(req,res)=>{
+    try{
+        if(req.body.token===null||req.body.token===undefined||req.body.session===null||req.body.session===undefined) return res.send("fail")
+        jwt.verify(req.body.token,jwtConfig.key);
+        jwt.verify(req.body.session,jwtConfig.key);
+        let user_pk = req.body.token;
+        user_pk = user_pk.split(".")[1];
+        user_pk = user_pk.split(".")[0];
+        user_pk = atob(user_pk);
+        user_pk = user_pk.split('{"user_pk":"')[1];
+        user_pk = user_pk.split('","iat":')[0];
+
+        let session = req.body.session;
+        session = session.split(".")[1];
+        session = session.split(".")[0];
+        session = atob(session);
+        session = session.split('{"session":"')[1];
+        session = session.split('","iat":')[0];
+
+        const db = await client.connect();
+        let checkSession = await db.query(`select from users where session=$1 and user_id=$2`,[session,user_pk])
+        if(checkSession.rows[0]===undefined){
+            await db.release();
+            return res.send("fail")
+        }
+
+        let result1 = await db.query(`select rtem_t1_pk,rtem_t1_name from rtem_t1`)
+        let result2 = await db.query(`select rtem_t2_pk,rtem_t2_name from rtem_t2`)
+        let returnArray = {
+            rtem1:result1.rows,
+            rtem2:result2.rows
+        }
+
+        await db.release();
+        return res.send(returnArray)
+    }catch(err){
+        console.log("error on getcate");
+        console.log(err)
+        return res.send("fail")
+    }
+})
+
+router.post("/rteminit",async(req,res)=>{
+    try{
+        if(req.body.key!=="randomkey") return res.send("fail")
+        const db = await client.connect();
+        let getpick = await db.query(`select rtem_t1_name,rtem_t1_key,rtem_t1_type from rtem_t1 where rtem_t1_zamong_pick=true limit 2`)
+        let getrtem = await db.query(`select rtem_t1_pk,rtem_t1_name from rtem_t1 where rtem_t1_zamong_pick=false`)
+        if(getrtem.rows[0]===undefined){
+            await db.release();
+            return res.send("fail")
+        }
+        
+        let temp = []
+        for(let i=0;i<getrtem.rowCount;i++){
+            let result = await db.query(`select rtem_t2_pk,rtem_t2_name,rtem_t2_key,rtem_t2_type from rtem_t2 where rtem_t1_pk=$1;`,[getrtem.rows[i].rtem_t1_pk])
+            if(result.rowCount>0){
+                temp.push(result.rows)
+            }
+        }
+        
+        let returnArray = {
+            pick:getpick.rows,
+            list:temp
+        }
+        await db.release();
+        return res.send(returnArray)
+    }catch(err){
+        console.log("error on getcate");
         console.log(err)
         return res.send("fail")
     }

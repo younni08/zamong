@@ -6,7 +6,6 @@ const Index = () => {
             <div>
                 <div className="index_level1">
                     <img src="./pics/rtende.png" alt="logo" />
-                    
                 </div>
                 <div className="index_level2">
                     <div></div>

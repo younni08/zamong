@@ -6,9 +6,30 @@ import 'react-quill/dist/quill.snow.css';
 import axios from "axios";
 
 const MongItem = () => {
+    const [t1list,setT1list] = useState([])
+    const [t2list,setT2list] = useState([])
     useEffect(()=>{
-        
+        init();
     },[])
+
+    const init = async() => {
+        let token = getCookie("token")
+        let session = getCookie("session")
+        if(token===null||session===null) return alert("로그인 후 이용하세요")
+        let url = "/api/mong/mongcateinit";
+        let params = {
+            token:token,
+            session:session
+        }
+        const config = {
+            headers:{
+                "content-type":"application/json"
+            }
+        }
+        let res = await axios.post(url,params,config)
+        setT1list(res.data.rtem1)
+        setT2list(res.data.rtem2)
+    }
     const [q00,setq00] = useState("")
     const [q0,setq0] = useState("")
     const [q1,setq1] = useState("")
@@ -176,6 +197,9 @@ const MongItem = () => {
             formData.append("t2image",t2_image.files[0])
         }
 
+        let parentpk = document.getElementById("mongselect_cate2").value
+        formData.append("t1pk",parentpk)
+
         const config = {
             headers:{
                 "content-type":"application/mu"
@@ -234,6 +258,9 @@ const MongItem = () => {
                 "content-type":"application/mu"
             }
         }
+
+        let parentpk = document.getElementById("mongselect_cate3").value
+        formData.append("t2pk",parentpk)
 
         let res = await axios.post(url,formData,config)
         console.log(res.data)
@@ -314,7 +341,22 @@ const MongItem = () => {
                         </div>
                     </div>
                     <div className="mong_add_newmedium" id="mong_add_newmedium">
-                        <div>
+                        <div className="mong_cate_list">
+                            <span>분류</span>
+                            <div>
+                                <select id="mongselect_cate2">
+                                    <option disabled selected>대분류를 선택해주세요</option>
+                                    {
+                                        t1list?t1list.map(c=>{
+                                            return(
+                                                <option key={c.rtem_t1_pk} value={c.rtem_t1_pk}>{c.rtem_t1_name}</option>
+                                            )
+                                        }):""
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div className="mong_add_newmedium_first">
                             <div>
                                 <span>이름</span>
                                 <div>
@@ -362,7 +404,22 @@ const MongItem = () => {
                         </div>
                     </div>
                     <div className="mong_add_newsmall" id="mong_add_newsmall">
-                        <div>
+                        <div className="mong_cate_list">
+                            <span>분류</span>
+                            <div>
+                                <select id="mongselect_cate3">
+                                    <option disabled selected>중분류를 선택해주세요</option>
+                                    {
+                                        t2list?t2list.map(c=>{
+                                            return(
+                                                <option key={c.rtem_t2_pk} value={c.rtem_t2_pk}>{c.rtem_t2_name}</option>
+                                            )
+                                        }):""
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div className="mong_add_newsmall_first">
                             <div>
                                 <span>이름</span>
                                 <div>

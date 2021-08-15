@@ -32,6 +32,7 @@ create table rtem_t1(
 )
 create table rtem_t2(
     id serial primary key,
+    rtem_t1_pk varchar(100),
     rtem_t2_pk varchar(100),
     rtem_t2_name varchar(500),
     rtem_t2_key varchar(500),
@@ -42,6 +43,7 @@ create table rtem_t2(
 )
 create table rtem_t3(
     id serial primary key,
+    rtem_t2_pk varchar(100),
     rtem_t3_pk varchar(100),
     rtem_t3_name varchar(500),
     rtem_t3_key varchar(500),

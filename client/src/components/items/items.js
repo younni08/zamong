@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Itembox from "./itembox"
 import {Link} from "react-router-dom"
+import axios from "axios";
 
 const Item = (props) => {
     const [cate,setCate] = useState("생활용품")
@@ -9,11 +10,22 @@ const Item = (props) => {
         init();
     },[props])
 
-    const init = () => {
+    const init = async() => {
         let getCate = window.location.href
         getCate = getCate.split("items?c=")[1]
         getCate = decodeURI(getCate)
         setCate(getCate)
+        console.log(getCate)
+        let url = "/api/mong/getcate";
+        let params = {
+            item:getCate
+        }
+        const config = {
+            headers:{
+                "content-type":"application/json"
+            }
+        }
+        let res = await axios.post(url,params.config)
     }
 
     return (
