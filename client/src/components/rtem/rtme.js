@@ -1,8 +1,10 @@
-import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import {Link} from "react-router-dom"
+import axios from "axios";
+import Item from "./rtem_item"
 
 const Rtem = () => {
+    const [list,setList] = useState([])
     useEffect(()=>{
         init()
     },[])
@@ -19,6 +21,7 @@ const Rtem = () => {
         }
         let res = await axios.post(url,params,config)
         console.log(res.data)
+        setList(res.data.list)
     }
 
     // page 넘기는거 만들어야함
@@ -60,57 +63,15 @@ const Rtem = () => {
                             </Link>
                         </div>
                     </div>
-                    <div className="rtem_level4">
-                        <span>부엌</span>
-                        <div>
-                            <Link to="/items?c=부엌">
-                                <img src="./pics/test.png" alt="text" />
-                            </Link>
-                            <Link to="/items?c=부엌">
-                                <img src="./pics/test.png" alt="text" />
-                            </Link>
-                            <Link to="/items?c=부엌">
-                                <img src="./pics/test.png" alt="text" />
-                            </Link>
-                            <Link to="/items?c=부엌">
-                                <img src="./pics/test.png" alt="text" />
-                            </Link>
-                        </div>
-                    </div>
-                    <div className="rtem_level4">
-                        <span>화장실</span>
-                        <div>
-                            <Link to="/items?c=화장실">
-                                <img src="./pics/test.png" alt="text" />
-                            </Link>
-                            <Link to="/items?c=화장실">
-                                <img src="./pics/test.png" alt="text" />
-                            </Link>
-                            <Link to="/items?c=화장실">
-                                <img src="./pics/test.png" alt="text" />
-                            </Link>
-                            <Link to="/items?c=화장실">
-                                <img src="./pics/test.png" alt="text" />
-                            </Link>
-                        </div>
-                    </div>
-                    <div className="rtem_level4">
-                        <span>생활</span>
-                        <div>
-                            <Link to="/items?c=생활">
-                                <img src="./pics/test.png" alt="text" />
-                            </Link>
-                            <Link to="/items?c=생활">
-                                <img src="./pics/test.png" alt="text" />
-                            </Link>
-                            <Link to="/items?c=생활">
-                                <img src="./pics/test.png" alt="text" />
-                            </Link>
-                            <Link to="/items?c=생활">
-                                <img src="./pics/test.png" alt="text" />
-                            </Link>
-                        </div>
-                    </div>
+                    {
+                        list?list.map(c=>{
+                            return(
+                                <Item 
+                                    data={c}
+                                />
+                            )
+                        }):""
+                    }
                 </div>
             </div>
         </div>
