@@ -1,27 +1,35 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import {Link} from "react-router-dom"
 
-const rtem_pick = (props) => {
+const Rtem_pick = (props) => {
+    const [titile,setTitle] = useState("")
+    const [array,setArray] = useState([])
+    useEffect(()=>{
+        init()
+    },[props])
+
+    const init = () => {
+        if(props.data===undefined) return 0
+        setArray(props.data)
+        setTitle(props.data[0].rtem_t1_name)
+    }
     
     return (
         <div className="rtem_level4">
-            <span>부엌</span>
+            <span>{titile}</span>
             <div>
-                <Link to="/items?c=부엌">
-                    <img src="./pics/test.png" alt="text" />
-                </Link>
-                <Link to="/items?c=부엌">
-                    <img src="./pics/test.png" alt="text" />
-                </Link>
-                <Link to="/items?c=부엌">
-                    <img src="./pics/test.png" alt="text" />
-                </Link>
-                <Link to="/items?c=부엌">
-                    <img src="./pics/test.png" alt="text" />
-                </Link>
+                {
+                    array?array.map(c=>{
+                        return(
+                            <Link to={"/items?c="+titile}>
+                                <img src="./pics/test.png" alt="text" />
+                            </Link>
+                        )
+                    }):""
+                }
             </div>
         </div>
     )
 }
 
-export default rtem_pick
+export default Rtem_pick

@@ -3,8 +3,8 @@ keeperchan@gmail.com
 이루자몽 aws 비밀번호
 Irooza11##
 
-keeperchan
 
+keeperchan
 Irooza11##
 
 create table users (
@@ -66,8 +66,6 @@ create table rtem_t3(
 )
 create table rtem_t4(
     id serial primary key,
-    rtem_t1_pk varchar(100),
-    rtem_t2_pk varchar(100),
     rtem_t3_pk varchar(100),
     rtem_t4_pk varchar(100),
     rtem_t4_name varchar(500),

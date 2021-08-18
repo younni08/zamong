@@ -4,8 +4,6 @@ import {getCookie} from "./../common/cookie"
 import axios from "axios";
 
 const MongItem = () => {
-    const [t1list,setT1list] = useState([])
-    const [t2list,setT2list] = useState([])
     const [t3list,setT3list] = useState([])
     useEffect(()=>{
         init();
@@ -24,8 +22,6 @@ const MongItem = () => {
         let res = await axios.post(url,params,config)
         console.log(res.data)
         if(res.data==="fail") return alert("잘못된 접근입니다.")
-        setT1list(res.data.t1)
-        setT2list(res.data.t2)
         setT3list(res.data.t3)
     }
 
@@ -36,20 +32,6 @@ const MongItem = () => {
     const [t4addr,setT4addr] = useState("")
     const handleT4ddr = (e) => {setT4addr(e.target.value)}
 
-    const handleT1checkbox = () => {
-        let tempString = ""
-        for(let i=0;i<t1list.length;i++){
-            if(document.getElementById(t1list[i].rtem_t1_pk).checked===true){tempString = tempString + t1list[i].rtem_t1_pk +","}
-        }
-        return tempString
-    }
-    const handleT2checkbox = () => {
-        let tempString = ""
-        for(let i=0;i<t2list.length;i++){
-            if(document.getElementById(t2list[i].rtem_t2_pk).checked===true){tempString = tempString + t2list[i].rtem_t2_pk +","}
-        }
-        return tempString
-    }
     const handleT3checkbox = () => {
         let tempString = ""
         for(let i=0;i<t3list.length;i++){
@@ -71,12 +53,8 @@ const MongItem = () => {
         formData.append("t4addres",t4addr);
         formData.append("t4tag",t4tag);
 
-        let checkt1 = handleT1checkbox();
-        let checkt2 = handleT2checkbox();
         let checkt3 = handleT3checkbox();
 
-        formData.append("t1item",checkt1)
-        formData.append("t2item",checkt2)
         formData.append("t3item",checkt3)
 
         let t4_image = document.getElementById("mong_t4_image");
@@ -100,42 +78,6 @@ const MongItem = () => {
         <div className="mong_item">
             <span>*는 필수 항목입니다.</span>
             <div>
-                <div className="mong_item_general">
-                    <div>
-                        <span>대분류*</span>
-                        <span></span>
-                    </div>
-                    <div>
-                        {
-                            t1list?t1list.map(c=>{
-                                return (
-                                <div className="mong_item_general_element" key={c.rtem_t1_pk}>
-                                    <label for={c.rtem_t1_pk}>{c.rtem_t1_name}</label>
-                                    <input type="checkbox" id={c.rtem_t1_pk} />
-                                </div>
-                                )
-                            }):""
-                        }
-                    </div>
-                </div>
-                <div className="mong_item_general">
-                    <div>
-                        <span>중분류*</span>
-                        <span></span>
-                    </div>
-                    <div>
-                        {
-                            t2list?t2list.map(c=>{
-                                return (
-                                <div className="mong_item_general_element" key={c.rtem_t2_pk}>
-                                    <label for={c.rtem_t2_pk}>{c.rtem_t2_name}</label>
-                                    <input type="checkbox" id={c.rtem_t2_pk} />
-                                </div>
-                                )
-                            }):""
-                        }
-                    </div>
-                </div>
                 <div className="mong_item_general">
                     <div>
                         <span>소분류*</span>

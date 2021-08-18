@@ -5,6 +5,7 @@ import axios from "axios";
 
 const Item = (props) => {
     const [cate,setCate] = useState("생활용품")
+    const [list,setList] = useState([])
 
     useEffect(()=>{
         init();
@@ -16,7 +17,7 @@ const Item = (props) => {
         getCate = decodeURI(getCate)
         setCate(getCate)
         console.log(getCate)
-        let url = "/api/mong/getcate";
+        let url = "/api/mong/itemsinit";
         let params = {
             item:getCate
         }
@@ -25,7 +26,10 @@ const Item = (props) => {
                 "content-type":"application/json"
             }
         }
-        let res = await axios.post(url,params.config)
+        let res = await axios.post(url,params,config)
+        if(res.data==="fail") return alert("")
+        setList(res.data)
+        console.log(res.data)
     }
 
     return (
@@ -40,16 +44,19 @@ const Item = (props) => {
                     <span><i className="xi-search"></i></span>
                 </div>
                 <div className="rtem_level2">
-                    <div>
-                        <span>광고 배너</span>
+                        <div>
+                            <div className="on">
+                                <img src="./pics/rtem-banner1.png" alt="banner1" />
+                            </div>
+                            <div>
+                                <img src="./pics/rtem-banner2.png" alt="banner2" />
+                            </div>
+                        </div>
+                        <div>
+                            <span className="on"></span>
+                            <span></span>
+                        </div>
                     </div>
-                    <div>
-                        <span className="on"></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </div>
                 <div className="item_main">
                     <div>
                         <span>알-템 - {cate}</span>
@@ -58,78 +65,17 @@ const Item = (props) => {
                         </select>
                     </div>
                     <div>
-                        <Link to="/item" className="itembox">
-                            <div>
-                                <img src="./pics/test.png" alt="test" />
-                            </div>
-                        </Link>
-                        <Link to="/item" className="itembox">
-                            <div>
-                                <img src="./pics/test.png" alt="test" />
-                            </div>
-                        </Link>
-                        <Link to="/item" className="itembox">
-                            <div>
-                                <img src="./pics/test.png" alt="test" />
-                            </div>
-                        </Link>
-                        <Link to="/item" className="itembox">
-                            <div>
-                                <img src="./pics/test.png" alt="test" />
-                            </div>
-                        </Link>
-                        <Link to="/item" className="itembox">
-                            <div>
-                                <img src="./pics/test.png" alt="test" />
-                            </div>
-                        </Link>
-                        <Link to="/item" className="itembox">
-                            <div>
-                                <img src="./pics/test.png" alt="test" />
-                            </div>
-                        </Link>
-                        <Link to="/item" className="itembox">
-                            <div>
-                                <img src="./pics/test.png" alt="test" />
-                            </div>
-                        </Link>
-                        <Link to="/item" className="itembox">
-                            <div>
-                                <img src="./pics/test.png" alt="test" />
-                            </div>
-                        </Link>
-                        <Link to="/item" className="itembox">
-                            <div>
-                                <img src="./pics/test.png" alt="test" />
-                            </div>
-                        </Link>
-                        <Link to="/item" className="itembox">
-                            <div>
-                                <img src="./pics/test.png" alt="test" />
-                            </div>
-                        </Link>
-                        <Link to="/item" className="itembox">
-                            <div>
-                                <img src="./pics/test.png" alt="test" />
-                            </div>
-                        </Link>
-                        <Link to="/item" className="itembox">
-                            <div>
-                                <img src="./pics/test.png" alt="test" />
-                            </div>
-                        </Link>
-                        <Link to="/item" className="itembox">
-                            <div>
-                                <img src="./pics/test.png" alt="test" />
-                            </div>
-                        </Link>
-                        <Link to="/item" className="itembox">
-                            <div>
-                                <img src="./pics/test.png" alt="test" />
-                            </div>
-                        </Link>
-                        <Itembox />
-                        <Itembox />
+                        {
+                            list?list.map(c=>{
+                                return(
+                                    <Link to={"/item?"+c.rtem_t2_pk} key={c.rtem_t2_pk} className="itembox">
+                                        <div>
+                                            <img src="./pics/test.png" alt="test" />
+                                        </div>
+                                    </Link>
+                                )
+                            }):""
+                        }
                     </div>
                 </div>
             </div>

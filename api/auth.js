@@ -148,7 +148,7 @@ router.post("/additem", upload.any(),async(req,res)=>{
             }
         }
 
-        await db.query(`insert into rtem_t4(rtem_t1_pk,rtem_t2_pk,rtem_t3_pk,rtem_t4_pk,rtem_t4_name,rtem_t4_key,rtem_t4_type,rtem_tag,rtem_address,rtem_t4_date) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`,[req.body.t1item,req.body.t2item,req.body.t3item,mana_pk,req.body.t4name,cover_key,cover_type,req.body.tag,req.body.t4addres,date])
+        await db.query(`insert into rtem_t4(rtem_t3_pk,rtem_t4_pk,rtem_t4_name,rtem_t4_key,rtem_t4_type,rtem_tag,rtem_address,rtem_t4_date) values($1,$2,$3,$4,$5,$6,$7,$8)`,[req.body.t3item,mana_pk,req.body.t4name,cover_key,cover_type,req.body.tag,req.body.t4addres,date])
         await db.release();
         return res.send("success")
     }catch(err){
@@ -375,12 +375,8 @@ router.post("/mong_item_init",async(req,res)=>{
     try{
         if(req.body.secret!=="secret?") return res.send("fail")
         const db = await client.connect();
-        let getT1 = await db.query(`select rtem_t1_pk,rtem_t1_name from rtem_t1 order by id asc`)
-        let getT2 = await db.query(`select rtem_t2_pk,rtem_t2_name from rtem_t2 order by id asc`)
         let getT3 = await db.query(`select rtem_t3_pk,rtem_t3_name from rtem_t3 order by id asc`)
         let returnArray = {
-            t1:getT1.rows,
-            t2:getT2.rows,
             t3:getT3.rows
         }
 
@@ -657,7 +653,7 @@ router.post("/mongcateinit",async(req,res)=>{
         await db.release();
         return res.send(returnArray)
     }catch(err){
-        console.log("error on getcate");
+        console.log("error on mongcateinit");
         console.log(err)
         return res.send("fail")
     }
@@ -676,7 +672,7 @@ router.post("/rteminit",async(req,res)=>{
         
         let temp = []
         for(let i=0;i<getrtem.rowCount;i++){
-            let result = await db.query(`select rtem_t2_pk,rtem_t2_name,rtem_t2_key,rtem_t2_type from rtem_t2 where rtem_t1_pk=$1;`,[getrtem.rows[i].rtem_t1_pk])
+            let result = await db.query(`select t2.rtem_t2_pk,t2.rtem_t2_name,t2.rtem_t2_key,t2.rtem_t2_type,t1.rtem_t1_name from rtem_t2 t2 inner join rtem_t1 t1 on t1.rtem_t1_pk=t2.rtem_t1_pk where t2.rtem_t1_pk=$1;`,[getrtem.rows[i].rtem_t1_pk])
             if(result.rowCount>0){
                 temp.push(result.rows)
             }
@@ -689,7 +685,49 @@ router.post("/rteminit",async(req,res)=>{
         await db.release();
         return res.send(returnArray)
     }catch(err){
-        console.log("error on getcate");
+        console.log("error on rteminit");
+        console.log(err)
+        return res.send("fail")
+    }
+})
+
+router.post("/itemsinit",async(req,res)=>{
+    try{
+        console.log(req.body)
+        if(req.body.item===undefined||req.body.item===null) return res.send("fail")
+        const db = await client.connect();
+        let returnArray = []
+        let result = await db.query(`select rtem_t2_pk,rtem_t2_name,rtem_t2_key,rtem_t2_type from rtem_t2 where rtem_t1_pk=(select rtem_t1_pk from rtem_t1 where rtem_t1_name=$1);`,[req.body.item])
+        returnArray = result.rows
+        await db.release();
+        return res.send(returnArray)
+    }catch(err){
+        console.log("error on itemsinit");
+        console.log(err)
+        return res.send("fail")
+    }
+})
+
+router.post("/iteminit",async(req,res)=>{
+    try{
+        console.log(req.body)
+        if(req.body.item===undefined||req.body.item===null) return res.send("fail")
+        const db = await client.connect();
+        let result = await db.query(`select rtem_t2_name,rtem_t2_key,rtem_t2_type,rtem_desc from rtem_t2 where rtem_t2_pk=$1`,[req.body.item])
+        let result2 = await db.query(`select rtem_t3_name,rtem_t3_key,rtem_t3_type,rtem_t3_r1,rtem_t3_r2,rtem_t3_r3,rtem_t3_r4,rtem_t3_r5,rtem_t3_r6,rtem_t3_r7,rtem_t3_r8,rtem_t3_r9,rtem_t3_r10,rtem_desc,rtem_desc2,rtem_desc3 from rtem_t3 where rtem_t2_pk=$1 limit 1`,[req.body.item])
+
+        if(result.rows[0]===undefined){
+            await db.release();
+            return res.send("fail")
+        }
+        let returnArray = {
+            item:result.rows[0],
+            list:result2.rows[0]
+        }
+        await db.release();
+        return res.send(returnArray)
+    }catch(err){
+        console.log("error on itemsinit");
         console.log(err)
         return res.send("fail")
     }
