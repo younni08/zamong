@@ -714,7 +714,8 @@ router.post("/iteminit",async(req,res)=>{
         if(req.body.item===undefined||req.body.item===null) return res.send("fail")
         const db = await client.connect();
         let result = await db.query(`select rtem_t2_name,rtem_t2_key,rtem_t2_type,rtem_desc from rtem_t2 where rtem_t2_pk=$1`,[req.body.item])
-        let result2 = await db.query(`select rtem_t3_name,rtem_t3_key,rtem_t3_type,rtem_t3_r1,rtem_t3_r2,rtem_t3_r3,rtem_t3_r4,rtem_t3_r5,rtem_t3_r6,rtem_t3_r7,rtem_t3_r8,rtem_t3_r9,rtem_t3_r10,rtem_desc,rtem_desc2,rtem_desc3 from rtem_t3 where rtem_t2_pk=$1 limit 1`,[req.body.item])
+        let result2 = await db.query(`select rtem_t3_name,rtem_t3_key,rtem_t3_type,rtem_t3_r1,rtem_t3_r2,rtem_t3_r3,rtem_t3_r4,rtem_t3_r5,rtem_t3_r6,rtem_t3_r7,rtem_t3_r8,rtem_t3_r9,rtem_t3_r10,rtem_desc,rtem_desc2,rtem_desc3 from rtem_t3 where rtem_t2_pk=$1 order by id desc  limit 1`,[req.body.item])
+        let result3 = await db.query(`select rtem_t3_pk,rtem_t3_key,rtem_t3_type from rtem_t3 where rtem_t2_pk=$1 order by id desc`,[req.body.item])
 
         if(result.rows[0]===undefined){
             await db.release();
@@ -722,7 +723,8 @@ router.post("/iteminit",async(req,res)=>{
         }
         let returnArray = {
             item:result.rows[0],
-            list:result2.rows[0]
+            detail:result2.rows[0],
+            list:result3.rows
         }
         await db.release();
         return res.send(returnArray)

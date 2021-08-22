@@ -1,18 +1,25 @@
 import axios from "axios";
 import React, { useState,useEffect } from "react";
 import parser from "html-react-parser"
+import Item_Element from "./item_element";
 
 const Item = (props) => {
     const [item,setItem] = useState([])
     const [list,setList] = useState([])
+    const [items,setItems] = useState([])
+    const [des1,setDes1] = useState("")
+    const [des2,setDes2] = useState("")
+    const [des3,setDes3] = useState("")
+    const [des4,setDes4] = useState("")
+
     useEffect(()=>{
         init()
-    },[])
+    },[props])
     
     const init = async() => {
         let url = "/api/mong/iteminit";
-        if(props.location.search.split("?")[1]===undefined) return alert("잘못된 접근입니다.")
-        let item_pk = props.location.search.split("?")[1]
+        if(window.location.href.split("?c=")[1]===undefined) return alert("잘못된 접근입니다.")
+        let item_pk = window.location.href.split("?c=")[1]
         let params = {
             item:item_pk
         }
@@ -24,9 +31,14 @@ const Item = (props) => {
         let res = await axios.post(url,params,config)
         if(res.data==="fail") return alert("잘못된 접근입니다.")
         setItem(res.data.item)
-        setList(res.data.list)
-        console.log(res.data)
+        setDes1(res.data.item.rtem_desc)
+        setDes2(res.data.detail.rtem_desc)
+        setDes3(res.data.detail.rtem_desc2)
+        setDes4(res.data.detail.rtem_desc3)
+        setList(res.data.detail)
+        setItems(res.data.list)
     }
+
     return (
         <div className="item">
             <div>
@@ -43,7 +55,7 @@ const Item = (props) => {
                             <span># 001 {item.rtem_t2_name}</span>
                         </div>
                         <div className="item_ex_level3">
-                            {parser(item.rtem_desc)}
+                            {parser(des1)}
                         </div>
                         <div className="item_ex_level4">
                             <div>
@@ -51,30 +63,18 @@ const Item = (props) => {
                                 <span>다양한 {item.rtem_t2_name}</span>
                             </div>
                             <div>
-                                <div className="item_ex_level4_element">
-                                    <div>
-                                        <img src="./pics/test.png" alt="test" />
-                                    </div>
-                                    <span></span>
-                                </div>
-                                <div className="item_ex_level4_element">
-                                    <div>
-                                        <img src="./pics/test.png" alt="test" />
-                                    </div>
-                                    <span></span>
-                                </div>
-                                <div className="item_ex_level4_element">
-                                    <div>
-                                        <img src="./pics/test.png" alt="test" />
-                                    </div>
-                                    <span></span>
-                                </div>
-                                <div className="item_ex_level4_element">
-                                    <div>
-                                        <img src="./pics/test.png" alt="test" />
-                                    </div>
-                                    <span></span>
-                                </div>
+                                {
+                                    items?items.map(c=>{
+                                        return (
+                                            <Item_Element
+                                                key={c.rtem_t3_pk}
+                                                pk={c.rtem_t3_pk}
+                                                image={c.rtem_t3_key}
+                                                type={c.rtem_t3_type}
+                                            />
+                                        )
+                                    }):""
+                                }
                             </div>
                         </div>
                         <div className="item_ex_level5">
@@ -86,7 +86,7 @@ const Item = (props) => {
                                 <div>
                                     <span><i className="xi-plus xi-x"></i></span>
                                     <span>소재</span>
-                                    <span>{parser(list.rtem_desc)}</span>
+                                    <span>{parser(des2)}</span>
                                 </div>
                             </div>
                             <div className="item_ex_level62">
@@ -95,7 +95,7 @@ const Item = (props) => {
                                     <span>특징</span>
                                 </div>
                                 <div>
-                                    <span>{parser(list.rtem_desc2)}</span>
+                                    <span>{parser(des3)}</span>
                                 </div>
                             </div>
                             <div className="item_ex_level63">
@@ -111,7 +111,7 @@ const Item = (props) => {
                                                 <img src="./pics/r1.png" alt="r10" />
                                             </div>
                                             <div>
-                                                <span>Replace / 관계짓지</span>
+                                                <span>Relate / 관계짓지</span>
                                                 <div>
                                                     {parser(list.rtem_t3_r1)}
                                                 </div>
@@ -125,7 +125,7 @@ const Item = (props) => {
                                                 <img src="./pics/r2.png" alt="r10" />
                                             </div>
                                             <div>
-                                                <span>Replace / 다시 생각하기</span>
+                                                <span>Rethink / 다시 생각하기</span>
                                                 <div>
                                                     {parser(list.rtem_t3_r2)}
                                                 </div>
@@ -139,7 +139,7 @@ const Item = (props) => {
                                                 <img src="./pics/r3.png" alt="r10" />
                                             </div>
                                             <div>
-                                                <span>Replace / 거절하기</span>
+                                                <span>Refuse / 거절하기</span>
                                                 <div>
                                                     {parser(list.rtem_t3_r3)}
                                                 </div>
@@ -153,7 +153,7 @@ const Item = (props) => {
                                                 <img src="./pics/r4.png" alt="r10" />
                                             </div>
                                             <div>
-                                                <span>Replace / 줄이기</span>
+                                                <span>Reduce / 줄이기</span>
                                                 <div>
                                                     {parser(list.rtem_t3_r4)}
                                                 </div>
@@ -167,7 +167,7 @@ const Item = (props) => {
                                                 <img src="./pics/r5.png" alt="r10" />
                                             </div>
                                             <div>
-                                                <span>Replace / 재사용하기</span>
+                                                <span>Reuse / 재사용하기</span>
                                                 <div>
                                                     {parser(list.rtem_t3_r5)}
                                                 </div>
@@ -181,7 +181,7 @@ const Item = (props) => {
                                                 <img src="./pics/r6.png" alt="r10" />
                                             </div>
                                             <div>
-                                                <span>Replace / 수리하기</span>
+                                                <span>Repair / 수리하기</span>
                                                 <div>
                                                     {parser(list.rtem_t3_r6)}
                                                 </div>
@@ -209,7 +209,7 @@ const Item = (props) => {
                                                 <img src="./pics/r8.png" alt="r10" />
                                             </div>
                                             <div>
-                                                <span>Replace / 새 용도 찾기</span>
+                                                <span>Repurpose / 새 용도 찾기</span>
                                                 <div>
                                                     {parser(list.rtem_t3_r8)}
                                                 </div>
@@ -223,7 +223,7 @@ const Item = (props) => {
                                                 <img src="./pics/r9.png" alt="r10" />
                                             </div>
                                             <div>
-                                                <span>Replace / 퇴비화하기</span>
+                                                <span>Rot / 퇴비화하기</span>
                                                 <div>
                                                     {parser(list.rtem_t3_r9)}
                                                 </div>
@@ -237,7 +237,7 @@ const Item = (props) => {
                                                 <img src="./pics/r10.png" alt="r10" />
                                             </div>
                                             <div>
-                                                <span>Replace / 재활용하기</span>
+                                                <span>Recycle / 재활용하기</span>
                                                 <div>
                                                     {parser(list.rtem_t3_r10)}
                                                 </div>
@@ -250,7 +250,7 @@ const Item = (props) => {
                         <div className="item_ex_level7">
                             <div>
                                 <div>
-                                    {parser(list.rtem_desc3)}
+                                    {parser(des4)}
                                 </div>
                                 <span>feat. 자몽</span>
                             </div>

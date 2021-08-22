@@ -27,9 +27,9 @@ const Item = (props) => {
             }
         }
         let res = await axios.post(url,params,config)
+        console.log(res.data)
         if(res.data==="fail") return alert("")
         setList(res.data)
-        console.log(res.data)
     }
 
     return (
@@ -68,7 +68,7 @@ const Item = (props) => {
                         {
                             list?list.map(c=>{
                                 return(
-                                    <Link to={"/item?"+c.rtem_t2_pk} key={c.rtem_t2_pk} className="itembox">
+                                    <Link to={"/item?c="+c.rtem_t2_pk} key={c.rtem_t2_pk} className="itembox">
                                         <div>
                                             <img src="./pics/test.png" alt="test" />
                                         </div>
