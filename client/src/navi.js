@@ -23,7 +23,7 @@ const Navi = () => {
         <div className="navi">
             <div className="navi_level1">
                 <Link to="/"></Link>
-                <span onClick={expandmenu}><i class="xi-bars xi-x"></i></span>
+                <span onClick={expandmenu}><i className="xi-bars xi-x"></i></span>
             </div>
             <div className="navi_level2" id="navi_list">
                 <Link onClick={close} to="/rtende"><span>알-텐데</span></Link>

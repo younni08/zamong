@@ -64,9 +64,10 @@ const Rtem = () => {
                         </div>
                     </div>
                     {
-                        list?list.map(c=>{
+                        list?list.map((c,index)=>{
                             return(
                                 <Item 
+                                    key={"rtem"+index}
                                     data={c}
                                 />
                             )

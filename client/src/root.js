@@ -17,6 +17,7 @@ import Zamong1 from "./components/zamong/rtem_item"
 import Zamong2 from "./components/zamong/rtem_cate"
 import Zamong3 from "./components/zamong/rtende_article"
 import Zamong4 from "./components/zamong/rtende_articlelist"
+import Zamong5 from "./components/zamong/rtem_recom"
 
 const Root = () => {
     return (
@@ -40,6 +41,7 @@ const Root = () => {
                 <Route path ="/rtem_cate" component={Zamong2} />
                 <Route path ="/rtende_article" component={Zamong3} />
                 <Route path ="/rtende_articlelist" component={Zamong4} />
+                <Route path ="/rtem_recom" component={Zamong5} />
                 <Route component={T3} />
             </Switch>
         </div>
