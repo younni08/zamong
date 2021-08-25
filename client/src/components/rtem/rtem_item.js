@@ -21,7 +21,7 @@ const Rtem_pick = (props) => {
                 {
                     array?array.map(c=>{
                         return(
-                            <Link to={"/items?c="+titile}>
+                            <Link to={"/items?c="+titile} key={c.rtem_t2_pk}>
                                 <img src="./pics/test.png" alt="text" />
                             </Link>
                         )
