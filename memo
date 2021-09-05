@@ -21,6 +21,11 @@ create table users_history (
     login_date timestamp
 )
 
+{
+    "access_key_id":"AKIAXRTDO5B7C4ZYXBEF",
+    "secret_access_key":"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"
+}
+
 create table rtem_t1(
     id serial primary key,
     rtem_t1_pk varchar(100),

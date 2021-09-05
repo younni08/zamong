@@ -48,7 +48,7 @@ const jwtConfig = JSON.parse(jwtkey);
 
 const uploadtoS3 = (file,name,type) => {
     let param ={
-        'Bucket':'zamongs33',
+        'Bucket':'iroozamongs3',
         'Key':'zamong/ '+ name,
         'ACL':'authenticated-read',
         'Body':file,
