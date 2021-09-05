@@ -9,17 +9,6 @@ body {
   color:#001717;
   font-family: 'Spoqa Han Sans Neo', 'sans-serif'; 
 }
-/* 
-#173f5f
-#20639b
-#3caea3
-#f6d55c
-#ed553b
-*/
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
 p{
   margin:0px;
 }
@@ -1597,8 +1586,52 @@ p{
   width:100%;
   justify-content: center;
 }
-.map_main img{
+.map_main > div{
+  display:flex;
+  flex-direction: column;
   width:100%;
+}
+.map_main > div > span{
+  font-weight: bold;
+  color:#fff;
+  width:calc(100% - 30px);
+  background:#F27459;
+  padding:15px;
+}
+.map_korea{
+
+}
+.map_main_table{
+  display:flex;
+  flex-direction: column;
+  padding:15px;
+  width:calc(100% - 30px);
+  font-size:0.8rem;
+}
+.map_main_table > div.normal{
+  display:flex;
+  width:100%;
+  border-bottom:solid 1px #000;
+  padding:5px 0px 5px 10px;
+}
+.map_main_table > div.normal:first-child{
+  border-top:solid 1px #000;
+}
+.map_main_table > div.normal > span:nth-child(1){
+  display:flex;
+  margin:0px 10px 0px 0px;
+}
+.map_main_table > div.normal > span:nth-child(2){
+
+}
+.map_main_table > div.normal > span:nth-child(3){
+
+}
+.map_main_table > div.normal > span:nth-child(4){
+
+}
+.map_main_table > div.normal > span:nth-child(5){
+
 }
 /* --------------------------------------- board --------------------------------------- */
 .board{
