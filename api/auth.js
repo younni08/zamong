@@ -593,11 +593,12 @@ router.post("/getArticle_pick",async(req,res)=>{
 
 router.post("/singleimage", async(req,res)=>{
     try{
+        console.log(req.body)
         if(req.body.key===undefined) return res.send("fa2il")
         if(req.body.key === "default") return res.send("fail");
         let temp_key = req.body.key
         let params = {
-            'Bucket' : 'zamongs33',
+            'Bucket' : 'iroozamongs3',
             'Key' : 'zamong/ ' + temp_key
         }
         await s3.getObject(params,async(err,data) => {

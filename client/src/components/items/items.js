@@ -69,9 +69,10 @@ const Item = (props) => {
                             list?list.map(c=>{
                                 return(
                                     <Link to={"/item?c="+c.rtem_t2_pk} key={c.rtem_t2_pk} className="itembox">
-                                        <div>
-                                            <img src="./pics/test.png" alt="test" />
-                                        </div>
+                                        <Itembox 
+                                            rtem_t2_key={c.rtem_t2_key}
+                                            rtem_t2_type={c.rtem_t2_type}
+                                        />
                                     </Link>
                                 )
                             }):""

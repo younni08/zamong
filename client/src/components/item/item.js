@@ -39,6 +39,8 @@ const Item = (props) => {
         setItems(res.data.list)
     }
 
+    
+
     return (
         <div className="item">
             <div>
