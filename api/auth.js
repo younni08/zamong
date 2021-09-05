@@ -211,6 +211,7 @@ router.post("/addcatet1", upload.any(),async(req,res)=>{
                 let name = "#t1" + date.getTime();
                 cover_type=req.files[0].mimetype;
                 cover_key=name;
+                console.log(name)
                 await uploadtoS3(req.files[0].buffer,name,req.files[0].mimetype)
             }
         }
