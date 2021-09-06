@@ -19,6 +19,8 @@ import Zamong3 from "./components/zamong/rtende_article"
 import Zamong4 from "./components/zamong/rtende_articlelist"
 import Zamong5 from "./components/zamong/rtem_recom"
 
+import Shop from "./components/map_shop/shop"
+
 const Root = () => {
     return (
         <div className="root">
@@ -33,7 +35,11 @@ const Root = () => {
                 <Route path ="/togather" component={T3} />
                 <Route path ="/think" component={T3} />
                 <Route path ="/about" component={T3} />
+
                 <Route path ="/map" component={Map} />
+                <Route path ="/shop" component={WaveShaperNode} />
+
+
                 <Route path ="/article" component={Article} />
 
                 <Route path ="/login" component={Login} />
@@ -42,6 +48,8 @@ const Root = () => {
                 <Route path ="/rtende_article" component={Zamong3} />
                 <Route path ="/rtende_articlelist" component={Zamong4} />
                 <Route path ="/rtem_recom" component={Zamong5} />
+
+
                 <Route component={T3} />
             </Switch>
         </div>
