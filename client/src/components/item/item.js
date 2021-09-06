@@ -1,9 +1,14 @@
 import axios from "axios";
 import React, { useState,useEffect } from "react";
 import parser from "html-react-parser"
-import Item_Element from "./item_element";
+import ItemElement from "./item_element";
+import Qrcode from "qrcode.react";
+// var React = require('react');
+// import QRCode = require('qrcodereact');
 
 const Item = (props) => {
+    const [sample,setSample] = useState("")
+    const [defaultImage,setDefaultImage] = useState(true)
     const [item,setItem] = useState([])
     const [list,setList] = useState([])
     const [items,setItems] = useState([])
@@ -11,6 +16,7 @@ const Item = (props) => {
     const [des2,setDes2] = useState("")
     const [des3,setDes3] = useState("")
     const [des4,setDes4] = useState("")
+    const [itempk,setitempk] = useState("")
 
     useEffect(()=>{
         init()
@@ -20,6 +26,7 @@ const Item = (props) => {
         let url = "/api/mong/iteminit";
         if(window.location.href.split("?c=")[1]===undefined) return alert("잘못된 접근입니다.")
         let item_pk = window.location.href.split("?c=")[1]
+        setitempk(item_pk)
         let params = {
             item:item_pk
         }
@@ -29,7 +36,10 @@ const Item = (props) => {
             }
         }
         let res = await axios.post(url,params,config)
+
+        console.log(res.data)
         if(res.data==="fail") return alert("잘못된 접근입니다.")
+        getimage(res.data.detail.rtem_t3_key,res.data.detail.rtem_t3_type)
         setItem(res.data.item)
         setDes1(res.data.item.rtem_desc)
         setDes2(res.data.detail.rtem_desc)
@@ -37,6 +47,27 @@ const Item = (props) => {
         setDes4(res.data.detail.rtem_desc3)
         setList(res.data.detail)
         setItems(res.data.list)
+    }
+
+    const getimage = async(key,type) => {
+        if(key===undefined||key===null||key===""||key==="default") return false
+        let url = "/api/mong/singleimage"
+        let params = {
+            key:key
+        }
+        const config = {
+            headers:{
+                "content-type":"application/json"
+            }
+        }
+        let res = await axios.post(url,params,config);
+        if(res.data!=="fail"&&res.data!=="no key"){
+            let ttt = '<img src="data:'+type.replace("#",'').replace(",",'')+';base64,'+ res.data + '">'
+            setDefaultImage(false)
+            return setSample(ttt)
+        }else{
+            return setDefaultImage(true)
+        }
     }
 
     
@@ -51,7 +82,9 @@ const Item = (props) => {
                 <div className="item_ex">
                     <div>
                         <div className="item_ex_level1">
-                            <img src="./pics/test.png" alt="test" />
+                            {
+                                defaultImage?<img src="./pics/test.png" alt="text" />:parser(sample)
+                            }
                         </div>
                         <div className="item_ex_level2">
                             <span># 001 {item.rtem_t2_name}</span>
@@ -61,18 +94,15 @@ const Item = (props) => {
                         </div>
                         <div className="item_ex_level4">
                             <div>
-                                <span><i className="xi-plus-min xi-x"></i></span>
-                                <span>다양한 {item.rtem_t2_name}</span>
-                            </div>
-                            <div>
                                 {
                                     items?items.map(c=>{
                                         return (
-                                            <Item_Element
+                                            <ItemElement
                                                 key={c.rtem_t3_pk}
                                                 pk={c.rtem_t3_pk}
-                                                image={c.rtem_t3_key}
-                                                type={c.rtem_t3_type}
+                                                rtem_t3_key={c.rtem_t3_key}
+                                                rtem_t3_type={c.rtem_t3_type}
+                                                rtem_t3_name={c.rtem_t3_name}
                                             />
                                         )
                                     }):""
@@ -247,6 +277,23 @@ const Item = (props) => {
                                         </div>:""
                                     }
                                 </div>
+                            </div>
+                        </div>
+                        <div className="item_ex_level_qr">
+                            <div>
+                                <img src="./pics/kakaotalk.png" alt="link" />
+                                <img src="./pics/facebook.png" alt="link" />
+                                <img src="./pics/twitter.png" alt="link" />
+                                <img src="./pics/insta.png" alt="link" />
+                                <img src="./pics/email.png" alt="link" />
+                                <img src="./pics/link.png" alt="link" />
+                            </div>
+                            <div>
+                                <Qrcode value={"https://www.iroozamong.com/#/item?c="+itempk}
+                                    size={100}
+                                    bgColor={"#FFFEF8"}
+                                />
+                                <span>QR코드 복사</span>
                             </div>
                         </div>
                         <div className="item_ex_level7">
