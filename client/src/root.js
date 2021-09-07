@@ -7,7 +7,9 @@ import Items from "./components/items/items"
 import Item from "./components/item/item"
 import Article from "./components/article/article"
 import Board from "./components/board/board"
+
 import Map from "./components/map/map"
+import MapState from "./components/map/map_state"
 
 import Login from "./components/login/login"
 import Rtem from "./components/rtem/rtme"
@@ -37,7 +39,8 @@ const Root = () => {
                 <Route path ="/about" component={T3} />
 
                 <Route path ="/map" component={Map} />
-                <Route path ="/shop" component={WaveShaperNode} />
+                <Route path ="/state" component={MapState} />
+                <Route path ="/shop" component={Shop} />
 
 
                 <Route path ="/article" component={Article} />

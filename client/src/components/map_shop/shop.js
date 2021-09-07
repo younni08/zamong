@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 import MapNavi from "./../map/map_navi"
+import Qrcode from "qrcode.react";
 
 const Shop = () => {
     const [expand,setExpand] = useState(false)
@@ -12,7 +13,6 @@ const Shop = () => {
             setExpand(false)
         }
     }
-
 
     return (
         <div className="map">
@@ -72,6 +72,33 @@ const Shop = () => {
                             <span>+</span>
                             <span>사이트</span>
                             <span>없음</span>
+                        </div>
+                    </div>
+                    <div className="item_ex_level_qr">
+                        <div>
+                            <img src="./pics/kakaotalk.png" alt="link" />
+                            <img src="./pics/facebook.png" alt="link" />
+                            <img src="./pics/twitter.png" alt="link" />
+                            <img src="./pics/insta.png" alt="link" />
+                            <img src="./pics/email.png" alt="link" />
+                            <img src="./pics/link.png" alt="link" />
+                        </div>
+                        <div>
+                            <Qrcode value={"https://www.iroozamong.com/#/shop"}
+                                size={100}
+                                bgColor={"#FFFEF8"}
+                            />
+                            <span>QR코드 복사</span>
+                        </div>
+                    </div>
+                    <div className="shop_level7">
+                        <div>
+                            <span>+</span>
+                            <span>읽을 거리</span>
+                        </div>
+                        <div>
+                            <img src="./pics/test.png" alt="link" />
+                            <span>test</span>
                         </div>
                     </div>
                 </div>

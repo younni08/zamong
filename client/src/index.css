@@ -197,6 +197,64 @@ p{
   border-radius: 10px;
   height:30vh;
 }
+.shop_level6{
+  display: flex;
+  flex-direction: column;
+  padding: 15px 15px 0px 15px;
+  width: calc(100% - 30px);
+  font-size: 0.8rem;
+  margin: 0px 0px 0px 0px;
+}
+.shop_level6 > div{
+  display: flex;
+  width: calc(100% - 10px);
+  padding: 5px 0px 5px 10px;
+  border-bottom: solid 1px #000;
+}
+.shop_level6 > div:first-child{
+  border-top: solid 1px #000;
+}
+.shop_level6 > div > span:nth-child(1){
+  display: flex;
+  margin: 0px 20px 0px 0px;
+}
+.shop_level6 > div > span:nth-child(2){
+  display: flex;
+  width:50px;
+}
+.shop_level6 > div > span:nth-child(3){
+  display:flex;
+  flex:1;
+}
+.shop_level7{
+  display: flex;
+  flex-direction: column;
+  padding: 15px 15px 0px 15px;
+  width: calc(100% - 30px);
+}
+.shop_level7 > div:first-child{
+  display: flex;
+  width: calc(100% - 10px);
+  padding: 5px 0px 5px 10px;
+  border-top: solid 1px #000;
+}
+.shop_level7 > div:first-child > span:nth-child(1){
+  display: flex;
+  margin: 0px 20px 0px 0px;
+}
+.shop_level7 > div:last-child{
+  display:flex;
+  flex-direction: column;
+  width:calc(100% - 40px);
+  margin:10px 0px 50px 0px;
+  padding:0px 0px 0px 40px;
+}
+.shop_level7 > div:last-child > img{
+  width:200px;
+  height: 200px;
+  border:solid 1px #000;
+  margin:0px 0px 10px 0px;
+}
 /* -------------------------------------- rtem ------------------------------------------ */
 .rtem{
   display:flex;
@@ -1740,7 +1798,6 @@ p{
 }
 .map_main_table > div:last-child{
   display:flex;
-  /* margin:5px 0px 0px 0px; */
   width:calc(100% - 10px);
   padding:5px 0px 5px 10px;
 }
@@ -1772,6 +1829,84 @@ p{
   padding:15px;
   font-size:20px;
   z-index: 5;
+}
+.map_main_table > div.map_list{
+  display:flex;
+  flex-direction: column;
+  width:calc(100% - 10px);
+  padding:5px 0px 5px 10px;
+  border-bottom:solid 1px #000;
+}
+.map_main_table > div.map_list > div{
+  display: flex;
+}
+.map_main_table > div.map_list > div > span{
+  display: flex;
+  margin: 0px 10px 0px 0px;
+}
+.map_main_table > div.map_list > div > div{
+  display:flex;
+  flex:1;
+  justify-content: space-between;
+}
+.map_main_table > div.map_list > ul{
+  padding: 0px 0px 0px 70px;
+  margin:0;
+  list-style: none;
+  width:calc(100% - 70px);
+}
+.map_main_table > div.map_list li{
+  width:100%;
+  display:flex;
+  justify-content: space-between;
+  margin:5px 0px;
+
+}
+.map_state{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  padding:20px;
+  width:calc(100% - 40px);
+  height:80vh;
+  background:#F27459;
+}
+.map_state_level1{
+  display:flex;
+  flex-direction: column;
+  padding:15px;
+  width:calc(100% - 30px);
+}
+.map_state_level1 > span{
+  font-size: 20px;
+  font-weight: bold;
+  display:flex;
+  margin:0px 0px 20px 0px;
+}
+.map_state_level1 > div{
+  display:flex;
+  flex-direction: column;
+}
+.map_state_level2{
+  display:flex;
+  justify-content: center;
+  margin:30px 0px;
+}
+.map_state_level2 > span{
+  display:flex;
+  justify-content: center;
+  color:#00B775;
+  border:solid 1px #00B775;
+  padding:10px 20px;
+  width:calc(100% - 80px);
+  border-radius: 30px;
+}
+.map_register{
+  display:flex;
+  position:fixed;
+  top:0;
+  width:100vw;
+  z-index: 20;
 }
 /* --------------------------------------- board --------------------------------------- */
 .board{

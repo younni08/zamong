@@ -3,8 +3,6 @@ import React, { useState,useEffect } from "react";
 import parser from "html-react-parser"
 import ItemElement from "./item_element";
 import Qrcode from "qrcode.react";
-// var React = require('react');
-// import QRCode = require('qrcodereact');
 
 const Item = (props) => {
     const [sample,setSample] = useState("")

@@ -1,6 +1,6 @@
 import React,{useState} from "react";
-import MapKorea from "./map_korea";
 import MapNavi from "./map_navi"
+import MapKorea from "./map_korea";
 
 const Map = () => {
     const [expand,setExpand] = useState(false)
