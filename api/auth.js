@@ -11,16 +11,6 @@ const CryptoJS = require("crypto-js");
 
 const nodemailer = require("nodemailer");
 
-let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false,
-    auth: {
-      user: "iroomailer@gmail.com",
-      pass: "dlfnwkahd123~",
-    },
-});
 
 // encrypt library
 const bcrypt = require("bcryptjs");
@@ -752,12 +742,54 @@ router.post("/iteminit",async(req,res)=>{
 
 router.post("/maprequest",async(req,res)=>{
     try{
+        if(req.body.location1===undefined||req.body.location2===undefined||req.body.text===undefined||req.body.email===undefined||req.body.check2===undefined||req.body.check1===undefined)
         console.log(req.body)
-        return res.send("sucess")
+        const db = await client.connect();
+        let date = new Date();
+        let ip = req.headers['x-forwarded-for'] ||  req.connection.remoteAddress;
+        await db.query(`insert into shop_request(email,shop_state,shop_city,policy,check1,check2,text,date,ip) values ($1,$2,$3,$4,$5,$6,$7,$8,$9)`,[req.body.email,req.body.location1,req.body.location2,true,req.body.check1,req.body.check2,req.body.text,date,ip])
+        await db.release();
+
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false,
+            auth: {
+              user: "iroomailer@gmail.com",
+              pass: "dlfnwkahd123~",
+            },
+        });
+
+        let txt = `<p>등록 이메일: ${req.body.email}</p><br/><p>등록 지역: ${req.body.location1}</p><br/><p>지역 상세: ${req.body.location2}</p><br/><br/><p>요청 사항: ${req.body.text}</p>`
+
+        if(req.body.check1===true){
+            let info = await transporter.sendMail({
+                from: '"이루자몽" <iroozamong@iroozamong.com>', // sender address
+                to: "iroozamong@naver.com", // list of receivers
+                subject: "제로웨이트샵을 희망합니다.", // Subject line
+                // text: "Hello world?", // plain text body
+                html: txt, // html body
+            });
+            console.log("Message sent: %s", info.messageId);
+        }else{
+            let info = await transporter.sendMail({
+                from: '"이루자몽" <iroozamong@iroozamong.com>', // sender address
+                to: "iroozamong@naver.com", // list of receivers
+                subject: "우리 지역의 제로웨이스턉을 소개를 희망합니다. ", // Subject line
+                // text: "Hello world?", // plain text body
+                html: txt, // html body
+            });
+            console.log("Message sent: %s", info.messageId);
+        }
+ 
+// 나만의 키다리아저씨를 찾아서
+        
+        return res.send("success")
     }catch(err){
         console.log("error on maprequest")
         console.log(err)
-        return req.send("fail")
+        return res.send("fail")
     }
 })
 

@@ -121,3 +121,16 @@ create table rka_article(
     rka_cate varchar(500),
     rka_date timestamp
 )
+
+create table shop_request(
+    id serial primary key,
+    email varchar(500),
+    shop_state varchar(500),
+    shop_city varchar(500),
+    policy boolean default false,
+    check1 boolean default false,
+    check2 boolean default false,
+    text varchar(5000),
+    date timestamp,
+    ip inet
+)

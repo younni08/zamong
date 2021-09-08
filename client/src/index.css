@@ -1905,14 +1905,14 @@ p{
 .map_register{
   display:flex;
   justify-content: flex-end;
-  position:fixed;
+  position:absolute;
   top:0;
   width:100vw;
   margin:111px 0px 0px 0px;
   transition: all 1s;
   z-index: 0;
   background:none;
-  padding:0px 0px 50vh 100vw;
+  padding:0px 0px 0vh 100vw;
   /* z-index: 20;
   background:rgba(0,0,0,0.3);
   padding:0px 0px 50vh 0px; */
