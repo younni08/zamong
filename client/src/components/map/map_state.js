@@ -1,3 +1,4 @@
+import axios from "axios";
 import React,{useState} from "react";
 import MapNavi from "./map_navi"
 
@@ -16,6 +17,33 @@ const MapState = () => {
     const mapPop = () => {
         console.log(document.getElementById("map_popupanimation"))
         document.getElementById("map_popupanimation").style.margin="-35vh 0px 0px 0px"
+    }
+
+    const oepnRegister = () => {
+        window.scroll(0,0)
+        document.getElementById("map_register1").style.padding="0px 0px 50vh 0vw"
+        document.getElementById("map_register1").style.background="rgba(0,0,0,0.3)"
+        document.getElementById("map_register1").style.zIndex="20"
+    }
+
+    const closeRegister = () => {
+        document.getElementById("map_register1").style.padding="0px 0px 50vh 100vw"
+        document.getElementById("map_register1").style.background="none"
+        document.getElementById("map_register1").style.zIndex="0"
+    }
+
+    const register = async() => {
+        let url = "/api/mong/maprequest"
+        let params = {
+
+        }
+        const config = {
+            headers:{
+                "content-type":"application/json"
+            }
+        }
+        let res = await axios.post(url,params,config)
+        console.log(res.data)
     }
     
     return (
@@ -81,12 +109,14 @@ const MapState = () => {
                             </div>
                         </div>
                         <div className="map_state_level2">
-                            <span>요청하기</span>
+                            <span onClick={oepnRegister}>요청하기</span>
                         </div>
-                        <div className="map_register">
-                            <div>
+                        <div className="map_register" id="map_register1">
+                            <div id="map_register2">
                                 <div className="map_register_level1">
-                                    <span>X</span>
+                                    <span onClick={closeRegister}>
+                                        <i className="xi-close xi-x"></i>
+                                    </span>
                                 </div>
                                 <div className="map_register_level2">
                                     <span>제로웨이스트샵이 필요해요</span>
@@ -99,16 +129,55 @@ const MapState = () => {
                                     <span>개인정보 제공에 동의합니다.</span>
                                 </div>
                                 <div className="map_register_level5">
-
+                                    <div>
+                                        <input type="text" placeholder="E-mail"/>
+                                    </div>
                                 </div>
                                 <div className="map_register_level6">
-
+                                    <div>
+                                        <select>
+                                            <option value="" selected disabled hidden >지역 선택</option>
+                                            <option value="서울특별시">서울특별시</option>
+                                            <option value="부산광역시">부산광역시</option>
+                                            <option value="제주특별자치도">제주특별자치도</option>
+                                            <option value="대구광역시">대구광역시</option>
+                                            <option value="인천광역시">인천광역시</option>
+                                            <option value="광주광역시">광주광역시</option>
+                                            <option value="대전광역시">대전광역시</option>
+                                            <option value="울산광역시">울산광역시</option>
+                                            <option value="세종특별자치시">세종특별자치시</option>
+                                            <option value="경기도">경기도</option>
+                                            <option value="강원도">강원도</option>
+                                            <option value="충청남도">충청남도</option>
+                                            <option value="충청북도">충청북도</option>
+                                            <option value="전라남도">전라남도</option>
+                                            <option value="전라북도">전라북도</option>
+                                            <option value="경상남도">경상남도</option>
+                                            <option value="경상북도">경상북도</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <select>
+                                            < option value="" selected disabled hidden >시/군/구</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div className="map_register_level7">
-
+                                    <input type="checkbox"/>
+                                    <span>제로웨이트스얍을 희망합니다</span>
                                 </div>
-
-
+                                <div className="map_register_level7">
+                                    <input type="checkbox"/>
+                                    <span>우리 지역의 제로웨이스트샵을 소개합니다</span>
+                                </div>
+                                <div className="map_register_level8">
+                                    <div>
+                                        <textarea placeholder="요청사항" />
+                                    </div>
+                                </div>
+                                <div className="map_register_level9">
+                                    <span onClick={register}>요청 보내기</span>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -9,6 +9,19 @@ const btoa = require('btoa');
 let atob = require("atob");
 const CryptoJS = require("crypto-js");
 
+const nodemailer = require("nodemailer");
+
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
+    auth: {
+      user: "iroomailer@gmail.com",
+      pass: "dlfnwkahd123~",
+    },
+});
+
 // encrypt library
 const bcrypt = require("bcryptjs");
 const saltRounds = 10;
@@ -734,6 +747,17 @@ router.post("/iteminit",async(req,res)=>{
         console.log("error on itemsinit");
         console.log(err)
         return res.send("fail")
+    }
+})
+
+router.post("/maprequest",async(req,res)=>{
+    try{
+        console.log(req.body)
+        return res.send("sucess")
+    }catch(err){
+        console.log("error on maprequest")
+        console.log(err)
+        return req.send("fail")
     }
 })
 
