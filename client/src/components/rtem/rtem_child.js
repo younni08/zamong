@@ -36,7 +36,7 @@ const RtemChild = (props) => {
     return (
         <>
             {
-                defaultImage?<img src="./pics/test.png" alt="text" />:parser(sample)
+                defaultImage?"":parser(sample)
             }
         </>
     )

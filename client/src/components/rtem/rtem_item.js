@@ -2,6 +2,9 @@ import React, { useState,useEffect } from "react";
 import {Link} from "react-router-dom"
 import Child from "./rtem_child"
 
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+
 const Rtem_pick = (props) => {
     const [titile,setTitle] = useState("")
     const [array,setArray] = useState([])
@@ -20,6 +23,55 @@ const Rtem_pick = (props) => {
         <div className="rtem_level4">
             <span>{titile}</span>
             <div>
+                <Carousel
+                    additionalTransfrom={0}
+                    arrows
+                    autoPlaySpeed={3000}
+                    centerMode={false}
+                    className=""
+                    containerClass="container"
+                    dotListClass=""
+                    draggable
+                    focusOnSelect={false}
+                    // infinite
+                    itemClass="containeritem"
+                    keyBoardControl
+                    minimumTouchDrag={80}
+                    partialVisible
+                    renderButtonGroupOutside={false}
+                    renderDotsOutside={false}
+                    removeArrowOnDeviceType={["tablet", "mobile"]}
+                    responsive={{
+                        desktop: {
+                            breakpoint: {
+                                max: 3000,
+                                min: 1024
+                            },
+                            items: 2,
+                            partialVisibilityGutter: 40
+                        },
+                        mobile: {
+                            breakpoint: {
+                                max: 464,
+                                min: 0
+                            },
+                            items: 2,
+                            partialVisibilityGutter: 8
+                        },
+                        tablet: {
+                            breakpoint: {
+                                max: 1024,
+                                min: 464
+                            },
+                            items: 3,
+                            partialVisibilityGutter: 30
+                        }
+                    }}
+                    showDots={false}
+                    sliderClass=""
+                    slidesToSlide={1}
+                    swipeable
+                    >
                 {
                     array?array.map(c=>{
                         return(
@@ -33,6 +85,7 @@ const Rtem_pick = (props) => {
                         )
                     }):""
                 }
+                </Carousel>
             </div>
         </div>
     )

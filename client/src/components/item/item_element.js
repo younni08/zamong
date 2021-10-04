@@ -37,7 +37,7 @@ const Item_Element = (props) => {
         <div className="item_ex_level4_element">
             <div className="on">
                 {
-                    defaultImage?<img src="./pics/test.png" alt="text" />:parser(sample)
+                    defaultImage?"":parser(sample)
                 }
             </div>
             <span>{props.rtem_t3_name}</span>

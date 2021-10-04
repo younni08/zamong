@@ -6,6 +6,7 @@ import RtemPick from "./rtem_pick";
 
 const Rtem = () => {
     const [list,setList] = useState([])
+    const [pick,setPick] = useState([])
     const [loading,setLoading] = useState(false)
     useEffect(()=>{
         init()
@@ -25,6 +26,7 @@ const Rtem = () => {
         let res = await axios.post(url,params,config)
         console.log(res.data)
         setList(res.data.list)
+        setPick(res.data.pick)
         setLoading(true)
     }
 
@@ -50,12 +52,15 @@ const Rtem = () => {
                         <div className="rtem_level3">
                             <span>이루자몽 PICK</span>
                             <div>
-                                <Link to="/items?c=부엌">
-                                    <img src="./pics/test.png" alt="text" />
-                                </Link>
-                                <Link to="/items?c=부엌">
-                                    <img src="./pics/test.png" alt="text" />
-                                </Link>
+                                {
+                                    pick?pick.map(c=>{
+                                        return(
+                                            <Link to="/items?c=부엌">
+                                                <img src="./pics/test.png" alt="text" />
+                                            </Link>
+                                        )
+                                    }):""
+                                }
                             </div>
                         </div>
                         {

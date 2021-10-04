@@ -81,7 +81,7 @@ const Item = (props) => {
                     <div>
                         <div className="item_ex_level1">
                             {
-                                defaultImage?<img src="./pics/test.png" alt="text" />:parser(sample)
+                                defaultImage?"":parser(sample)
                             }
                         </div>
                         <div className="item_ex_level2">
