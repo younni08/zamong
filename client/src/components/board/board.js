@@ -2,15 +2,16 @@ import axios from "axios";
 import React,{useState,useEffect} from "react";
 import {Link} from "react-router-dom"
 import parser from "html-react-parser"
+import PickItem from "./pick_item";
 
 const Board = () => {
     const [expand,setExpand] = useState(false)
     const [page,setPage] = useState(1)
-    const [pickpage,setPickpage] = useState(1)
-    const [picklist,setPicklist] = useState([])
     const [pick,setPick] = useState([])
-    const [pickcate,setPickcate] = useState("")
     const [list,setList] = useState([])
+    const [align,setAlign] = useState("recent")
+    const [cate,setCate] = useState("all")
+
     const handleExpand = () => {
         if(expand===false){
             document.getElementById("board_expand").style.height="385px";
@@ -48,7 +49,6 @@ const Board = () => {
         }else{
             setList(p => [...p,...res.data.list])
         }
-        console.log(res.data)
     }
 
     const nextPage = () => {
@@ -58,7 +58,7 @@ const Board = () => {
     const getPick = async() => {
         let url = "/api/mong/getArticle_pick";
         let params = {
-            page:pickpage
+            page:6974
         }
         const config = {
             headers:{
@@ -68,57 +68,36 @@ const Board = () => {
         let res = await axios.post(url,params,config)
         console.log(res.data)
         if(res.data==="fail") return alert("잘못된 접근입니다.")
-        if(res.data.pick.rka_cover_key!=="default"){
-            console.log(res.data.pick.rka_cover_key)
-            getImage(res.data.pick.rka_cover_key,res.data.pick.rka_cover_type)
-        }
-        let temp = "알-템"
-        if(res.data.pick.rka_cate!==null&&res.data.pick.rka_cate!==undefined&&res.data.pick.rka_cate.split(",")!==undefined){
-            if(res.data.pick.rka_cate.split(",")[0]==="rtende"){
-                temp="알-텐데"
-            }
-            if(res.data.pick.rka_cate.split(",")[0]==="rtem"){
-                temp="알-템"
-            }
-            if(res.data.pick.rka_cate.split(",")[0]==="rka"){
-                temp="알-까"
-            }
-            if(res.data.pick.rka_cate.split(",")[0]==="rmap"){
-                temp="지-도"
-            }
-            if(res.data.pick.rka_cate.split(",")[0]==="docu"){
-                temp="자-료"
-            }
-        }
-        setPickcate(temp)
-        setPicklist(res.data.list)
-        setPick(res.data.pick)
+        setPick(res.data.picks)
     }
 
-    const [sample,setSample] = useState("")
-    const getImage = async(key,type) => {
-        let url = "/api/mong/singleimage"
-        let params = {
-            key:key
+    const boardPickShift = (e) => {
+        for(let i=0;i<document.getElementById("board_pick_wrapper").childNodes.length;i++){
+            document.getElementById("board_pick_wrapper").childNodes[i].className = ""
         }
-        const config = {
-            headers:{
-                "content-type":"application/json"
-            }
+        if(e.currentTarget.getAttribute("id")==="board_pick_id1"){
+            document.getElementById("board_pick_id1").className="on"
+            document.getElementById("board_pick").style.transform = "translateX(0px)";
+            
         }
-        console.log(type)
-        let res = await axios.post(url,params,config);
-        if(res.data!=="fail"){
-            let ttt = '<img src="data:'+type.replace("#",'').replace(",",'')+';base64,'+ res.data + '">'
-            console.log(ttt)
-            setSample(ttt)
-        }
-    }
+        if(e.currentTarget.getAttribute("id")==="board_pick_id2"){
+            document.getElementById("board_pick_id2").className="on"
+            let width = window.innerWidth
+            document.getElementById("board_pick").style.transform = `translateX(-${width}px)`;
 
-    const handleDisplayButton = (e) => {
-        let getid = e.currentTarget.getAttribute("id")
+        }
+        if(e.currentTarget.getAttribute("id")==="board_pick_id3"){
+            document.getElementById("board_pick_id3").className="on"
+            let width = window.innerWidth
+            document.getElementById("board_pick").style.transform = `translateX(-${Number(width*2)}px)`;
 
-        // setPickpage()
+        }
+        if(e.currentTarget.getAttribute("id")==="board_pick_id4"){
+            document.getElementById("board_pick_id4").className="on"
+            let width = window.innerWidth
+            document.getElementById("board_pick").style.transform = `translateX(-${Number(width*3)}px)`;
+
+        }
     }
 
     return (
@@ -161,37 +140,28 @@ const Board = () => {
                     </div>
                     <div className="board_level12">
                         <div>
-                            {
-                                sample?<Link to={"/article?a="+pick.rka_pk}>
-                                    <div>
-                                        {
-                                            parser(sample)
-                                        }
-                                    </div>
-                                    <span>[{pickcate}] {pick.rka_title}</span>
-                                </Link>:
-                                <Link to={"/article?a="}>
-                                    <div>
-                                        이미지
-                                    </div>
-                                    <span>[알-템] 테스트</span>
-                                </Link>
-                            }
+                            <div id="board_pick">
+                                {
+                                    pick?pick.map(c=>{
+                                        return(
+                                            <PickItem 
+                                                key={c.rka_pk}
+                                                rka_pk={c.rka_pk}
+                                                rka_cate={c.rka_cate}
+                                                rka_title={c.rka_title}
+                                                rka_cover_key={c.rka_cover_key}
+                                                rka_cover_type={c.rka_cover_type}
+                                            />
+                                        )
+                                    }):""
+                                }
+                            </div>
                         </div>
-                        <div>
-                            {
-                                picklist?picklist.map((c,index)=>{
-                                    if(index===0){
-                                        return(
-                                            <span id={c.rka_pk} key={c.rka_pk} className="on" onClick={handleDisplayButton}></span>
-                                        )
-                                    }else{
-                                        return(
-                                            <span id={c.rka_pk} key={c.rka_pk} onClick={handleDisplayButton}></span>
-                                        )
-                                    }
-                                }):""
-                            }
+                        <div id="board_pick_wrapper">
+                            <span onClick={boardPickShift} id="board_pick_id1" className="on"></span>
+                            <span onClick={boardPickShift} id="board_pick_id2"></span>
+                            <span onClick={boardPickShift} id="board_pick_id3"></span>
+                            <span onClick={boardPickShift} id="board_pick_id4"></span>
                         </div>
                     </div>
                     <div className="board_level2">

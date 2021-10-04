@@ -36,7 +36,7 @@ const Itembox = (props) => {
     return (
         <div>
             {
-                defaultImage?<img src="./pics/test.png" alt="text" />:parser(sample)
+                defaultImage?"":parser(sample)
             }
         </div>
     )

@@ -6,7 +6,7 @@
 .pnp.js
 aws_key.json
 database.json
-memo
+memo.txt
 
 # testing
 /coverage

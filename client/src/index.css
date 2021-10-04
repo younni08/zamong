@@ -276,6 +276,12 @@ p{
 .rtem > div > div:first-child > span{
   font-size:20px;
 }
+.rtem > div > span{
+  display: flex;
+  width:100%;
+  justify-content: center;
+  margin:10vh 0px 0px 0px;
+}
 .rtem_main{
   display:flex;
   flex-direction: column;
@@ -309,23 +315,26 @@ p{
   width:100%;
 }
 .rtem_level2 > div:first-child{
-  display:flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  background:#eaeaea;
-  width:100vw;
-  height:50vw;
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  height: 50vw;
 }
 .rtem_level2 > div:first-child > div{
-  display:none;
-  width:100vw;
-  height:50vw;
-}
-.rtem_level2 > div:first-child > div.on{
   display:flex;
+  height:50vw;
+  width: 100%;
+  transition: all 0.3s;
+  transform: translateX(0px);
 }
-.rtem_level2 > div:first-child > div > img{
+.rtem_level2 > div:first-child > div > div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 50vw;
+}
+.rtem_level2 > div:first-child > div > div > img{
   width:100vw;
   height:50vw;
 }
@@ -407,6 +416,7 @@ p{
   background:#FFFEF8;
   color:#001717;
   width:100%;
+  z-index: 15;
 }
 .index > div{
   display:flex;
@@ -440,6 +450,7 @@ p{
   width:49.4vw;
   border-radius:0px 25vh 25vh 0px;
   height:calc(25vh - 18px);
+  margin:50px 0px 0px 0px;
 }
 .index_level3{
   display:flex;
@@ -452,17 +463,27 @@ p{
   height:calc(25vh - 18px);
 }
 .index_level3 > div:nth-child(2){
-  background: #DF80B4;
+  display:flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  overflow:hidden;
   width:49.4vw;
-  border-radius:0px 10vh 0px 10vh;
   height:calc(25vh - 18px);
+  margin:50px 0px 0px 0px;
+}
+.index_level3 > div:nth-child(2) > span{
+  display:block;
+  background: #00B775;
+  width:98.8vw;
+  border-radius:0px 50vh 0px 00vh;
+  height:calc(50vh - 36px);
 }
 .index_level4{
   display:flex;
   width:100%;
 }
 .index_level4 > div:nth-child(1){
-  background: #00B775;
+  background: #2A5EBC;
   width:100%;
   border-radius:25vh;
   /* height:calc(25vh - 18px); */
@@ -554,7 +575,12 @@ p{
   flex-direction: column;
   width:100%;
 }
-
+.article > span{
+  display:flex;
+  width:100%;
+  justify-content: center;
+  margin:10vh 0px 0px 0px;
+}
 .article > div > div:first-child{
   display:flex;
   justify-content: space-between;
@@ -577,25 +603,48 @@ p{
   font-size:16px;
 }
 .article_level1 > div:nth-child(2){
+  display:flex;
+  justify-content: center;
+  align-items: center;
   width:calc(100vw - 40px);
   height:calc(100vw - 40px);
   background:#F4F3ED;
   margin:15px 0px;
 }
-.article_level1 > span:nth-child(3){
-  font-size:20px;
-  font-weight: bold;
+.article_level1 > div:nth-child(2) img{
+  width:calc(100vw - 40px);
+  height:calc(100vw - 40px);
 }
 .article_level2{
   display:flex;
-  width:calc(100% - 40px);
-  font-size:12px;
-  padding:20px 20px;
   flex-direction: column;
+  width:calc(100% - 40px);
+  padding:20px 20px 0px 20px;
 }
-.article_level2 > span:nth-child(1){
+.article_level2 > div{
   display:flex;
+  width:100%;
+  justify-content: space-between;
+  align-items: center;
   margin:0px 0px 10px 0px;
+}
+.article_level2 > div > span{
+  font-weight: bold;
+  font-size: 20px;
+}
+.article_level2 > div > div{
+  display:flex;
+  align-items: center;
+  color:#2A5EBC;
+  font-size:12px;
+}
+.article_level2 > div > div > span{
+  display:flex;
+  margin:0px 0px 0px 5px;
+}
+.article_level2 > span{
+  font-size:12px;
+
 }
 .article_level3{
   display:flex;
@@ -608,6 +657,7 @@ p{
   flex-direction: column;
   width:calc(100% - 40px);
   padding:0px 20px;
+  margin:10px 0px 0px 0px;
 }
 .article_level4 > div{
   display:flex;
@@ -635,47 +685,26 @@ p{
 }
 .article_level5{
   display:flex;
-  flex-direction: column;
+  padding:10px 20px 20px 20px;
   width:calc(100% - 40px);
-  margin:0px 20px;
-  border-bottom:solid 1px #000;
 }
-.article_level5 > div:nth-child(1){
-  display:flex;
-  padding:10px 0px;
-}
-.article_level5 > div:nth-child(1) > span:nth-child(1){
-  display:flex;
-  align-items: center;
-  margin:0px 10px 0px 5px;
-}
-.article_level5 > div:nth-child(1) > span:nth-child(2){
-  display:flex;
-  align-items: center;
-  margin:0px 20px 0px 0px;
+.article_level5 > span{
   font-size:12px;
-  color:#001717;
-}
-.article_level5 > div:nth-child(1) > span:nth-child(3){
-  font-size:12px;
-  color:#001717;
-}
-.article_level5 > div:nth-child(2){
-  display:flex;
-  margin:0px 0px 0px 80px;
-  padding:0px 0px 10px 0px;
 }
 .article_level6{
   display:flex;
-  padding:20px;
+  margin:10px 20px;
+  padding:20px 0px;
   width:calc(100% - 40px);
   flex-wrap: wrap;
+  border-top:solid 2px #adadad;
 }
 .article_level6 > span{
   display:flex;
-  padding:3px 8px;
+  padding:0px 8px;
   border:solid 1px #000;
   margin:0px 10px 10px 0px;
+  font-size: 16px;
 }
 /* -------------------------------------- item ------------------------------------------ */
 .item{
@@ -697,6 +726,12 @@ p{
 }
 .item > div > div:first-child > span{
   font-size:20px;
+}
+.item > div > span{
+  display: flex;
+  width:100%;
+  justify-content: center;
+  margin:10vh 0px 0px 0px;
 }
 .item_main{
   display:flex;
@@ -732,6 +767,7 @@ p{
   justify-content: center;
   align-items: center;
   padding:10px;
+  height:calc(50vw - 46px);
 }
 .itembox img{
   width:calc(100% - 10px);
@@ -2143,28 +2179,48 @@ p{
   display:flex;
   width:100%;
   overflow: hidden;
+  height:100vw;
 }
-.board_level12 > div:first-child > a{
+.board_level12 > div:first-child > div{
+  display:flex;
+  width:100%;
+  transition: all 0.3s;
+  transform: translateX(0px);
+}
+.board_pick_item{
+  display:flex;
+  width:100vw;
+  height:100vw;
+}
+.board_pick_item > a{
   display:flex;
   flex-direction: column;  
   font-weight: bold;
   background:#eaeaea;
   width:100vw;
   text-decoration: none;
+  position: relative;
 }
-.board_level12 > div:first-child > a > div{
+.board_pick_item > a > div{
   display:flex;
   justify-content: center;
   align-items: center;
   width:100vw;
   height:100vw;
 }
-.board_level12 > div:first-child > a > span{
+.board_pick_item > a > div > img{
+  width:100vw;
+  height:100vw;
+}
+.board_pick_item > a > span{
   display:flex;
   font-size:1.3rem;
-  padding:10px 20px 20px 20px;
+  padding:20px 20px 20px 20px;
   width:calc(100% - 40px);
   color:#000;
+  position: absolute;
+  bottom:0;
+  background: rgba(255,255,255,0.3);
 }
 .board_level12 > div:last-child{
   display:flex;
@@ -2177,6 +2233,7 @@ p{
   display:flex;
   border-bottom:2px #eaeaea solid;
   width:calc(25vw - 15px);
+  transition: all 0.3s;
 }
 .board_level12 > div:last-child > span.on{
   border-bottom:2px #2A5EBC solid;

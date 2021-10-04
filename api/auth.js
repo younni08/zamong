@@ -575,20 +575,93 @@ router.post("/getArticle_pick",async(req,res)=>{
     try{
         if(req.body.page===undefined||req.body.page===null) return res.send("fail")
         const db = await client.connect();
-        let page_param = 0;
-        if(req.body.page!==null){
-            page_param = (Number(req.body.page)-1);
+        let result = await db.query(`select rka_pk,rka_cate,rka_title,rka_cover_key,rka_cover_type from rka_article where zamong_pick=true order by id desc limit 4`)
+        let temp = []
+        for(let i=0;i<result.rowCount;i++){
+            let cate = "알텐데"
+            if(result.rows[i].rka_cate==="rtende"){
+                temp="알-텐데"
+            }
+            if(result.rows[i].rka_cate==="rtem"){
+                temp="알-템"
+            }
+            if(result.rows[i].rka_cate==="rka"){
+                temp="알-까"
+            }
+            if(result.rows[i].rka_cate==="rmap"){
+                temp="지-도"
+            }
+            if(result.rows[i].rka_cate==="docu"){
+                temp="자-료"
+            }
+            temp[i] = {
+                rka_pk:result.rows[i].rka_pk,
+                rka_cate:cate,
+                rka_title:result.rows[i].rka_title,
+                rka_cover_key:result.rows[i].rka_cover_key,
+                rka_cover_type:result.rows[i].rka_cover_type
+            }
         }
-        let result = await db.query(`select rka_pk from rka_article where zamong_pick=true order by id limit 4`)
-        let result2 = await db.query(`select rka_pk,rka_cate,rka_title,rka_cover_key,rka_cover_type from rka_article where zamong_pick=true order by id desc limit 1 offset ${page_param}`)
         let returnArray = {
-            pick:result2.rows[0],
-            list:result.rows
+            picks:temp
         }
         await db.release();
         return res.send(returnArray)
     }catch(err){
         console.log("error on getArticles")
+        console.log(err)
+        return res.send("fail")
+    }
+})
+
+router.post("/getArticle", async(req,res)=>{
+    try{
+        if(req.body.article_pk===undefined||req.body.article_pk===null) return res.send("fail")
+        console.log(req.body)
+        const db = await client.connect();
+        await db.query(`update rka_article set rka_vote=rka_vote+1 where rka_pk=$1`,[req.body.article_pk])
+        let result = await db.query(`select rka_pk,rka_title,rka_tag,rka_content,rka_cover_key,rka_cover_type,rka_image_cnt,rka_image_key,rka_image_type,rka_file_key,rka_file_type,rka_vote,rka_date,rka_cate from rka_article where rka_pk=$1`,[req.body.article_pk])
+        let temp = "알텐데"
+        if(result.rows[0].rka_cate==="rtende"){
+            temp="알-텐데"
+        }
+        if(result.rows[0].rka_cate==="rtem"){
+            temp="알-템"
+        }
+        if(result.rows[0].rka_cate==="rka"){
+            temp="알-까"
+        }
+        if(result.rows[0].rka_cate==="rmap"){
+            temp="지-도"
+        }
+        if(result.rows[0].rka_cate==="docu"){
+            temp="자-료"
+        }
+        let returnArray = {
+            rka_pk:result.rows[0].rka_pk,
+            rka_title:result.rows[0].rka_title,
+            rka_tag:result.rows[0].rka_tag,
+            rka_content:result.rows[0].rka_content,
+            rka_cover_key:result.rows[0].rka_cover_key,
+            rka_cover_type:result.rows[0].rka_cover_type,
+            rka_image_cnt:result.rows[0].rka_image_cnt,
+            rka_image_key:result.rows[0].rka_image_key,
+            rka_image_type:result.rows[0].rka_image_type,
+            rka_file_key:result.rows[0].rka_file_key,
+            rka_file_type:result.rows[0].rka_file_type,
+            rka_vote:result.rows[0].rka_vote,
+            rka_date:result.rows[0].rka_date,
+            rka_cate:temp
+        }
+
+        // log
+        let date = new Date();
+        let ip = req.headers['x-forwarded-for'] ||  req.connection.remoteAddress;
+        await db.query(`insert into rka_article_history(rka_pk,date,ip) values($1,$2,$3)`,[req.body.article_pk,date,ip])
+        await db.release();
+        return res.send(returnArray)
+    }catch(err){
+        console.log("error on getArticle")
         console.log(err)
         return res.send("fail")
     }
@@ -668,13 +741,12 @@ router.post("/rteminit",async(req,res)=>{
     try{
         if(req.body.key!=="randomkey") return res.send("fail")
         const db = await client.connect();
-        let getpick = await db.query(`select rtem_t1_name,rtem_t1_key,rtem_t1_type from rtem_t1 where rtem_t1_zamong_pick=true limit 2`)
+        let getpick = await db.query(`select rtem_t4_key,rtem_t4_type,rtem_t4_pk from rtem_t4 where rtem_t4_zamong_pick order by id desc limit 2`)
         let getrtem = await db.query(`select rtem_t1_pk,rtem_t1_name from rtem_t1 where rtem_t1_zamong_pick=false`)
         if(getrtem.rows[0]===undefined){
             await db.release();
             return res.send("fail")
         }
-        
         let temp = []
         for(let i=0;i<getrtem.rowCount;i++){
             let result = await db.query(`select t2.rtem_t2_pk,t2.rtem_t2_name,t2.rtem_t2_key,t2.rtem_t2_type,t1.rtem_t1_name from rtem_t2 t2 inner join rtem_t1 t1 on t1.rtem_t1_pk=t2.rtem_t1_pk where t2.rtem_t1_pk=$1;`,[getrtem.rows[i].rtem_t1_pk])
