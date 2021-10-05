@@ -3,15 +3,22 @@ import Itembox from "./itembox"
 import {Link} from "react-router-dom"
 import axios from "axios";
 import RtemPick from "../rtem/rtem_pick";
+import RtemHeader from "../rtem/rtem_header";
 
 const Item = (props) => {
     const [cate,setCate] = useState("생활용품")
     const [list,setList] = useState([])
     const [loading,setLoading] = useState(false)
+    const [align,setAlign] = useState("recent")
+
+    const handleSelect = () => {
+        let getalign = document.getElementById("items_select").value;
+        setAlign(getalign)
+    }
 
     useEffect(()=>{
         init();
-    },[props])
+    },[props,align])
 
     const init = async() => {
         setLoading(false)
@@ -19,10 +26,10 @@ const Item = (props) => {
         getCate = getCate.split("items?c=")[1]
         getCate = decodeURI(getCate)
         setCate(getCate)
-        console.log(getCate)
         let url = "/api/mong/itemsinit";
         let params = {
-            item:getCate
+            item:getCate,
+            align:align
         }
         const config = {
             headers:{
@@ -39,22 +46,16 @@ const Item = (props) => {
     return (
         <div className="item">
             <div>
-                <div>
-                    <span>알-템</span>
-                    <span><i className="xi-caret-down-min"></i></span>
-                </div>
-                <div className="rtem_level1">
-                    <input type="text" placeholder="예) 대나무 칫솔" />
-                    <span><i className="xi-search"></i></span>
-                </div>
+                <RtemHeader />
                 <RtemPick />
                 {
                     loading?
                     <div className="item_main">
                         <div>
                             <span>알-템 <i className="xi-angle-right-min"></i> {cate}</span>
-                            <select>
-                                <option>업로드순</option>
+                            <select onChange={handleSelect} id="items_select">
+                                <option value="recent">최신순</option>
+                                <option value="pop">인기순</option>
                             </select>
                         </div>
                         <div>

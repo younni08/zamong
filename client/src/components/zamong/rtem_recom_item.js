@@ -1,6 +1,7 @@
 import React,{useState,useMemo} from "react";
 import axios from "axios"
 import parser from "html-react-parser"
+import { getCookie } from "../common/cookie";
 
 const RtemRecomItem = (props) => {
     const [sample,setSample] = useState("")
@@ -29,8 +30,45 @@ const RtemRecomItem = (props) => {
         if(props.rtem_t4_zamong_pick===true) return setPick(true)
     },[props.rtem_t4_key])
 
-    const addPick = () => {
-        let url = "/api/mong/mong_rtem_add_pick"
+    const addPick = async() => {
+        let url = "/api/mong/mong_rtem_add_pick";
+        let token = getCookie("token")
+        let session = getCookie("session")
+        let params = {
+            token:token,
+            session:session,
+            rtem_pk:props.rtem_pk
+        }
+        const config = {
+            headers:{
+                "content-type":"application/json"
+            }
+        }
+        console.log(params)
+        let res = await axios.post(url,params,config)
+        console.log(res.data)
+        if(res.data==="fail") return alert("잘못된 경로입니다.")
+        if(res.data==="success") return alert("자몽픽으로 변경되었습니다.")
+    }
+
+    const deleteRtem = async() => {
+        let url = "/api/mong/mong_rtem_delete";
+        let token = getCookie("token")
+        let session = getCookie("session")
+        let params = {
+            token:token,
+            session:session,
+            rtem_pk:props.rtem_pk
+        }
+        const config = {
+            headers:{
+                "content-type":"application/json"
+            }
+        }
+        let res = await axios.post(url,params,config)
+        console.log(res.data)
+        if(res.data==="fail") return alert("잘못된 경로입니다.")
+        if(res.data==="success") return alert("삭제되었습니다.")
     }
 
     return (
@@ -43,11 +81,11 @@ const RtemRecomItem = (props) => {
             </div>
             <div>
                 <span>{props.rtem_t4_name}</span>
-                <span>{pick?"자몽픽":"aa"}</span>
+                <span>{pick?"자몽 Pick":""}</span>
             </div>
             <div>
-                <span>pick</span>
-                <span>삭제</span>
+                <span onClick={addPick}>pick</span>
+                <span onClick={deleteRtem}>삭제</span>
             </div>
         </div>
     )

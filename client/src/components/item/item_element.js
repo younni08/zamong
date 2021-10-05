@@ -1,10 +1,12 @@
 import React,{ useMemo,useState } from "react";
 import parser from "html-react-parser"
 import axios from "axios"
+import {Link} from "react-router-dom"
 
 const Item_Element = (props) => {
     const [sample,setSample] = useState("")
     const [defaultImage,setDefaultImage] = useState(true)
+    const [match,setMatch] = useState(false)
 
     const getimage = async(key,type) => {
         if(key===undefined||key===null||key===""||key==="default") return false
@@ -30,18 +32,28 @@ const Item_Element = (props) => {
     useMemo(()=>{
         if(props.rtem_t3_key===undefined) return 0
         if(props.rtem_t3_key==="default") return setDefaultImage(true)
+        if(props.itempk===props.rtem_t3_pk) setMatch(true)
+        console.log(props)
         getimage(props.rtem_t3_key,props.rtem_t3_type)
     },[props.rtem_t3_key])
     
     return (
-        <div className="item_ex_level4_element">
-            <div className="on">
+        <Link className="item_ex_level4_element" to={"/item?c="+props.rtem_t3_pk}>
+            {
+                match?
+                <div className="on">
                 {
                     defaultImage?"":parser(sample)
                 }
-            </div>
+                </div>:
+                <div>
+                    {
+                        defaultImage?"":parser(sample)
+                    }
+                </div>
+            }
             <span>{props.rtem_t3_name}</span>
-        </div>
+        </Link>
     )
 }
 

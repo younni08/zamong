@@ -8,7 +8,7 @@ const Item = (props) => {
     const [sample,setSample] = useState("")
     const [defaultImage,setDefaultImage] = useState(true)
     const [item,setItem] = useState([])
-    const [list,setList] = useState([])
+    const [detail,setDetail] = useState([])
     const [items,setItems] = useState([])
     const [des1,setDes1] = useState("")
     const [des2,setDes2] = useState("")
@@ -43,7 +43,7 @@ const Item = (props) => {
         setDes2(res.data.detail.rtem_desc)
         setDes3(res.data.detail.rtem_desc2)
         setDes4(res.data.detail.rtem_desc3)
-        setList(res.data.detail)
+        setDetail(res.data.detail)
         setItems(res.data.list)
     }
 
@@ -97,7 +97,9 @@ const Item = (props) => {
                                         return (
                                             <ItemElement
                                                 key={c.rtem_t3_pk}
-                                                pk={c.rtem_t3_pk}
+                                                rtem_t3_pk={c.rtem_t3_pk}
+                                                rtem_t2_pk={item.rtem_t2_pk}
+                                                itempk={detail.rtem_t3_pk}
                                                 rtem_t3_key={c.rtem_t3_key}
                                                 rtem_t3_type={c.rtem_t3_type}
                                                 rtem_t3_name={c.rtem_t3_name}
@@ -109,7 +111,7 @@ const Item = (props) => {
                         </div>
                         <div className="item_ex_level5">
                             <span>#001-1</span>
-                            <span>{list.rtem_t3_name}</span>
+                            <span>{detail.rtem_t3_name}</span>
                         </div>
                         <div className="item_ex_level6">
                             <div className="item_ex_level61">
@@ -135,7 +137,7 @@ const Item = (props) => {
                                 </div>
                                 <div>
                                     {
-                                        list.rtem_t3_r1?
+                                        detail.rtem_t3_r1?
                                         <div className="item_ex_level63_element">
                                             <div>
                                                 <img src="./pics/r1.png" alt="r10" />
@@ -143,13 +145,13 @@ const Item = (props) => {
                                             <div>
                                                 <span>Relate / 관계짓지</span>
                                                 <div>
-                                                    {parser(list.rtem_t3_r1)}
+                                                    {parser(detail.rtem_t3_r1)}
                                                 </div>
                                             </div>
                                         </div>:""
                                     }
                                     {
-                                        list.rtem_t3_r2?
+                                        detail.rtem_t3_r2?
                                         <div className="item_ex_level63_element">
                                             <div>
                                                 <img src="./pics/r2.png" alt="r10" />
@@ -157,13 +159,13 @@ const Item = (props) => {
                                             <div>
                                                 <span>Rethink / 다시 생각하기</span>
                                                 <div>
-                                                    {parser(list.rtem_t3_r2)}
+                                                    {parser(detail.rtem_t3_r2)}
                                                 </div>
                                             </div>
                                         </div>:""
                                     }
                                     {
-                                        list.rtem_t3_r3?
+                                        detail.rtem_t3_r3?
                                         <div className="item_ex_level63_element">
                                             <div>
                                                 <img src="./pics/r3.png" alt="r10" />
@@ -171,13 +173,13 @@ const Item = (props) => {
                                             <div>
                                                 <span>Refuse / 거절하기</span>
                                                 <div>
-                                                    {parser(list.rtem_t3_r3)}
+                                                    {parser(detail.rtem_t3_r3)}
                                                 </div>
                                             </div>
                                         </div>:""
                                     }
                                     {
-                                        list.rtem_t3_r4?
+                                        detail.rtem_t3_r4?
                                         <div className="item_ex_level63_element">
                                             <div>
                                                 <img src="./pics/r4.png" alt="r10" />
@@ -185,13 +187,13 @@ const Item = (props) => {
                                             <div>
                                                 <span>Reduce / 줄이기</span>
                                                 <div>
-                                                    {parser(list.rtem_t3_r4)}
+                                                    {parser(detail.rtem_t3_r4)}
                                                 </div>
                                             </div>
                                         </div>:""
                                     }
                                     {
-                                        list.rtem_t3_r5?
+                                        detail.rtem_t3_r5?
                                         <div className="item_ex_level63_element">
                                             <div>
                                                 <img src="./pics/r5.png" alt="r10" />
@@ -199,13 +201,13 @@ const Item = (props) => {
                                             <div>
                                                 <span>Reuse / 재사용하기</span>
                                                 <div>
-                                                    {parser(list.rtem_t3_r5)}
+                                                    {parser(detail.rtem_t3_r5)}
                                                 </div>
                                             </div>
                                         </div>:""
                                     }
                                     {
-                                        list.rtem_t3_r6?
+                                        detail.rtem_t3_r6?
                                         <div className="item_ex_level63_element">
                                             <div>
                                                 <img src="./pics/r6.png" alt="r10" />
@@ -213,13 +215,13 @@ const Item = (props) => {
                                             <div>
                                                 <span>Repair / 수리하기</span>
                                                 <div>
-                                                    {parser(list.rtem_t3_r6)}
+                                                    {parser(detail.rtem_t3_r6)}
                                                 </div>
                                             </div>
                                         </div>:""
                                     }
                                     {
-                                        list.rtem_t3_r7?
+                                        detail.rtem_t3_r7?
                                         <div className="item_ex_level63_element">
                                             <div>
                                                 <img src="./pics/r7.png" alt="r10" />
@@ -227,13 +229,13 @@ const Item = (props) => {
                                             <div>
                                                 <span>Replace / 교체하기</span>
                                                 <div>
-                                                    {parser(list.rtem_t3_r7)}
+                                                    {parser(detail.rtem_t3_r7)}
                                                 </div>
                                             </div>
                                         </div>:""
                                     }
                                     {
-                                        list.rtem_t3_r8?
+                                        detail.rtem_t3_r8?
                                         <div className="item_ex_level63_element">
                                             <div>
                                                 <img src="./pics/r8.png" alt="r10" />
@@ -241,13 +243,13 @@ const Item = (props) => {
                                             <div>
                                                 <span>Repurpose / 새 용도 찾기</span>
                                                 <div>
-                                                    {parser(list.rtem_t3_r8)}
+                                                    {parser(detail.rtem_t3_r8)}
                                                 </div>
                                             </div>
                                         </div>:""
                                     }
                                     {
-                                        list.rtem_t3_r9?
+                                        detail.rtem_t3_r9?
                                         <div className="item_ex_level63_element">
                                             <div>
                                                 <img src="./pics/r9.png" alt="r10" />
@@ -255,13 +257,13 @@ const Item = (props) => {
                                             <div>
                                                 <span>Rot / 퇴비화하기</span>
                                                 <div>
-                                                    {parser(list.rtem_t3_r9)}
+                                                    {parser(detail.rtem_t3_r9)}
                                                 </div>
                                             </div>
                                         </div>:""
                                     }
                                     {
-                                        list.rtem_t3_r10?
+                                        detail.rtem_t3_r10?
                                         <div className="item_ex_level63_element">
                                             <div>
                                                 <img src="./pics/r10.png" alt="r10" />
@@ -269,7 +271,7 @@ const Item = (props) => {
                                             <div>
                                                 <span>Recycle / 재활용하기</span>
                                                 <div>
-                                                    {parser(list.rtem_t3_r10)}
+                                                    {parser(detail.rtem_t3_r10)}
                                                 </div>
                                             </div>
                                         </div>:""

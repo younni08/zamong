@@ -266,16 +266,6 @@ p{
   flex-direction: column;
   width:100%;
 }
-.rtem > div > div:first-child{
-  display:flex;
-  justify-content: space-between;
-  padding:15px;
-  font-weight: bold;
-  color:#001717;
-}
-.rtem > div > div:first-child > span{
-  font-size:20px;
-}
 .rtem > div > span{
   display: flex;
   width:100%;
@@ -287,16 +277,30 @@ p{
   flex-direction: column;
   width:100%;
 }
+.rtem_level01{
+  display:flex;
+  flex-direction: column;
+  height:0px;
+  transition: all 0.3s;
+  overflow:hidden;
+}
+.rtem_level01 > div{
+  display:flex;
+  padding:15px 20px;
+  width:calc(100% - 40px);
+  border-bottom:solid 1px #000;
+}
 .rtem_level1{
   display:flex;
   justify-content: space-between;
-  padding:15px 20px;
+  padding:20px 20px;
   width:calc(100% - 40px);
   background:#00B775;
 }
 .rtem_level1 > input{
   width:calc(100% - 25px);
   border:none;
+  color:#fff;
   background:#00B775;
 }
 .rtem_level1 > input:focus{
@@ -305,8 +309,10 @@ p{
 .rtem_level1 > input::placeholder{
   color:#fff;
 }
-.rtem_level1 > span{
+.rtem_level1 > button{
   color:#fff;
+  background:#00B775;
+  border:none;
 }
 .rtem_level2{
   display:flex;
@@ -716,14 +722,14 @@ p{
   flex-direction: column;
   width:100%;
 }
-.item > div > div:first-child{
+.rtem_level0{
   display:flex;
   justify-content: space-between;
   padding:15px;
   font-weight: bold;
   color:#001717;
 }
-.item > div > div:first-child > span{
+.rtem_level0 > span{
   font-size:20px;
 }
 .item > div > span{
@@ -746,6 +752,13 @@ p{
 }
 .item_main > div:first-child > span{
   letter-spacing: 1px;
+}
+.item_main > div:first-child > select{
+  border:none;
+  background: #FFFEF8;
+}
+.item_main > div:first-child > select:focus{
+  outline: none;
 }
 .item_main > div:last-child{
   display:flex;
@@ -839,6 +852,7 @@ p{
 .item_ex_level4_element{
   display:flex;
   flex-direction: column;
+  text-decoration: none;
 }
 .item_ex_level4_element > div{
   display:flex;
@@ -861,6 +875,7 @@ p{
   display:flex;
   font-size: 12px;
   margin:5px 0px 0px 0px;
+  color:#000;
 }
 .item_ex_level5{
   display:flex;

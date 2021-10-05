@@ -3,6 +3,8 @@ import {Link} from "react-router-dom"
 import axios from "axios";
 import Item from "./rtem_item"
 import RtemPick from "./rtem_pick";
+import RtemZamongPick from "./rtem_zamong_pick";
+import RtemHeader from "./rtem_header";
 
 const Rtem = () => {
     const [list,setList] = useState([])
@@ -16,7 +18,8 @@ const Rtem = () => {
         setLoading(false)
         let url = "/api/mong/rteminit";
         let params = {
-            key:"randomkey"
+            key:"randomkey",
+            shortcut:shortcut
         }
         const config = {
             headers:{
@@ -24,40 +27,56 @@ const Rtem = () => {
             }
         }
         let res = await axios.post(url,params,config)
+        if(res.data==="fail"){
+            setShortCut("")
+            setShortMode(false)
+            window.location.reload();
+        }
         console.log(res.data)
         setList(res.data.list)
         setPick(res.data.pick)
+        if(res.data.shortcut===true) setShortMode(true)
         setLoading(true)
     }
 
     // page 넘기는거 만들어야함
+    const [shortcut,setShortCut] = useState("")
+    const [shortmode,setShortMode] = useState(false)
+    const [searchResult,setSearchResult] = useState([])
 
-    
+    useEffect(()=>{
+        if(shortcut==="") return 0
+        init()
+    },[shortcut])
 
     return (
         <div className="rtem">
             <div>
-                <div>
-                    <span>알-템</span>
-                    <span><i className="xi-caret-down-min"></i></span>
-                </div>
+                <RtemHeader 
+                    getShortcut={setShortCut}
+                    getRtemResult={setSearchResult}
+                />
                 {
-                    loading?
+                    loading?shortmode?
                     <div className="rtem_main">
-                        <div className="rtem_level1">   
-                            <input type="text" placeholder="예) 대나무 칫솔" />
-                            <span><i className="xi-search"></i></span>
-                        </div>
+                        <span>검색 결과</span>
+
+                    </div>:
+                    <div className="rtem_main">
                         <RtemPick />
                         <div className="rtem_level3">
                             <span>이루자몽 PICK</span>
                             <div>
                                 {
                                     pick?pick.map(c=>{
+                                        console.log(c)
                                         return(
-                                            <Link to="/items?c=부엌">
-                                                <img src="./pics/test.png" alt="text" />
-                                            </Link>
+                                            <RtemZamongPick 
+                                                key={c.rtem_t4_pk}
+                                                rtem_t4_pk={c.rtem_t4_pk}
+                                                rtem_t4_key={c.rtem_t4_key}
+                                                rtem_t4_type={c.rtem_t4_type}
+                                            />
                                         )
                                     }):""
                                 }
@@ -73,7 +92,7 @@ const Rtem = () => {
                                 )
                             }):""
                         }
-                    </div>:<span>Loading...</span>
+                    </div>:<span>...</span>
                 }
             </div>
         </div>

@@ -737,6 +737,81 @@ router.post("/mongcateinit",async(req,res)=>{
     }
 })
 
+router.post("/mong_rtem_add_pick",async(req,res)=>{
+    try{
+        console.log(req.body)
+        if(req.body.token===null||req.body.token===undefined||req.body.session===null||req.body.session===undefined) return res.send("fail")
+        jwt.verify(req.body.token,jwtConfig.key);
+        jwt.verify(req.body.session,jwtConfig.key);
+        let user_pk = req.body.token;
+        user_pk = user_pk.split(".")[1];
+        user_pk = user_pk.split(".")[0];
+        user_pk = atob(user_pk);
+        user_pk = user_pk.split('{"user_pk":"')[1];
+        user_pk = user_pk.split('","iat":')[0];
+
+        let session = req.body.session;
+        session = session.split(".")[1];
+        session = session.split(".")[0];
+        session = atob(session);
+        session = session.split('{"session":"')[1];
+        session = session.split('","iat":')[0];
+
+        const db = await client.connect();
+        let checkSession = await db.query(`select from users where session=$1 and user_id=$2`,[session,user_pk])
+        if(checkSession.rows[0]===undefined){
+            await db.release();
+            return res.send("fail")
+        }
+
+        await db.query(`update rtem_t4 set rtem_t4_zamong_pick=true where rtem_t4_pk=$1`,[req.body.rtem_pk])
+
+        await db.release();
+        return res.send("success")
+    }catch(err){
+        console.log("error on mong_rtem_add_pick");
+        console.log(err)
+        return res.send("fail")
+    }
+})
+
+router.post("/mong_rtem_delete",async(req,res)=>{
+    try{
+        if(req.body.token===null||req.body.token===undefined||req.body.session===null||req.body.session===undefined) return res.send("fail")
+        jwt.verify(req.body.token,jwtConfig.key);
+        jwt.verify(req.body.session,jwtConfig.key);
+        let user_pk = req.body.token;
+        user_pk = user_pk.split(".")[1];
+        user_pk = user_pk.split(".")[0];
+        user_pk = atob(user_pk);
+        user_pk = user_pk.split('{"user_pk":"')[1];
+        user_pk = user_pk.split('","iat":')[0];
+
+        let session = req.body.session;
+        session = session.split(".")[1];
+        session = session.split(".")[0];
+        session = atob(session);
+        session = session.split('{"session":"')[1];
+        session = session.split('","iat":')[0];
+
+        const db = await client.connect();
+        let checkSession = await db.query(`select from users where session=$1 and user_id=$2`,[session,user_pk])
+        if(checkSession.rows[0]===undefined){
+            await db.release();
+            return res.send("fail")
+        }
+
+        await db.query(`update rtem_t4 set rtem_t4_zamong_pick=true where rtem_t4_pk=$1`,[req.body.rtem_pk])
+
+        await db.release();
+        return res.send("success")
+    }catch(err){
+        console.log("error on mong_rtem_delete");
+        console.log(err)
+        return res.send("fail")
+    }
+})
+
 router.post("/mong_rtem_recon",async(req,res)=>{
     try{
         if(req.body.token===null||req.body.token===undefined||req.body.session===null||req.body.session===undefined) return res.send("fail")
@@ -780,28 +855,42 @@ router.post("/mong_rtem_recon",async(req,res)=>{
 
 router.post("/rteminit",async(req,res)=>{
     try{
+        console.log(req.body)
         if(req.body.key!=="randomkey") return res.send("fail")
         const db = await client.connect();
-        let getpick = await db.query(`select rtem_t4_key,rtem_t4_type,rtem_t4_pk from rtem_t4 where rtem_t4_zamong_pick order by id desc limit 2`)
-        let getrtem = await db.query(`select rtem_t1_pk,rtem_t1_name from rtem_t1 where rtem_t1_zamong_pick=false`)
-        if(getrtem.rows[0]===undefined){
-            await db.release();
-            return res.send("fail")
-        }
-        let temp = []
-        for(let i=0;i<getrtem.rowCount;i++){
-            let result = await db.query(`select t2.rtem_t2_pk,t2.rtem_t2_name,t2.rtem_t2_key,t2.rtem_t2_type,t1.rtem_t1_name from rtem_t2 t2 inner join rtem_t1 t1 on t1.rtem_t1_pk=t2.rtem_t1_pk where t2.rtem_t1_pk=$1;`,[getrtem.rows[i].rtem_t1_pk])
-            if(result.rowCount>0){
-                temp.push(result.rows)
+        if(req.body.shortcut===""){
+            let getpick = await db.query(`select rtem_t4_key,rtem_t4_type,rtem_t4_pk from rtem_t4 where rtem_t4_zamong_pick order by id desc limit 2`)
+            let getrtem = await db.query(`select rtem_t1_pk,rtem_t1_name from rtem_t1 where rtem_t1_zamong_pick=false`)
+            if(getrtem.rows[0]===undefined){
+                await db.release();
+                return res.send("fail")
             }
+            let temp = []
+            for(let i=0;i<getrtem.rowCount;i++){
+                let result = await db.query(`select t2.rtem_t2_pk,t2.rtem_t2_name,t2.rtem_t2_key,t2.rtem_t2_type,t1.rtem_t1_name from rtem_t2 t2 inner join rtem_t1 t1 on t1.rtem_t1_pk=t2.rtem_t1_pk where t2.rtem_t1_pk=$1;`,[getrtem.rows[i].rtem_t1_pk])
+                if(result.rowCount>0){
+                    temp.push(result.rows)
+                }
+            }
+            
+            let returnArray = {
+                pick:getpick.rows,
+                list:temp,
+                shortcut:false
+            }
+            await db.release();
+            return res.send(returnArray)
+        }else{
+            let string = "%"+req.body.shortcut+"%"
+            let getrtem = await db.query(`select rtem_t1_pk,rtem_t1_name from rtem_t1 where rtem_t1_name like $1`,[string])
+            let result = await db.query(`select t2.rtem_t2_pk,t2.rtem_t2_name,t2.rtem_t2_key,t2.rtem_t2_type,t1.rtem_t1_name from rtem_t2 t2 inner join rtem_t1 t1 on t1.rtem_t1_pk=t2.rtem_t1_pk where t2.rtem_t1_pk=$1;`,[getrtem.rows[0].rtem_t1_pk])
+            let returnArray = {
+                list:result.rows,
+                shortcut:true
+            }
+            await db.release();
+            return res.send(returnArray)
         }
-        
-        let returnArray = {
-            pick:getpick.rows,
-            list:temp
-        }
-        await db.release();
-        return res.send(returnArray)
     }catch(err){
         console.log("error on rteminit");
         console.log(err)
@@ -812,11 +901,39 @@ router.post("/rteminit",async(req,res)=>{
 router.post("/itemsinit",async(req,res)=>{
     try{
         console.log(req.body)
-        if(req.body.item===undefined||req.body.item===null) return res.send("fail")
+        if(req.body.item===undefined||req.body.item===null||req.body.align===undefined||req.body.align===null) return res.send("fail")
         const db = await client.connect();
         let returnArray = []
-        let result = await db.query(`select rtem_t2_pk,rtem_t2_name,rtem_t2_key,rtem_t2_type from rtem_t2 where rtem_t1_pk=(select rtem_t1_pk from rtem_t1 where rtem_t1_name=$1);`,[req.body.item])
-        returnArray = result.rows
+        if(req.body.align==="recent"){
+            let result = await db.query(`select rtem_t2_pk,rtem_t2_name,rtem_t2_key,rtem_t2_type from rtem_t2 where rtem_t1_pk=(select rtem_t1_pk from rtem_t1 where rtem_t1_name=$1) order by id ;`,[req.body.item])
+            returnArray = result.rows
+        }
+        if(req.body.align==="pop"){
+            let result = await db.query(`select rtem_t2_pk,rtem_t2_name,rtem_t2_key,rtem_t2_type from rtem_t2 where rtem_t1_pk=(select rtem_t1_pk from rtem_t1 where rtem_t1_name=$1) order by id;`,[req.body.item])
+            returnArray = result.rows
+        }
+        await db.release();
+        return res.send(returnArray)
+    }catch(err){
+        console.log("error on itemsinit");
+        console.log(err)
+        return res.send("fail")
+    }
+})
+
+router.post("/searchrtem",async(req,res)=>{
+    try{
+        console.log(req.body)
+        if(req.body.input===undefined||req.body.input===null) return res.send("fail")
+        const db = await client.connect();
+        let string = '%'+req.body.input+'%'
+        let result = await db.query(`select rtem_t3_pk,rtem_t4_pk,rtem_t4_name,rtem_t4_key,rtem_t4_type from rtem_t4 where rtem_t4_name like $1;`,[string])
+        let result2 = await db.query(`select rtem_t2_pk,rtem_t3_pk,rtem_t3_name,rtem_t3_key,rtem_t3_type from rtem_t3; where rtem_t3_name like $1;`,[string])
+        let returnArray = []
+        returnArray = {
+            t3:result2.rows,
+            t4:result.rows
+        }
         await db.release();
         return res.send(returnArray)
     }catch(err){
@@ -831,8 +948,8 @@ router.post("/iteminit",async(req,res)=>{
         console.log(req.body)
         if(req.body.item===undefined||req.body.item===null) return res.send("fail")
         const db = await client.connect();
-        let result = await db.query(`select rtem_t2_name,rtem_t2_key,rtem_t2_type,rtem_desc from rtem_t2 where rtem_t2_pk=$1`,[req.body.item])
-        let result2 = await db.query(`select rtem_t3_name,rtem_t3_key,rtem_t3_type,rtem_t3_r1,rtem_t3_r2,rtem_t3_r3,rtem_t3_r4,rtem_t3_r5,rtem_t3_r6,rtem_t3_r7,rtem_t3_r8,rtem_t3_r9,rtem_t3_r10,rtem_desc,rtem_desc2,rtem_desc3 from rtem_t3 where rtem_t2_pk=$1 order by id desc  limit 1`,[req.body.item])
+        let result = await db.query(`select rtem_t2_pk,rtem_t2_name,rtem_t2_key,rtem_t2_type,rtem_desc from rtem_t2 where rtem_t2_pk=$1`,[req.body.item])
+        let result2 = await db.query(`select rtem_t3_pk,rtem_t3_name,rtem_t3_key,rtem_t3_type,rtem_t3_r1,rtem_t3_r2,rtem_t3_r3,rtem_t3_r4,rtem_t3_r5,rtem_t3_r6,rtem_t3_r7,rtem_t3_r8,rtem_t3_r9,rtem_t3_r10,rtem_desc,rtem_desc2,rtem_desc3 from rtem_t3 where rtem_t2_pk=$1 order by id desc  limit 1`,[req.body.item])
         let result3 = await db.query(`select rtem_t3_name,rtem_t3_pk,rtem_t3_key,rtem_t3_type from rtem_t3 where rtem_t2_pk=$1 order by id desc`,[req.body.item])
 
         if(result.rows[0]===undefined){
@@ -852,6 +969,8 @@ router.post("/iteminit",async(req,res)=>{
         return res.send("fail")
     }
 })
+
+
 
 router.post("/maprequest",async(req,res)=>{
     try{
@@ -896,7 +1015,7 @@ router.post("/maprequest",async(req,res)=>{
             console.log("Message sent: %s", info.messageId);
         }
  
-// 나만의 키다리아저씨를 찾아서
+    // 나만의 키다리아저씨를 찾아서
         
         return res.send("success")
     }catch(err){
@@ -905,5 +1024,43 @@ router.post("/maprequest",async(req,res)=>{
         return res.send("fail")
     }
 })
+
+// router.post("/mong_rtem_add_pick",async(req,res)=>{
+//     try{
+//         if(req.body.token===null||req.body.token===undefined||req.body.session===null||req.body.session===undefined) return res.send("fail")
+//         jwt.verify(req.body.token,jwtConfig.key);
+//         jwt.verify(req.body.session,jwtConfig.key);
+//         let user_pk = req.body.token;
+//         user_pk = user_pk.split(".")[1];
+//         user_pk = user_pk.split(".")[0];
+//         user_pk = atob(user_pk);
+//         user_pk = user_pk.split('{"user_pk":"')[1];
+//         user_pk = user_pk.split('","iat":')[0];
+
+//         let session = req.body.session;
+//         session = session.split(".")[1];
+//         session = session.split(".")[0];
+//         session = atob(session);
+//         session = session.split('{"session":"')[1];
+//         session = session.split('","iat":')[0];
+
+//         const db = await client.connect();
+//         let checkSession = await db.query(`select from users where session=$1 and user_id=$2`,[session,user_pk])
+//         if(checkSession.rows[0]===undefined){
+//             await db.release();
+//             return res.send("fail")
+//         }
+
+        
+
+//         await db.release();
+//         return res.send("success")
+//     }catch(err){
+//         console.log("error on mong_rtem_add_pick");
+//         console.log(err)
+//         return res.send("fail")
+//     }
+// })
+
 
 module.exports = router;
