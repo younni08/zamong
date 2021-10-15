@@ -1,6 +1,7 @@
 import axios from "axios";
 import React,{useState} from "react";
 import MapNavi from "./map_navi"
+import KoreaState from "./list/map3"
 
 const MapState = () => {
     const [expand,setExpand] = useState(false)
@@ -112,14 +113,14 @@ const MapState = () => {
                 </div>
                 <div className="map_main">
                     <div>
-                        <span>충청남도</span>
+                        <span>경상남도</span>
                         <div className="map_state">
-
+                            <KoreaState />
                         </div>
                         <div className="map_popup" onClick={mapPop} id="map_popupanimation">
                             <div>
                                 <span>앗, 이런.</span>
-                                <span>충청남도에는 제로웨이스트샵이 하나도 없어요</span>
+                                <span>경상남도에는 제로웨이스트샵이 하나도 없어요</span>
                                 <span>우리 지역에도 제로웨이스트샵이 생길 수 있도록 이루자몽에 요청해주세요.</span>
                             </div>
                         </div>
@@ -128,7 +129,7 @@ const MapState = () => {
                                 <span>+</span>
                                 <span>매장수</span>
                                 <div>
-                                    <span>충청남도</span>
+                                    <span>경상남도</span>
                                     <span>/</span>
                                     <span>47</span>
                                 </div>
@@ -143,7 +144,7 @@ const MapState = () => {
                                 </div>
                                 <ul>
                                     <li>
-                                        <span>충청남도</span>
+                                        <span>경상남도</span>
                                         <span>183건</span>
                                     </li>
                                 </ul>

@@ -33,12 +33,12 @@ const Map = () => {
                     <div>
                         <span>전국</span>
                         <MapKorea />
-                        <div className="map_popup" onClick={mapPop} id="map_popupanimation">
+                        {/* <div className="map_popup" onClick={mapPop} id="map_popupanimation">
                             <div>
                                 <span>전국에는 다양한 개성을 가진 제로웨이스트샵이 운영되고 있습니다.</span>
                                 <span>지도를 클릭해 나에게 맞는 제로웨이트스샵을 찾아보세요.</span>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="map_main_table">
                             <div className="normal">
                                 <span>+</span>

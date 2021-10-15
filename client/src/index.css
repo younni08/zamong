@@ -1873,17 +1873,18 @@ p{
   padding:15px;
 }
 .map_korea{
-  background:#F27459;
+  /* background:#F27459; */
+  background:#Fff;
   padding:0px 0px 40px 0px;
 }
-.st0{fill:#F4F4ED;}
+.st0{fill:#2A5EBC;}
 .st1{fill:#F4F4ED;}
 .st2{fill:#F4F4ED;}
 .st3{fill:#F37559;}
-/* .st0{fill:#F4F4ED;}
-.st1{fill:#FFCC04;}
-.st2{fill:#00B775;}
-.st3{fill:#F37559;} */
+.map_korea_state svg{
+  fill:#fff;
+  background:#F27459;
+}
 .map_main_table{
   display:flex;
   flex-direction: column;
@@ -1981,13 +1982,13 @@ p{
 
 }
 .map_state{
-  display:flex;
+  /* display:flex;
   justify-content: center;
   align-items: center;
   padding:20px;
   width:calc(100% - 40px);
   height:80vh;
-  background:#F27459;
+  background:#F27459; */
 }
 .map_state_level1{
   display:flex;
