@@ -1877,10 +1877,14 @@ p{
   background:#Fff;
   padding:0px 0px 40px 0px;
 }
-.st0{fill:#2A5EBC;}
-.st1{fill:#F4F4ED;}
-.st2{fill:#F4F4ED;}
-.st3{fill:#F37559;}
+.map_korea > svg{
+  fill:#fff;
+  background:#F27459;
+}
+.st0{fill:#F4F4ED;}
+.st1{fill:#FFCB04;}
+.st2{fill:#00B775;}
+.st3{fill:#2A5EBC;}
 .map_korea_state svg{
   fill:#fff;
   background:#F27459;
