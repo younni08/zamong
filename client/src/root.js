@@ -20,6 +20,7 @@ import Map8 from "./components/map/state_8"
 import Map9 from "./components/map/state_9"
 import Map10 from "./components/map/state_10"
 import Map11 from "./components/map/state_11"
+import Map12 from "./components/map/state_12"
 import Map13 from "./components/map/state_13"
 import Map14 from "./components/map/state_14"
 import Map15 from "./components/map/state_15"
@@ -66,6 +67,7 @@ const Root = () => {
                 <Route path ="/state9" component={Map9} />
                 <Route path ="/state10" component={Map10} />
                 <Route path ="/state11" component={Map11} />
+                <Route path ="/state12" component={Map12} />
                 <Route path ="/state13" component={Map13} />
                 <Route path ="/state14" component={Map14} />
                 <Route path ="/state15" component={Map15} />

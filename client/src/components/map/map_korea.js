@@ -21,7 +21,7 @@ const Map_korea = () => {
             {
                 redirect?<Redirect to={"/"+goto} />:""
             }
-            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 595.28 841.89" xmlSpace="preserve">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 595.28 841.89" xmlSpace="preserve">
                     {/* 강원도 */}
                 <polygon onClick={handleMap} id="state1" className="st0" points="192.12,76.26 211.57,95.26 241.26,102.45 241.26,115.89 270.09,130.37 252.75,148.76 252.75,179.96 
                     268.9,177.23 275.34,187.98 296.97,191.84 287.14,203.63 280.19,232.29 284.66,246.72 277.84,257.71 284.69,263.04 302.17,260.13 

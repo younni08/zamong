@@ -1873,9 +1873,8 @@ p{
   padding:15px;
 }
 .map_korea{
-  /* background:#F27459; */
-  background:#Fff;
-  padding:0px 0px 40px 0px;
+  background:#FFFEF8;
+  padding:0px 0px 10px 0px;
 }
 .map_korea > svg{
   fill:#fff;
@@ -1888,6 +1887,87 @@ p{
 .map_korea_state svg{
   fill:#fff;
   background:#F27459;
+}
+.map_main_navi{
+  display:flex;
+  padding:0px 15px;
+  width:calc(100% - 30px);
+}
+.map_main_navi > div{
+  display:flex;
+  width:100%;
+  overflow:hidden;
+  overflow-x: scroll;
+  padding:0px 0px 20px 0px;
+  margin:0px 0px 20px 0px;
+}
+.map_main_navi > div > div{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  margin:0px 10px;
+}
+.map_main_navi > div::-webkit-scrollbar { height: 3px; }
+.map_main_navi > div::-webkit-scrollbar-track { background-color: #eaeaea; }
+.map_main_navi > div::-webkit-scrollbar-thumb { 
+    background: #e6684c;
+}
+.map_main_navi > div > div > div{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+.map_main_navi > div > div > div > img{
+  width:60px;
+  height:60px;
+  margin:0px 0px 5px 0px;
+}
+.map_main_navi > div > div > div > span{
+  font-size:0.7rem;
+  color:#7f7f7f;
+}
+.map_main_list{
+  display:flex;
+  flex-direction: column;
+  width: 100%;
+}
+.map_main_list > a:first-child{
+  border-top:solid 1px #000;
+}
+.map_main_list_element{
+  display:flex;
+  width:100%;
+  border-bottom:solid 1px #000;
+  color:#000;
+  text-decoration: none;
+}
+.map_main_list_element > div:nth-child(1){
+  display:flex;
+  width:100px;
+  height:100px;
+}
+.map_main_list_element > div:nth-child(1) > img{
+  width:100px;
+  height:100px;
+}
+.map_main_list_element > div:nth-child(2){
+  display:flex;
+  flex-direction: column;
+  padding:10px;
+  width:calc(100% - 120px);
+}
+.map_main_list_element > div:nth-child(2) > div:nth-child(1){
+  display:flex;
+  justify-content: space-between;
+}
+.map_main_list_element > div:nth-child(2) > span:nth-child(2){
+  display:flex;
+  margin:10px 0px 5px 0px;
+  font-size:0.8rem;
+}
+.map_main_list_element > div:nth-child(2) > span:nth-child(3){
+  font-size:0.7rem;
+  color:#7f7f7f;
 }
 .map_main_table{
   display:flex;
