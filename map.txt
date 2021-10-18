@@ -1,3 +1,22 @@
+create table kstate(
+    id serial primary key,
+    state_id varchar(100),
+    state_name varchar(1000),
+    city_cnt int,
+    shop_cnt int
+)
+
+create table kcity(
+    id serial primary key,
+    state_id varchar(100),
+    city_id varchar(100),
+    city_name varchar(1000),
+    shop_cnt int
+)
+
+insert into kstate(state_id,state_name,city_cnt,shop_cnt) values('','',0,0)
+insert into kcity(state_id,city_id,city_name,shop_cnt) values('','','',0,0)
+
 
 state
 1 강원도
@@ -20,6 +39,7 @@ state
 
 city
 ------------------------------------- 1 강원도
+insert into kcity(state_id,city_id,city_name,shop_cnt) values('state1','','',0)
 a1 인제군
 a2 고성군
 a3 속초시
@@ -40,6 +60,7 @@ a17 춘천시
 a18 홍천군
 
 ------------------------------------- 2 경기도
+insert into kcity(state_id,city_id,city_name,shop_cnt) values('state2','','',0)
 b1 김포시
 b2 화성시
 b2_1,b2_2 
@@ -74,9 +95,10 @@ b30 시흥시
 b31 남양주시
 
 ------------------------------------- 3 경상남도
+insert into kcity(state_id,city_id,city_name,shop_cnt) values('state3','','',0)
 c1 남해군
 c1_1 
-c2거제시
+c2 거제시
 c3 통영시
 c3_1,c3_2,c3_3
 c4 의령군
@@ -96,6 +118,8 @@ c17 하동군
 c18 사천시
 
 ------------------------------------- 4 경상북도
+insert into kcity(state_id,city_id,city_name,shop_cnt) values('state4','','',0)
+
 d1 울릉군
 d1_1
 d2 의성군
@@ -122,6 +146,7 @@ d22 성주군
 d23 고령군
 
 ------------------------------------- 5 광주
+insert into kcity(state_id,city_id,city_name,shop_cnt) values('state5','','',0)
 e1 서구
 e2 광산구
 e3 북구
@@ -129,6 +154,7 @@ e4 남구
 e5 동구
 
 ------------------------------------- 6 대구
+insert into kcity(state_id,city_id,city_name,shop_cnt) values('state6','','',0)
 f1 서구
 f2 남구
 f3 북구
@@ -140,6 +166,7 @@ f7 수성구
 f8 중구
 
 ------------------------------------- 7 대전
+insert into kcity(state_id,city_id,city_name,shop_cnt) values('state7','','',0)
 g1 유성구
 g2 대덕구
 g3 서구
@@ -147,6 +174,7 @@ g4 중구
 g5 동구
 
 ------------------------------------- 8 서울
+insert into kcity(state_id,city_id,city_name,shop_cnt) values('state8','','',0)
 h1 서대문구
 h2 마포구
 h2_2
@@ -175,6 +203,7 @@ h24 은평구
 h25 강서구
 
 ------------------------------------- 9 세종
+insert into kcity(state_id,city_id,city_name,shop_cnt) values('state9','','',0)
 i1 연서면
 i2 연기면
 i3 조치원읍
@@ -189,13 +218,17 @@ i10 소정면
 i11 장군면
 
 ------------------------------------- 10 울산
-1 중구
-2 북구
-3 동구
-4 울주군
-5 남구
+insert into kcity(state_id,city_id,city_name,shop_cnt) values('state10','','',0)
+j1 중구
+j2 북구
+j3 동구
+j4 울주군
+j5 남구
 
 ------------------------------------- 11 인천
+insert into kcity(state_id,city_id,city_name,shop_cnt) values('state11','','',0)
+
+
 k1 강화군
 k1_1,1_2,1_3,1_4,1_5,1_6
 k2 옹진군
@@ -211,30 +244,31 @@ k9 연제구
 k10 서구
 
 ------------------------------------- 12 부산
+insert into kcity(state_id,city_id,city_name,shop_cnt) values('state12','','',0)
 l1 서구
-2 동구
-3 사상구
-4 연제구
-5 금정구
-6 수영구
-7 부산진구
-8 남구
-9 동래구
-10 해운대구
-11 기장군
-12 중구
-13 사하구
-14 북구
-15 강서구
-16 영도구
+l2 동구
+l3 사상구
+l4 연제구
+l5 금정구
+l6 수영구
+l7 부산진구
+l8 남구
+l9 동래구
+l10 해운대구
+l11 기장군
+l12 중구
+l13 사하구
+l14 북구
+l15 강서구
+l16 영도구
 
 ------------------------------------- 13 전라남도
+insert into kcity(state_id,city_id,city_name,shop_cnt) values('state13','','',0)
 m1 진도군
 m2 완도군
 m3 무안군
 m4 영암군
 m5 함평군
-m담양군이랑 화순군 붙어있음
 m6 담양군
 m7 화순군
 m8 나주시
@@ -254,63 +288,67 @@ m21 해남군
 m22 목포시
 
 ------------------------------------- 14 전라북도
+insert into kcity(state_id,city_id,city_name,shop_cnt) values('state14','','',0)
 n1 김제시
-2 군산시
-3 익산시
-4 전주시
-5 진안군
-6 완주군
-7 임실군
-8 부안군
-9 남원시
-10 고창군
-11 무주군
-12 장수군
-13 순창군
-14 정읍시
+n2 군산시
+n3 익산시
+n4 전주시
+n5 진안군
+n6 완주군
+n7 임실군
+n8 부안군
+n9 남원시
+n10 고창군
+n11 무주군
+n12 장수군
+n13 순창군
+n14 정읍시
 
 ------------------------------------- 15 제주도o
-1 제주시
-2 한경면
-3 한림읍
-4 애월읍
-5 조천읍
-6 구좌읍
-7 남원읍
-8 서귀포시
-9 표선면
-10 성산읍
-11 중문
-12 대정읍
-13 안덕면
+insert into kcity(state_id,city_id,city_name,shop_cnt) values('state15','','',0)
+o1 제주시
+o2 한경면
+o3 한림읍
+o4 애월읍
+o5 조천읍
+o6 구좌읍
+o7 남원읍
+o8 서귀포시
+o9 표선면
+o10 성산읍
+o11 중문
+o12 대정읍
+o13 안덕면
 
 ------------------------------------- 16 충청남도p
-1 예산군
-2 금산군
-3 아산기
-4 당진시
-5 계룡시
-6 서산시
-7 논산시
-8 서천군
-9 부여군
-10 청양군
-11 홍성군
-12 보령시
-13 공주시
-14 천안시
-15 태안군
+insert into kcity(state_id,city_id,city_name,shop_cnt) values('state16','','',0)
+p1 예산군
+p2 금산군
+p3 아산기
+p4 당진시
+p5 계룡시
+p6 서산시
+p7 논산시
+p8 서천군
+p9 부여군
+p10 청양군
+p11 홍성군
+p12 보령시
+p13 공주시
+p14 천안시
+p15 태안군
 15_1
 
 ------------------------------------- 17 충청북도q
-1 괴산군
-2 증평군
-3 제천시
-4 충주시
-5 보은군
-6 옥천군
-7 단양군
-8 영동군
-9 진천군
-10 음성군
-11 청주시
+insert into kcity(state_id,city_id,city_name,shop_cnt) values('state17','','',0)
+q1 괴산군
+q2 증평군
+q3 제천시
+q4 충주시
+q5 보은군
+q6 옥천군
+q7 단양군
+q8 영동군
+q9 진천군
+q10 음성군
+q11 청주시

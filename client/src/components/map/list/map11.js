@@ -6,6 +6,9 @@ const Map_korea = () => {
     const [redirect,setRedirect] = useState(false)
     const handleMap = (e) => {
         let getid = e.currentTarget.getAttribute("id")
+        if(getid==="k1_1"||getid==="k1_2"||getid==="k1_3"||getid==="k1_4"||getid==="k1_5"||getid==="k1_6") getid = "k1"
+        if(getid==="k2_1"||getid==="k2_2"||getid==="k2_3"||getid==="k2_4"||getid==="k2_5"||getid==="k2_6") getid = "k2"
+        if(getid==="k3_1"||getid==="k3_2"||getid==="k3_3") getid = "k3"
         setGoto(getid)
     }
     useEffect(()=>{

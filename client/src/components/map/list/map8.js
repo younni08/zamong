@@ -6,6 +6,7 @@ const Map_korea = () => {
     const [redirect,setRedirect] = useState(false)
     const handleMap = (e) => {
         let getid = e.currentTarget.getAttribute("id")
+        if(getid==="h2_1") getid = "h2"
         setGoto(getid)
     }
     useEffect(()=>{
@@ -99,7 +100,7 @@ const Map_korea = () => {
                 <path onClick={handleMap} id="h25" className="st0" d="M95.79,437.34c5.01-2.44,10.48-5.14,14.79-7.29l0.66-0.33l7.4,7.66l1.8,11.01l14.98-2.2l8.92-6.46v-24.55h17.41
                     l17.19,7.9l4.13-4.13l-7.23-9.35l-30.98-16.78l-11.7-24.3l-26.79-12.92l-29.49-30.39l-15.39,4.29l1.43,26.2l-21.44,12.86L39.1,381.9
                     l-14.85,20.48l15.32,18.58l17.62,2.86l4.76,6.67l25.72-3.81L95.79,437.34z"/>
-                <polygon onClick={handleMap} id="h2_2" className="st0" points="152.46,385.56 182.45,401.8 190.19,411.81 196.78,405.22 227.2,401.48 227.2,388.16 196.45,369.71 
+                <polygon onClick={handleMap} id="h2_1" className="st0" points="152.46,385.56 182.45,401.8 190.19,411.81 196.78,405.22 227.2,401.48 227.2,388.16 196.45,369.71 
                     187.52,348.88 172,347.58 161.04,357.11 159.61,367.59 145.72,371.56 "/>
                 </svg>
 

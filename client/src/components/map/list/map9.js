@@ -6,6 +6,7 @@ const Map_korea = () => {
     const [redirect,setRedirect] = useState(false)
     const handleMap = (e) => {
         let getid = e.currentTarget.getAttribute("id")
+        if(getid==="i5_1") getid = "i5"
         setGoto(getid)
     }
     useEffect(()=>{
