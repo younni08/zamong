@@ -51,6 +51,10 @@ const MongSidenavi = () => {
                 <span className="mong_rka">알-까</span>
                 <span>게시글 관리</span>
             </Link>
+            <Link to="/rtem_shopregistry">
+                <span className="mong_shop">상-점</span>
+                <span>상점 등록</span>
+            </Link>
             {
                 redirect?<Redirect to="/login" />:""
             }

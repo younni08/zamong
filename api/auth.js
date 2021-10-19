@@ -480,6 +480,102 @@ router.post("/rka_article_write",upload.any(),async(req,res)=>{
     }
 })
 
+router.post("/shop_reg",upload.any(),async(req,res)=>{
+    try{
+        if(req.body.token===null||req.body.token===undefined||req.body.session===null||req.body.session===undefined) return res.send("fail")
+        jwt.verify(req.body.token,jwtConfig.key);
+        jwt.verify(req.body.session,jwtConfig.key);
+        let user_pk = req.body.token;
+        user_pk = user_pk.split(".")[1];
+        user_pk = user_pk.split(".")[0];
+        user_pk = atob(user_pk);
+        user_pk = user_pk.split('{"user_pk":"')[1];
+        user_pk = user_pk.split('","iat":')[0];
+
+        let session = req.body.session;
+        session = session.split(".")[1];
+        session = session.split(".")[0];
+        session = atob(session);
+        session = session.split('{"session":"')[1];
+        session = session.split('","iat":')[0];
+
+        const db = await client.connect();
+        let checkSession = await db.query(`select from users where session=$1 and user_id=$2`,[session,user_pk])
+        if(checkSession.rows[0]===undefined){
+            await db.release();
+            return res.send("fail")
+        }
+        let date = new Date();
+
+        let mana_pk = "";
+        let random_pk = Math.floor(Math.random()*4398046511104);
+        mana_pk = "shop"+btoa(random_pk);
+        mana_pk = mana_pk.replace(/=/g,'_')
+        let check_pk = await db.query("select shop_pk from shops where shop_pk=$1;",[mana_pk]);
+        if(check_pk.rows[0]!==undefined){
+            let pk_check = false
+            while(pk_check===true){
+                random_pk = Math.floor(Math.random()*4398046511104);
+                mana_pk = "shop"+btoa(random_pk);
+                mana_pk = mana_pk.replace(/=/g,'_')
+                check_pk = await db.query("select shop_pk from shops where shop_pk=$1;",[mana_pk]);
+                if(check_pk.rows[0]===undefined){
+                    checkPk = true
+                }
+            }
+        }
+
+        let cover_type = "default"
+        let cover_key = "default"
+        if(req.body.imgCnt!==undefined) img_cnt = req.body.imgCnt
+        for(let i=0;i<req.files.length;i++){
+            if(req.files[i]!==undefined){
+                if(req.files[i].fieldname === "cover"){
+                    let name = "#shop_c"+ i + date.getTime();
+                    cover_type=req.files[i].mimetype;
+                    cover_key=name;
+                    await uploadtoS3(req.files[i].buffer,name,req.files[i].mimetype)
+                }
+            }
+        }
+
+        
+        
+        shop_pk,
+        title,
+        state_id,
+        city_id,
+        shop_emp,
+        shop_cover_key
+        shop_cover_type,
+        shop_tag,
+        shop_body,
+        shop_address,
+        shop_web,
+        shop_tel,
+        shop_email,
+        shop_location
+
+        mana_pk,
+        req.body.title,
+        req.body.kstate,
+        req.body.kcity,
+        req.body.emp,
+        cover_key,
+        cover_type,
+        req.body.emp,
+
+        await db.query(`insert into shops(shop_pk,title,state_id,city_id,shop_emp,shop_cover_keyshop_cover_type,shop_tag,shop_body,shop_address,shop_web,shop_tel,shop_email,shop_location) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`,[mana_pk,req.body.title,req.body.tag,req.body.content,cover_key,cover_type,img_cnt,img_key,img_type,attached_key,attached_type,date,req.body.cate])
+
+        await db.release();
+        return res.send("success")
+    }catch(err){
+        console.log("error on rka_article_write")
+        console.log(err)
+        return res.send("fail")
+    }
+})
+
 router.post("/getArticles",async(req,res)=>{
     try{
         if(req.body.page===undefined||req.body.page===null) return res.send("fail")

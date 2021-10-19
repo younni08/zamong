@@ -1218,6 +1218,9 @@ p{
 .mong_sidenavi > div > span.mong_rka{
   background:#2A5EBC;
 }
+.mong_sidenavi span.mong_shop{
+  background:#F27459;
+}
 .mong_sidenavi > a{
   display:flex;
   justify-content: flex-start;
@@ -1376,6 +1379,7 @@ p{
   box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.3);
   cursor: pointer;
 }
+
 /* --------------------------------------- mong_item --------------------------------------- */
 .mong_item{
   display:flex;
@@ -1423,6 +1427,15 @@ p{
   font-size: 0.8em;
 }
 .mong_item_general > div:last-child{
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(100% - 22px);
+  padding: 10px;
+  border: 1px solid #c1cdcd;
+  background: #f4f4f4;
+  min-height:22px;
+}
+.mong_item_general > div:last-child.general_input2{
   display: flex;
   flex-wrap: wrap;
   width: calc(100% - 22px);
@@ -1665,6 +1678,15 @@ p{
   flex-direction: column;
   width:calc(50% - 10px)
 }
+.mong_item_manager4{
+  display:flex;
+  justify-content: space-between;
+}
+.mong_item_manager4 > div{
+  display:flex;
+  flex-direction: column;
+  width:calc(33% - 10px)
+}
 .general_input > input{
   width: 100%;
   font-size: 1rem;
@@ -1677,6 +1699,27 @@ p{
 }
 .general_input > input.image{
   font-size: 0.6rem;
+}
+.general_input2 > input{
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  background: #f4f4f4;
+}
+.general_input2 > input:focus{
+  outline: none;
+}
+.general_input2 > input.image{
+  font-size: 0.6rem;
+}
+.general_input > select{
+  width:100%;
+  border:none;
+  background:#f4f4f4
+}
+.general_input > select:focus{
+  outline: none;
 }
 .mong_item_general_submit{
   width:100%;
