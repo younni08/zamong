@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {Redirect} from "react";
+import { Redirect } from "react-router";
 
 const Map_korea = () => {
     const [goto,setGoto] = useState("")

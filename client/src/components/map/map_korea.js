@@ -19,7 +19,7 @@ const Map_korea = () => {
     return (
         <div className="map_korea">
             {
-                redirect?<Redirect to={"/"+goto} />:""
+                redirect?<Redirect to={"/state?s="+goto} />:""
             }
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 595.28 841.89" xmlSpace="preserve">
                     {/* 강원도 */}

@@ -541,29 +541,29 @@ router.post("/shop_reg",upload.any(),async(req,res)=>{
 
         
         
-        shop_pk,
-        title,
-        state_id,
-        city_id,
-        shop_emp,
-        shop_cover_key
-        shop_cover_type,
-        shop_tag,
-        shop_body,
-        shop_address,
-        shop_web,
-        shop_tel,
-        shop_email,
-        shop_location
+        // shop_pk,
+        // title,
+        // state_id,
+        // city_id,
+        // shop_emp,
+        // shop_cover_key
+        // shop_cover_type,
+        // shop_tag,
+        // shop_body,
+        // shop_address,
+        // shop_web,
+        // shop_tel,
+        // shop_email,
+        // shop_location
 
-        mana_pk,
-        req.body.title,
-        req.body.kstate,
-        req.body.kcity,
-        req.body.emp,
-        cover_key,
-        cover_type,
-        req.body.emp,
+        // mana_pk,
+        // req.body.title,
+        // req.body.kstate,
+        // req.body.kcity,
+        // req.body.emp,
+        // cover_key,
+        // cover_type,
+        // req.body.emp,
 
         await db.query(`insert into shops(shop_pk,title,state_id,city_id,shop_emp,shop_cover_keyshop_cover_type,shop_tag,shop_body,shop_address,shop_web,shop_tel,shop_email,shop_location) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`,[mana_pk,req.body.title,req.body.tag,req.body.content,cover_key,cover_type,img_cnt,img_key,img_type,attached_key,attached_type,date,req.body.cate])
 

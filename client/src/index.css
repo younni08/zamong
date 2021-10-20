@@ -1927,6 +1927,9 @@ p{
 .st1{fill:#FFCB04;}
 .st2{fill:#00B775;}
 .st3{fill:#2A5EBC;}
+.map_state{
+  z-index: 50;
+}
 .map_korea_state svg{
   fill:#fff;
   background:#F27459;
@@ -2300,6 +2303,39 @@ p{
   padding:10px 0px;
   justify-content: center;
   border-radius: 10px;
+}
+.Map_scale{
+  display:flex;
+  flex-direction: column;
+  width:calc(100% - 40px);
+  padding:30px 20px 50px 20px;
+}
+.Map_scale > span{
+  font-size:0.8rem;
+}
+.Map_scale > div{
+  display:flex;
+  width:100%;
+}
+.Map_scale > div > span{
+  width:25%;
+  height:10px;
+  font-size:0.6rem;
+}
+.Map_scale > div:nth-child(2) > span:nth-child(1){
+  background: #fff;
+}
+.Map_scale > div:nth-child(2) > span:nth-child(2){
+  background: #FFCB04;
+}
+.Map_scale > div:nth-child(2) > span:nth-child(3){
+  background: #00B775;
+}
+.Map_scale > div:nth-child(2) > span:nth-child(4){
+  background: #2A5EBC;
+}
+.Map_scale > div:nth-child(2){
+  border:solid 1px #000;
 }
 /* --------------------------------------- board --------------------------------------- */
 .board{

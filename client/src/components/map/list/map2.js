@@ -1,5 +1,5 @@
-import React,{useState,useEffect} from "react";
-import {Redirect} from "react";
+import React,{useState,} from "react";
+import { Redirect } from "react-router";
 
 const Map_korea = () => {
     const [goto,setGoto] = useState("")
@@ -8,12 +8,8 @@ const Map_korea = () => {
         let getid = e.currentTarget.getAttribute("id")
         if(getid==="b2_1"||getid==="b2_2") getid = "b2"
         setGoto(getid)
-    }
-    useEffect(()=>{
-        if(goto==="") return 0
         setRedirect(true)
-    },[goto])
-
+    }
 
     return (
         <div className="map_korea_state">
