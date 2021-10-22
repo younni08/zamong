@@ -45,6 +45,13 @@ const Shop = () => {
                         <img src="./pics/refill4.png" alt="refill" />
                         <img src="./pics/refill5.png" alt="refill" />
                     </div>
+                    <div className="shop_level33">
+                        <div>
+                            <span>리필스테이션 (세제)</span>
+                            <span>다회용 용기를 준비해보세요.</span>
+                            <span>없다면, 매장에 문의하고 방문해요.</span>
+                        </div>
+                    </div>
                     <div className="shop_level4">
                         2019년 문을 연 초록상점은 대전의 중심지 유성구에 위치하고 있습니다. 각종 아기자기한 생활용품과 식료품을 판매하며 각종 액체 세제를 리필용기에 담아갈 수 있는 매장입니다. 또 정기적으로 환경문제, 패미니즘 등의 다양한 주제로 독서모임이 진행되어 환경에 관심이 있는 다양한 사람들과 만날 수 있는 공간도 제공하고 있습니다.
                     </div>
