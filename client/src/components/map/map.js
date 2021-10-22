@@ -1,10 +1,13 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import MapNavi from "./map_navi"
 import MapKorea from "./map_korea";
-import {Link} from "react-router-dom"
+import ShopListElement from "./shoplist_element";
+import axios from "axios";
 
 const Map = () => {
     const [expand,setExpand] = useState(false)
+    const [type,setType] = useState("all")
+    const [page,setPage] = useState(1)
     const handleExpand = () => {
         if(expand===false){
             document.getElementById("map_expand").style.height="513px";
@@ -19,6 +22,25 @@ const Map = () => {
         console.log(document.getElementById("map_popupanimation"))
         document.getElementById("map_popupanimation").style.margin="-35vh 0px 0px 0px"
     }
+
+    const init = async() => {
+        let url = "api/mong/mapinit";
+        let params = {
+            type:type,
+            page:page
+        }
+        const config = {
+            headers:{
+                "content-type":"application/json"
+            }
+        }
+        let res = await axios.post(url,params,config)
+        console.log(res.data)
+    }
+
+    useEffect(()=>{
+        init()
+    },[page,type])
 
     return (
         <div className="map">
@@ -42,7 +64,6 @@ const Map = () => {
                         </div>
                         <div className="map_main_navi">
                             <div>
-                                
                                 <div>
                                     <div>
                                         <img src="./pics/refill1.png" alt="refill" />
@@ -53,79 +74,58 @@ const Map = () => {
                                 <div>
                                     <div>
                                         <img src="./pics/refill2.png" alt="refill" />
-                                        <span>서제 리필</span>
+                                        <span>화장품 리필</span>
                                     </div>
                                     <span></span>
                                 </div>
                                 <div>
                                     <div>
                                         <img src="./pics/refill3.png" alt="refill" />
-                                        <span>서제 리필</span>
+                                        <span>곡류 리필</span>
                                     </div>
                                     <span></span>
                                 </div>
                                 <div>
                                     <div>
                                         <img src="./pics/refill4.png" alt="refill" />
-                                        <span>서제 리필</span>
+                                        <span>팝업 리필</span>
                                     </div>
                                     <span></span>
                                 </div>
                                 <div>
                                     <div>
                                         <img src="./pics/refill5.png" alt="refill" />
-                                        <span>서제 리필</span>
+                                        <span>반려용품 리필</span>
                                     </div>
                                     <span></span>
                                 </div>
                                 <div>
                                     <div>
                                         <img src="./pics/refill6.png" alt="refill" />
-                                        <span>서제 리필</span>
+                                        <span>비건 리필</span>
                                     </div>
                                     <span></span>
                                 </div>
                                 <div>
                                     <div>
                                         <img src="./pics/refill7.png" alt="refill" />
-                                        <span>서제 리필</span>
+                                        <span>무포장 리필</span>
                                     </div>
                                     <span></span>
                                 </div>
                                 <div>
                                     <div>
                                         <img src="./pics/refill8.png" alt="refill" />
-                                        <span>서제 리필</span>
+                                        <span>공작소 리필</span>
                                     </div>
                                     <span></span>
                                 </div>
                             </div>
                         </div>
                         <div className="map_main_list">
-                            <Link to="/shop" className="map_main_list_element">
-                                <div>
-                                    <img src="./pics/test.png" alt="shop" />
-                                </div>
-                                <div>
-                                    <div>
-                                        <span>가나다 상점</span>
-                                    </div>
-                                    <span>상점 소개</span>
-                                    <span>주소</span>
-                                </div>
-                            </Link>
-                            <Link to="/shop" className="map_main_list_element">
-                                <div>
-                                    <img src="./pics/test.png" alt="shop" />
-                                </div>
-                                <div>
-                                    <div>
-                                        <span>가나다 상점</span>
-                                    </div>
-                                    <span>상점 소개</span>
-                                    <span>주소</span>
-                                </div>
-                            </Link>
+                            <ShopListElement />
+                            <ShopListElement />
+                            <ShopListElement />
                         </div>
                     </div>
                 </div>
