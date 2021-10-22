@@ -104,6 +104,8 @@ p{
   height:0px;
   transition:all 0.6s;
   overflow: hidden;
+  z-index: 20;
+  background:#FFFEF8;
 }
 .map_expand > div{
   display:flex;
@@ -113,6 +115,10 @@ p{
   font-weight: bold;
   width:calc(50vw - 41px);
   font-size:16px
+}
+.map_expand > div > a{
+  color:#000;
+  text-decoration: none;
 }
 .map_expand > div:nth-child(1), .map_expand > div:nth-child(2){
   border-top: solid 1px #000;
@@ -1046,7 +1052,6 @@ p{
 .item_ex_level_qr > div:last-child{
   display:flex;
   flex-direction: column;
-  width:100px;
 }
 .item_ex_level_qr > div:last-child > span{
   display:flex;
@@ -1928,7 +1933,7 @@ p{
 .st2{fill:#00B775;}
 .st3{fill:#2A5EBC;}
 .map_state{
-  z-index: 50;
+  z-index: 2;
 }
 .map_korea_state svg{
   fill:#fff;
@@ -2020,8 +2025,8 @@ p{
   flex-direction: column;
   padding:15px;
   width:calc(100% - 30px);
-  font-size:0.8rem;
-  margin:0px 0px 50px 0px;
+  font-size:0.7rem;
+  margin:0px 0px -20px 0px;
 }
 .map_main_table > div.normal{
   display:flex;
@@ -2030,10 +2035,12 @@ p{
   border-bottom:solid 1px #000;
 }
 .map_main_table > div.normal:first-child{
+  border-bottom:none;
   border-top:solid 1px #000;
 }
 .map_main_table > div.normal > span:nth-child(1){
   display:flex;
+  width:8px;
   margin:0px 10px 0px 0px;
 }
 .map_main_table > div.normal > span:nth-child(2){
@@ -2177,6 +2184,7 @@ p{
   border-bottom:solid 1px #00B775;
   border-left:solid 1px #00B775;
   border-radius: 10px 0px 0px 10px;
+  z-index: 58;
 }
 .map_register_level1{
   display:flex;

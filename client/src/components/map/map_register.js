@@ -101,7 +101,7 @@ const MapRegister = () => {
             <div className="map_register_level6">
                 <div>
                     <select id="map_select1" onChange={handleLocation1}>
-                        <option value="" selected disabled hidden >지역 선택</option>
+                        <option value="" defaultValue disabled hidden >지역 선택</option>
                         <option value="서울특별시">서울특별시</option>
                         <option value="부산광역시">부산광역시</option>
                         <option value="제주특별자치도">제주특별자치도</option>
@@ -123,7 +123,7 @@ const MapRegister = () => {
                 </div>
                 <div>
                     <select id="map_select2">
-                        < option value="" selected disabled hidden >시/군/구</option>
+                        < option value="" defaultValue disabled hidden >시/군/구</option>
                         {
                             function(s){
                                 switch(s){

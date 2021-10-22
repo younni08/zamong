@@ -20,7 +20,6 @@ const Map_korea = () => {
             {
                 redirect?<Redirect to={"/shoplist?m="+goto} />:""
             }
-
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 595.28 841.89" xmlSpace="preserve">
                 <polygon onClick={handleMap} id="c1" className="st0" points="104.36,564.36 101.62,578.05 84.49,592.44 94.42,615.04 94.42,639.01 111.21,652.71 116,626.68 
                     130.38,633.53 130.38,658.88 144.77,652.71 153.67,662.3 165.32,646.55 165.32,628.74 168.74,617.78 152.3,613.33 146.14,606.14 

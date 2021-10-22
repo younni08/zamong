@@ -9,6 +9,7 @@ import Article from "./components/article/article"
 import Board from "./components/board/board"
 
 import Map from "./components/map/map"
+import ShopList from "./components/map/shoplist"
 import Map1 from "./components/map/state"
 
 import Login from "./components/login/login"
@@ -43,7 +44,7 @@ const Root = () => {
 
                 <Route path ="/state" component={Map1} />
                 <Route path ="/shop" component={Shop} />
-                <Route path ="/shoplist" component={Shop} />
+                <Route path ="/shoplist" component={ShopList} />
 
 
                 <Route path ="/article" component={Article} />

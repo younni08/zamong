@@ -20,6 +20,7 @@ import KoreaState17 from "./list/map17"
 import MapRegister from "./map_register";
 import MapScale from "./map_scale";
 import axios from "axios";
+import Qrcode from "qrcode.react";
 
 const MapState = () => {
     const [expand,setExpand] = useState(false)
@@ -28,6 +29,8 @@ const MapState = () => {
     const [noshop,setNoshop] = useState(false)
     const [bigcity,setBigcity] = useState([])
     const [citylist,setCitylist] = useState([])
+    const [shopSum,setShopSum] = useState(0)
+    const [cstate,setCstate] = useState("")
 
     const handleExpand = () => {
         if(expand===false){
@@ -81,9 +84,27 @@ const MapState = () => {
                 "content-type":"application/json"
             }
         }
+        setCstate(getState)
         let res = await axios.post(url,params,config)
-        console.log(res.data)
-
+        let sum = 0
+        let array = res.data
+        if(res.data==="fail") return setNoshop(true)
+        setBigcity(res.data[0])
+        for(let i=0;i<array.length;i++){
+            sum = array[i].shop_cnt
+            if(array[i].shop_cnt>0){
+                document.getElementById(array[i].city_id).classList.replace('st0','st1')
+            }
+            if(array[i].shop_cnt>10){
+                document.getElementById(array[i].city_id).classList.replace('st0','st2')
+            }
+            if(array[i].shop_cnt>100){
+                document.getElementById(array[i].city_id).classList.replace('st0','st3')
+            }
+        }
+        if(sum===0) setNoshop(true)
+        setCitylist(res.data)
+        setShopSum(sum)
     }
 
     useEffect(()=>{
@@ -165,28 +186,55 @@ const MapState = () => {
                                 <div>
                                     <span>{kstate}</span>
                                     <span>/</span>
-                                    <span>47</span>
+                                    <span>{shopSum}개</span>
                                 </div>
-                            </div>
+                            </div> 
+                            <div className="normal">
+                                <span></span>
+                                <span>가장 많은 지역</span>
+                                <div>
+                                    <span>{bigcity.city_name}</span>
+                                    <span>/</span>
+                                    <span>{bigcity.shop_cnt}개</span>
+                                </div>
+                            </div> 
                             <div className="map_list">
                                 <div>
                                     <span>+</span>
                                     <div>
                                         <span>요청수</span>
-                                        <span>193건</span>
+                                        <span>{shopSum}건</span>
                                     </div>
                                 </div>
                                 <ul>
-                                    <li>
-                                        <span>{kstate}</span>
-                                        <span>183건</span>
-                                    </li>
+                                    {
+                                        citylist?citylist.map(c=>{
+                                            return(
+                                                <li key={c.city_name}>
+                                                    <span>{c.city_name}</span>
+                                                    <span>{c.shop_cnt}건</span>
+                                                </li>
+                                            )
+                                        }):""
+                                    }
                                 </ul>
                             </div>
+                        </div>
+                        <div className="item_ex_level_qr">
                             <div>
-                                <span>+</span>
-                                <span>지도 공유하기</span>
-                                <img src="./pics/kakaotalk.png" alt="share with kakaotalk" />
+                                <img src="./pics/kakaotalk.png" alt="link" />
+                                <img src="./pics/facebook.png" alt="link" />
+                                <img src="./pics/twitter.png" alt="link" />
+                                <img src="./pics/insta.png" alt="link" />
+                                <img src="./pics/email.png" alt="link" />
+                                <img src="./pics/link.png" alt="link" />
+                            </div>
+                            <div>
+                                <Qrcode value={"https://www.iroozamong.com/#/state?s="+cstate}
+                                    size={80}
+                                    bgColor={"#FFFEF8"}
+                                />
+                                <span>QR코드 복사</span>
                             </div>
                         </div>
                         <div className="map_state_level1">
