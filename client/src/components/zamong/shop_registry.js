@@ -22,10 +22,20 @@ const ShopRegistry = () => {
     const [addr,setAddr] = useState("")
     const [web,setWeb] = useState("")
     const [location,setLocation] = useState("")
+    const [oneline,setOneline] = useState("")
+    const [type,setType] = useState("")
     
 
     const handleBody = (html) => {
         setBody(html)
+    }
+
+    const handleOneLIne = (e) => {
+        setOneline(e.target.value)
+    }
+
+    const handleType = (e) => {
+        setType(e.target.value)
     }
 
     const handleTitle = (e) => {
@@ -79,6 +89,8 @@ const ShopRegistry = () => {
         formData.append("email",email);
         formData.append("kcity",kcity);
         formData.append("kstate",kstate);
+        formData.append("oneline",oneline);
+        formData.append("type",type);
         formData.append("emp",emp);
         formData.append("content",temphtml);
         formData.append("token",token);
@@ -520,6 +532,26 @@ const ShopRegistry = () => {
                                                 }):<option></option>
                                             }
                                         </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="mong_item_manager3">
+                                <div className="mong_item_general">
+                                    <div>
+                                        <span>한줄 소개*</span>
+                                        <span></span>
+                                    </div>
+                                    <div className="general_input">
+                                        <input type="text" onChange={handleOneLIne} />
+                                    </div>
+                                </div>
+                                <div className="mong_item_general">
+                                    <div>
+                                        <span>종류</span>
+                                        <span>서제, 화장품, 곡류, 팝업, 반려, 비건, 무포장, 공작소 중 택 1</span>
+                                    </div>
+                                    <div className="general_input">
+                                        <input type="text" onChange={handleType} />
                                     </div>
                                 </div>
                             </div>

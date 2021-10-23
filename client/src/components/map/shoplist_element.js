@@ -1,18 +1,47 @@
-import React from "react";
+import React,{useState, useMemo} from "react";
+import axios from "axios"
 import {Link} from "react-router-dom";
+import parser from "html-react-parser"
 
-const ShopListElement = () => {
+const ShopListElement = (props) => {
+    const [sample,setSample] = useState("")
+
+    const getimage = async(key,type) => {
+        if(key===undefined||key===null||key===""||key==="default") return false
+        let url = "/api/mong/singleimage"
+        let params = {
+            key:key
+        }
+        const config = {
+            headers:{
+                "content-type":"application/json"
+            }
+        }
+        let res = await axios.post(url,params,config);
+        if(res.data!=="fail"&&res.data!=="no key"){
+            let ttt = '<img src="data:'+type.replace("#",'').replace(",",'')+';base64,'+ res.data + '">'
+            return setSample(ttt)
+        }
+    }
+    
+    useMemo(()=>{
+        if(props.shop_cover_key===undefined) return 0
+        if(props.shop_cover_key==="default") return 0
+        getimage(props.shop_cover_key,props.shop_cover_type)
+    },[props.shop_cover_key])
     return (
-        <Link to="/shop" className="map_main_list_element">
+        <Link to={"/shop?s="+props.shop_pk} className="map_main_list_element">
             <div>
-                <img src="./pics/test.png" alt="shop" />
+                {
+                    sample?parser(sample):""
+                }
             </div>
             <div>
                 <div>
-                    <span>가나다 상점</span>
+                    <span>{props.title}</span>
                 </div>
-                <span>상점 소개</span>
-                <span>주소</span>
+                <span>{props.oneline}</span>
+                <span>{props.shop_address}</span>
             </div>
         </Link>
     )

@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from "react";
 import { Redirect } from "react-router";
 
-const Map_korea = () => {
+const Map_korea = (props) => {
     const [goto,setGoto] = useState("")
     const [redirect,setRedirect] = useState(false)
     const handleMap = (e) => {
@@ -11,6 +11,23 @@ const Map_korea = () => {
         }
         setGoto(getid)
     }
+
+    useEffect(()=>{
+        if(props.kstate===null||props.kstate===undefined) return 0
+        console.log(props)
+        for(let i=0;i<props.kstate.length;i++){
+            if(props.kstate[i].shop_cnt>0){
+                document.getElementById(props.kstate[i].state_name).classList.replace('st0','st1')
+            }
+            if(props.kstate[i].shop_cnt>10){
+                document.getElementById(props.kstate[i].state_name).classList.replace('st0','st2')
+            }
+            if(props.kstate[i].shop_cnt>100){
+                document.getElementById(props.kstate[i].state_name).classList.replace('st0','st3')
+            }
+        }
+    },[props])
+
     useEffect(()=>{
         if(goto==="") return 0
         setRedirect(true)

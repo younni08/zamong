@@ -1,9 +1,14 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import MapNavi from "./../map/map_navi"
-import Qrcode from "qrcode.react";
+import Qrcode, { propTypes } from "qrcode.react";
+import axios from "axios";
+import parser from "html-react-parser"
 
 const Shop = () => {
     const [expand,setExpand] = useState(false)
+    const [expand2,setExpand2] = useState(false)
+    const [loading,setLoading] = useState(false)
+    const [shop,setShop] = useState([])
     const handleExpand = () => {
         if(expand===false){
             document.getElementById("map_expand").style.height="513px";
@@ -11,6 +16,61 @@ const Shop = () => {
         }else{
             document.getElementById("map_expand").style.height="0px";
             setExpand(false)
+        }
+    }
+
+    const init = async() => {
+        let getpk = window.location.href.split("shop?s=")[1]
+        let url = "/api/mong/shopinit"
+        let params = {
+            shop_pk:getpk
+        }
+        const config = {
+            headers:{
+                "content-type":"application/json"
+            }
+        }
+        let res = await axios.post(url,params,config)
+        console.log(res.data)
+        setShop(res.data)
+        setLoading(true)
+        getimage(res.data.shop_cover_key,res.data.shop_cover_type)
+    }
+
+    useEffect(()=>{
+        init()
+    },[])
+
+    const [refill1,setRefill1] = useState(false)
+    const [refill2,setRefill2] = useState(false)
+    const [refill3,setRefill3] = useState(false)
+    const [refill4,setRefill4] = useState(false)
+    const [refill5,setRefill5] = useState(false)
+    const [refill6,setRefill6] = useState(false)
+    const [refill7,setRefill7] = useState(false)
+    const [refill8,setRefill8] = useState(false)
+    const [refill9,setRefill9] = useState(false)
+    const handleRefillClick = () => {
+
+    }
+
+    const [sample,setSample] = useState("")
+
+    const getimage = async(key,type) => {
+        if(key===undefined||key===null||key===""||key==="default") return false
+        let url = "/api/mong/singleimage"
+        let params = {
+            key:key
+        }
+        const config = {
+            headers:{
+                "content-type":"application/json"
+            }
+        }
+        let res = await axios.post(url,params,config);
+        if(res.data!=="fail"&&res.data!=="no key"){
+            let ttt = '<img src="data:'+type.replace("#",'').replace(",",'')+';base64,'+ res.data + '">'
+            return setSample(ttt)
         }
     }
 
@@ -26,34 +86,41 @@ const Shop = () => {
                 </div>
                 <div className="shop">
                     <div className="shop_level1">
-                        <span>대전 <i className="xi-angle-right-min"></i> 초록상점</span>
+                        <span>{shop.state_id} <i className="xi-angle-right-min"></i> {shop.title}</span>
                         <div>
-                            <img src="./pics/test.png" alt="aa"/>
+                            {
+                                sample?parser(sample):""
+                            }
                         </div>
                     </div>
                     <div className="shop_level2">
-                        <span>초록 상점</span>
+                        <span>{shop.title}</span>
                         <div>
                             <span><i className="xi-heart"></i></span>
-                            <span>15</span>
+                            <span>0</span>
                         </div>
                     </div>
                     <div className="shop_level3">
-                        <img src="./pics/refill1.png" alt="refill" />
-                        <img src="./pics/refill2.png" alt="refill" />
-                        <img src="./pics/refill3.png" alt="refill" />
-                        <img src="./pics/refill4.png" alt="refill" />
-                        <img src="./pics/refill5.png" alt="refill" />
+                        <img src="./pics/refill1.png" alt="refill" id="shop_refill1" onClick={handleRefillClick} />
+                        <img src="./pics/refill2.png" alt="refill" id="shop_refill2" onClick={handleRefillClick} />
+                        <img src="./pics/refill3.png" alt="refill" id="shop_refill3" onClick={handleRefillClick} />
+                        <img src="./pics/refill4.png" alt="refill" id="shop_refill4" onClick={handleRefillClick} />
+                        <img src="./pics/refill5.png" alt="refill" id="shop_refill5" onClick={handleRefillClick} />
                     </div>
-                    <div className="shop_level33">
-                        <div>
-                            <span>리필스테이션 (세제)</span>
-                            <span>다회용 용기를 준비해보세요.</span>
-                            <span>없다면, 매장에 문의하고 방문해요.</span>
-                        </div>
-                    </div>
+                    {
+                        expand2?<div className="shop_level33">
+                            <div>
+                                <span>리필스테이션 (세제)</span>
+                                <span>다회용 용기를 준비해보세요.</span>
+                                <span>없다면, 매장에 문의하고 방문해요.</span>
+                            </div>
+                        </div>:""
+                    }
+                    
                     <div className="shop_level4">
-                        2019년 문을 연 초록상점은 대전의 중심지 유성구에 위치하고 있습니다. 각종 아기자기한 생활용품과 식료품을 판매하며 각종 액체 세제를 리필용기에 담아갈 수 있는 매장입니다. 또 정기적으로 환경문제, 패미니즘 등의 다양한 주제로 독서모임이 진행되어 환경에 관심이 있는 다양한 사람들과 만날 수 있는 공간도 제공하고 있습니다.
+                        {
+                            loading?parser(shop.shop_body):""
+                        }
                     </div>
                     <div className="shop_level5">
                         <div>
@@ -63,22 +130,22 @@ const Shop = () => {
                         <div>
                             <span>+</span>
                             <span>주소</span>
-                            <span>충남 서천군 우리집</span>
+                            <span>{shop.shop_address}</span>
                         </div>
                         <div>
                             <span>+</span>
                             <span>연락처</span>
-                            <span>010 2222 8888</span>
+                            <span>{shop.shop_tel}</span>
                         </div>
                         <div>
                             <span>+</span>
                             <span>이메일</span>
-                            <span>test@test.com</span>
+                            <span>{shop.shop_email}</span>
                         </div>
                         <div>
                             <span>+</span>
                             <span>사이트</span>
-                            <span>없음</span>
+                            <span>{shop.shop_web}</span>
                         </div>
                     </div>
                     <div className="item_ex_level_qr">
@@ -92,7 +159,7 @@ const Shop = () => {
                         </div>
                         <div>
                             <Qrcode value={"https://www.iroozamong.com/#/shop"}
-                                size={100}
+                                size={80}
                                 bgColor={"#FFFEF8"}
                             />
                             <span>QR코드 복사</span>

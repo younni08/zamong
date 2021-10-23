@@ -213,6 +213,7 @@ p{
 }
 .shop_level4{
   display:flex;
+  flex-direction: column;
   width:calc(100vw - 40px);
   padding:20px;
 }
@@ -2018,6 +2019,17 @@ p{
   flex-direction: column;
   align-items: center;
   margin:0px 10px;
+}
+.map_main_navi > div > div > div > div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 55px;
+  color:#7f7f7f;
+}
+.map_main_navi > div > div > div > div.on{
+  color:#e6684c;
 }
 .map_main_navi > div::-webkit-scrollbar { height: 3px; }
 .map_main_navi > div::-webkit-scrollbar-track { background-color: #eaeaea; }

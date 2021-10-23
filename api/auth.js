@@ -10,11 +10,6 @@ let atob = require("atob");
 
 const nodemailer = require("nodemailer");
 
-
-// encrypt library
-const bcrypt = require("bcryptjs");
-const saltRounds = 10;
-
 // db setting
 const {Pool} = require("pg");
 const fs = require("fs");
@@ -538,10 +533,11 @@ router.post("/shop_reg",upload.any(),async(req,res)=>{
             }
         }
 
-        await db.query(`update kcity set shop_cnt=shop_cnt+1 where city_id=$1`,[req.body.kcity])
-        await db.query(`update kstate set shop_cnt=shop_cnt+1 where state_id=$1`,[req.body.kstate])
 
-        await db.query(`insert into shops(shop_pk,title,state_id,city_id,shop_emp,shop_cover_key,shop_cover_type,shop_tag,shop_body,shop_address,shop_web,shop_tel,shop_email,shop_location) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)`,[mana_pk,req.body.title,req.body.kstate,req.body.kcity,req.body.emp,cover_key,cover_type,req.body.tag,req.body.content,req.body.addr,req.body.web,req.body.tel,req.body.email,req.body.location])
+        await db.query(`update kcity set shop_cnt=shop_cnt+1 where city_id=$1`,[req.body.kcity])
+        await db.query(`update kstate set shop_cnt=shop_cnt+1 where state_name=$1`,[req.body.kstate])
+
+        await db.query(`insert into shops(shop_pk,title,state_id,city_id,shop_emp,shop_cover_key,shop_cover_type,shop_tag,shop_body,shop_address,shop_web,shop_tel,shop_email,shop_location,oneline,shoptype) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)`,[mana_pk,req.body.title,req.body.kstate,req.body.kcity,req.body.emp,cover_key,cover_type,req.body.tag,req.body.content,req.body.addr,req.body.web,req.body.tel,req.body.email,req.body.location,req.body.oneline,req.body.type])
         await db.release();
         return res.send("success")
     }catch(err){
@@ -1051,6 +1047,89 @@ router.post("/iteminit",async(req,res)=>{
         return res.send(returnArray)
     }catch(err){
         console.log("error on itemsinit");
+        console.log(err)
+        return res.send("fail")
+    }
+})
+
+router.post("/mapinit",async(req,res)=>{
+    try{
+        if(req.body.type===undefined||req.body.type===null||req.body.page===undefined||req.body.page===null) return res.send("fail")
+        const db = await client.connect();
+        let result = [];
+        let result2 = [];
+        let page_param = 0;
+        if(req.body.page>0){
+            page_param = (Number(req.body.page)*10)-10;
+        }
+        let shopCnt = 1
+        let map = await db.query(`select state_id,state_name,shop_cnt from kstate`)
+        if(req.body.type==="all"){
+            result = await db.query(`select shop_pk,title,oneline,shop_address,shop_cover_type,shop_cover_key from shops offset ${page_param} limit 10 ;`)
+            result2 = await db.query(`select shop_pk from shops ;`)
+            console.log(result.rows)
+        }
+        if(req.body.type!=="all"){
+            result = await db.query(`select shop_pk,title,oneline,shop_address,shop_cover_type,shop_cover_key from shops where shoptype like '%${req.body.type}%' offset ${page_param} limit 10 ;`)
+            result2 = await db.query(`select shop_pk from shops where shoptype like '%${req.body.type}%'`)
+        }
+        shopCnt = result2.rowCount
+        let returnArray = {
+            item:result.rows,
+            map:map.rows,
+            shopcnt:shopCnt
+        }
+        await db.release();
+        return res.send(returnArray)
+    }catch(err){
+        console.log("error on itemsinit");
+        console.log(err)
+        return res.send("fail")
+    }
+})
+
+router.post("/shoplistinit",async(req,res)=>{
+    try{
+        const db = await client.connect();
+        let result = [];
+        let result2 = [];
+        let page_param = 0;
+        if(req.body.page>0){
+            page_param = (Number(req.body.page)*10)-10;
+        }
+        let shopCnt = 1
+        if(req.body.type==="all"){
+            result = await db.query(`select shop_pk,title,oneline,shop_address,shop_cover_type,shop_cover_key from shops where city_id=$1 offset ${page_param} limit 10 ;`,[req.body.city])
+            result2 = await db.query(`select shop_pk from shops ;`)
+            console.log(result.rows)
+        }
+        if(req.body.type!=="all"){
+            result = await db.query(`select shop_pk,title,oneline,shop_address,shop_cover_type,shop_cover_key from shops where city_id=$1 and shoptype like '%${req.body.type}%' offset ${page_param} limit 10 ;`,[req.body.city])
+            result2 = await db.query(`select shop_pk from shops where shoptype like '%${req.body.type}%'`)
+        }
+        shopCnt = result2.rowCount
+        let returnArray = {
+            item:result.rows,
+            shopcnt:shopCnt
+        }
+        await db.release();
+        return res.send(returnArray)
+    }catch(err){
+        console.log("error on itemsinit");
+        console.log(err)
+        return res.send("fail")
+    }
+})
+
+router.post("/shopinit",async(req,res)=>{
+    try{
+        console.log(req.body)
+        const db = await client.connect();
+        let result = await db.query(`select k1.state_id,s1.title,s1.shop_cover_key,s1.shop_cover_type,s1.shop_body,s1.shop_address,s1.shop_web,s1.shop_tel,s1.shop_email,s1.shop_location from shops s1 inner join kstate k1 on s1.state_id=k1.state_name where shop_pk=$1;`,[req.body.shop_pk])
+        await db.release();
+        return res.send(result.rows[0])
+    }catch(err){
+        console.log("error on shopinit");
         console.log(err)
         return res.send("fail")
     }
