@@ -642,6 +642,9 @@ p{
   align-items: center;
   width:100%;
 }
+.index_level1 > img{
+  width: 80vw;
+}
 .index_level2{
   display:flex;
   justify-content: space-between;
