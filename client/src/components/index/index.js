@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom"
 
 const Index = () => {
     return (
@@ -19,7 +20,7 @@ const Index = () => {
                 </div>
                 <div className="index_level4">
                     <div></div>
-                    <div>
+                    <Link to="/rtende">
                         <div>
                             시작
                             <span></span>
@@ -31,7 +32,7 @@ const Index = () => {
                             <span></span>
                             <span></span>
                         </div>
-                    </div>
+                    </Link>
                 </div>
             </div>
         </div>
