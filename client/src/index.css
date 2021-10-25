@@ -322,6 +322,142 @@ p{
 .shoplist_list > a:first-child{
   border-top:solid 1px #000;
 }
+/* -------------------------------------- project ------------------------------------------ */
+.project{
+  display:flex;
+  justify-content: center;
+  width:100%;
+}
+.project > div{
+  display:flex;
+  flex-direction: column;
+  width:100%;
+}
+.project > div > span{
+  display:flex;
+  width:calc(100% - 40px);
+  padding:20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  border-bottom: solid 2px #000;
+}
+.project_main{
+  display:flex;
+  width:100%;
+  flex-wrap: wrap;
+}
+.project_22{
+  display:flex;
+  position:relative;
+  width:100vw;
+  height:100vw;
+  border-bottom: solid 1px #000;
+}
+.project_22 > span{
+  position:absolute;
+  bottom:15px;
+  right:15px;
+}
+.project_11{
+  display:flex;
+  position:relative;
+  width:calc(50vw - 2px);
+  height:50vw;
+  border-left: solid 1px #000;
+  border-right: solid 1px #000;
+  border-bottom: solid 1px #000;
+}
+.project_11 > span{
+  position:absolute;
+  bottom:15px;
+  right:15px;
+}
+.project_21{
+  display:flex;
+  position:relative;
+  width:100vw;
+  height:50vw;
+  border-bottom: solid 1px #000;
+}
+.project_21 > span{
+  position:absolute;
+  bottom:15px;
+  right:15px;
+}
+.project_12{
+  display:flex;
+  position:relative;
+  width:calc(50vw - 2px);
+  height:100vw;
+  border-left: solid 1px #000;
+  border-right: solid 1px #000;
+  border-bottom: solid 1px #000;
+}
+.project_12 > span{
+  position:absolute;
+  bottom:15px;
+  right:15px;
+}
+/* -------------------------------------- about ------------------------------------------ */
+.about{
+  display:flex;
+  justify-content: center;
+  width:100%;
+}
+.about > div{
+  display:flex;
+  flex-direction: column;
+  width:100%;
+}
+.about > div > span{
+  display:flex;
+  width:calc(100% - 40px);
+  padding:20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+.about_video{
+  border-top:solid 1px #000;
+  border-bottom:solid 1px #000;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  height:55vw;
+}
+.about_main{
+  display:flex;
+  flex-direction: column;
+  width:100%;
+}
+.about_element{
+  display: flex;
+  flex-direction: column;
+  width:calc(100% - 40px);
+  padding:20px 20px 10px 20px;
+  font-size: 0.8rem;
+}
+.about_element > span{
+  font-weight: bold;
+}
+.about_element > div{
+  display: flex;
+  flex-direction: column;
+  margin:10px 0px 20px 0px;
+}
+.about_element > div > span{
+  text-indent: 10px;
+}
+.about_element span.sep{
+  font-weight: normal;
+  margin:0px 0px 20px 0px;
+}
+.about_element a.sep{
+  font-weight: normal;
+  font-size: 0.8rem;
+  color: #000;
+  text-decoration: none;
+}
 /* -------------------------------------- rtem ------------------------------------------ */
 .rtem{
   display:flex;
@@ -1907,10 +2043,9 @@ p{
 .mong_rtem_recom_item > div:nth-child(3) > span:nth-child(2){
   background:#f00;
 }
-/* --------------------------------------- map --------------------------------------- */
+/* --------------------------------------- rtende --------------------------------------- */
 .rtende{
   display:flex;
-  justify-content: center;
   width:100%;
 }
 .rtende > div{
@@ -1918,49 +2053,69 @@ p{
   flex-direction: column;
   width:100%;
 }
-.rtende_ad{
+.rtende_navi{
   display:flex;
+  justify-content: space-between;
+  border-bottom:solid 1px #000;
   width:calc(100% - 40px);
   padding:20px;
-  justify-content: space-between;
-  background:#FFCB04;
+  font-size:0.8rem;
+  font-weight: bold;
 }
-.rtende_level1{
+.rtende_subnavi{
   display:flex;
-  justify-content: center;
-  align-items: center;
-  width:100vw;
-  height:133vw;
-  background:#eaeaea;
+  width: 100%;
+  overflow-x: scroll;
+  padding:0px 0px 10px 0px;
 }
-.rtende_level2{
-  display:flex;
-  justify-content: center;
-  align-items: center;
-  width:100%;
-}
-.rtende_level2 > img{
-  width:100%;
-}
-.rtende_level3{
+.rtende_subnavi > div{
   display:flex;
   flex-direction: column;
-  align-items: flex-start;
-  border-top:solid 1px #000;
-  border-bottom:solid 1px #000;
-  background: #fff;
-  padding:20px 0px 20px 40px;
-  width:calc(100% - 40px);
-  font-size:1.1rem;
-}
-.rtende_level4{
-  display:flex;
   justify-content: center;
-  width:100%;
-  padding:40px 0px;
+  align-items: center;
 }
-.rtende_level5{
-  margin:0px 0px 100px 0px;
+.rtende_subnavi > div > img{
+  width:50px;
+  padding:10px;
+}
+.rtende_subnavi > div > span{
+  font-size:0.7rem;
+}
+.rtende_display{
+  display:flex;
+  width:100vw;
+  height:100vw;
+  margin:20px 0px 0px 0px;
+  border-bottom:solid 1px #000;
+}
+.rtende_info{
+  display:flex;
+  flex-direction: column;
+  width: 100%;
+}
+.rtende_info > div:first-child{
+  display: flex;
+  align-items: center;
+  width:calc(100% - 40px);
+  padding:10px 20px 10px 20px;
+}
+.rtende_info > div:first-child > div > img{
+  height:30px;
+  width:30px;
+}
+.rtende_info > div:first-child > span{
+  display:flex;
+  align-items: center;
+  font-size:0.8rem;
+  padding:0px 0px 0px 20px;
+}
+.rtende_info > div:last-child{
+  display: flex;
+  width:calc(100% - 40px);
+  padding:0px 20px 20px 20px;
+  flex-direction: column;
+  font-size:0.8rem;
+  color:#7f7f7f;
 }
 /* --------------------------------------- map --------------------------------------- */
 .map_main{
@@ -1977,9 +2132,9 @@ p{
   font-weight: bold;
   color:#fff;
   width:calc(100% - 30px);
+  padding:15px;
   background:#F27459;
   font-size:20px;
-  padding:15px;
 }
 .map_korea{
   background:#FFFEF8;
