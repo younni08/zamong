@@ -229,6 +229,11 @@ p{
   border:solid 1px #000;
   border-radius: 10px;
   height:30vh;
+  overflow:hidden;
+}
+.shop_level5 > div > div{
+  width:100%;
+  height:30vh;
 }
 .shop_level6{
   display: flex;

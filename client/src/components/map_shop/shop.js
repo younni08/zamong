@@ -1,8 +1,9 @@
 import React,{useEffect, useState} from "react";
 import MapNavi from "./../map/map_navi"
-import Qrcode, { propTypes } from "qrcode.react";
+import Qrcode from "qrcode.react";
 import axios from "axios";
 import parser from "html-react-parser"
+import { RenderAfterNavermapsLoaded, NaverMap } from 'react-naver-maps'; 
 
 const Shop = () => {
     const [expand,setExpand] = useState(false)
@@ -37,6 +38,8 @@ const Shop = () => {
         getimage(res.data.shop_cover_key,res.data.shop_cover_type)
     }
 
+
+
     useEffect(()=>{
         init()
     },[])
@@ -54,6 +57,7 @@ const Shop = () => {
 
     }
 
+    
     const [sample,setSample] = useState("")
 
     const getimage = async(key,type) => {
@@ -124,6 +128,13 @@ const Shop = () => {
                     </div>
                     <div className="shop_level5">
                         <div>
+                        <RenderAfterNavermapsLoaded
+                            ncpClientId={'59ggdfmhb3'} // 자신의 네이버 계정에서 발급받은 Client ID
+                            error={<p>Maps Load Error</p>}
+                            loading={<p>Maps Loading...</p>}
+                            >
+                            <NaverMapAPI />
+                        </RenderAfterNavermapsLoaded>
                         </div>
                     </div>
                     <div className="shop_level6">
@@ -181,4 +192,18 @@ const Shop = () => {
     )
 }
 
+function NaverMapAPI() {
+    return (
+      <NaverMap
+        mapDivId={'maps-getting-started-uncontrolled'} // default: react-naver-map
+        style={{
+          width: '100%', // 네이버지도 가로 길이
+          height: '30vh' // 네이버지도 세로 길이
+        }}
+        defaultCenter={{ lat: 37.554722, lng: 126.970833 }} // 지도 초기 위치
+        defaultZoom={13} // 지도 초기 확대 배율
+      />
+    );
+}
+  
 export default Shop;
