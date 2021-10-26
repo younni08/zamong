@@ -6,7 +6,7 @@ const Index = () => {
         <div className="index">
             <div>
                 <div className="index_level1">
-                    <img src="./pics/rtende.svg" alt="logo" />
+                    <img src="./pics/rtende.png" alt="logo" />
                 </div>
                 <div className="index_level2">
                     <div></div>

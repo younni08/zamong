@@ -22,7 +22,9 @@ const Navi = () => {
     return (
         <div className="navi">
             <div className="navi_level1">
-                <Link to="/"></Link>
+                <Link to="/">
+                    <img src="./pics/rtende.svg" alt="logo" />
+                </Link>
                 <span onClick={expandmenu}><i className="xi-bars xi-x"></i></span>
             </div>
             <div className="navi_level2" id="navi_list">

@@ -38,13 +38,18 @@ p{
   cursor: pointer;
 }
 .navi_level1 > a{
+  display:flex;
+  align-items: center;
   color:#001717;
   font-size:1.5em;
   font-weight: bold;
-  padding:9px 20px;
+  padding:0px 20px;
   cursor: pointer;
   user-select: none;
   text-decoration: none;
+}
+.navi_level1 > a > img{
+  width:70px;
 }
 .navi_level2{
   display:flex;
@@ -647,9 +652,9 @@ p{
   align-items: center;
   width:100%;
 }
-.index_level1 > img{
+/* .index_level1 > img{
   width: 80vw;
-}
+} */
 .index_level2{
   display:flex;
   justify-content: space-between;
