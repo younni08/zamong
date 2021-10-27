@@ -5,6 +5,7 @@ import {Switch,Route} from "react-router-dom"
 import T3 from "./temp3"
 import Items from "./components/items/items"
 import Item from "./components/item/item"
+import Index2 from "./components/index/index2"
 import Article from "./components/article/article"
 import Board from "./components/board/board"
 
@@ -26,6 +27,7 @@ import Zamong6 from "./components/zamong/shop_registry"
 import Shop from "./components/map_shop/shop"
 import About from "./etc/about"
 import Sste from "./etc/sste"
+import Qr from "./etc/qr"
 
 const Root = () => {
     return (
@@ -33,12 +35,14 @@ const Root = () => {
             <Navi />
             <Switch>
                 <Route exact path="/" component={Index} />
+                <Route exact path="/index" component={Index2} />
                 <Route path ="/rtende" component={Rtende} />
                 <Route path ="/board" component={Board} />
                 <Route path ="/Rtem" component={Rtem} />
                 <Route path ="/items" component={Items} />
                 <Route path ="/item" component={Item} />
                 <Route path ="/project" component={Sste} />
+                <Route path ="/qr" component={Qr} />
 
                 <Route path ="/map" component={Map} />
                 <Route path ="/about" component={About} />

@@ -7,6 +7,19 @@ const Rtende = () => {
         setRtype(Number(e.currentTarget.getAttribute("id").split("rtende")[1]))
     }
 
+    const hitest = () => {
+        document.getElementById("temp2").style.opacity="1";
+    }
+    const hitest2 = () => {
+        document.getElementById("temp3").style.opacity="1";
+    }
+    const hitest3 = () => {
+        document.getElementById("temp2").style.opacity="0";
+    }
+    const hitest4 = () => {
+        document.getElementById("temp2").style.opacity="1";
+    }
+
     return(
         <div className="rtende">
             <div>
@@ -58,8 +71,57 @@ const Rtende = () => {
                         </div>
                     </div>
                     <div className="rtende_display">
-                        {/* 여기 */}
-
+                        {
+                            function(rtype){
+                                switch(rtype){
+                                    case 1:
+                                        return (
+                                            <img src="./pics/r1.gif" alt="rtende" />
+                                        )
+                                    case 2:
+                                        return (
+                                            <img src="./pics/r2.gif" alt="rtende" />
+                                        )
+                                    case 3:
+                                        return (
+                                            <img src="./pics/r3.gif" alt="rtende" />
+                                        )
+                                    case 4:
+                                        return (
+                                            <img src="./pics/r4.gif" alt="rtende" />
+                                        )
+                                    case 5:
+                                        return (
+                                            <img src="./pics/r5.gif" alt="rtende" />
+                                        )
+                                    case 6:
+                                        return (
+                                            <img src="./pics/r6.gif" alt="rtende" />
+                                        )
+                                    case 7:
+                                        return (
+                                            <img src="./pics/r7.gif" alt="rtende" />
+                                        )
+                                    case 8:
+                                        return (
+                                            <img src="./pics/r8.gif" alt="rtende" />
+                                        )
+                                    case 9:
+                                        return (
+                                            <img src="./pics/r9.gif" alt="rtende" />
+                                        )
+                                    case 10:
+                                        return (
+                                            <img src="./pics/r10.gif" alt="rtende" />
+                                        )
+                                    
+                                    default :
+                                        return (
+                                            <img src="./pics/r1.gif" alt="rtende" />
+                                        )
+                                }
+                            }(rtype)
+                        }
                     </div>
                     {
                         function(rtype){

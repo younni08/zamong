@@ -2058,6 +2058,54 @@ p{
 .mong_rtem_recom_item > div:nth-child(3) > span:nth-child(2){
   background:#f00;
 }
+.qrmaster{
+  display:flex;
+  width:100%;
+  background:#fff;
+}
+.qrmaster > div{
+  display:flex;
+  width:100%;
+  flex-direction: column;
+}
+.qrmaster > div > span{
+  display:flex;
+  font-size:0.8rem;
+  padding:20px;
+  width:calc(100% - 40px);
+  font-weight: bold;
+}
+.qrmaster > div > div{
+  display:flex;
+  padding:20px;
+  width:calc(100% - 40px);
+  flex-direction: column;
+}
+.qrmaster > div > div > div:first-child{
+  display:flex;
+  width:100%;
+  justify-content: center;
+  margin:0px 0px 50px 0px;
+}
+.qrmaster > div > div > div:last-child{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+.qrmaster > div > div > div:last-child > div{
+  display:flex;
+  border:solid 2px #2A5EBC;
+  padding:5px;
+  width:calc(100% - 10px);
+  max-width: 190px;
+  margin:0px 0px 50px 0px;
+}
+.qrmaster > div > div > div:last-child > div > input{
+  border:none;
+}
+.qrmaster > div > div > div:last-child > div > input:focus{
+  outline: none;
+}
 /* --------------------------------------- rtende --------------------------------------- */
 .rtende{
   display:flex;
@@ -2098,10 +2146,16 @@ p{
 }
 .rtende_display{
   display:flex;
+  align-items: center;
   width:100vw;
   height:100vw;
   margin:20px 0px 0px 0px;
   border-bottom:solid 1px #000;
+  position:relative;
+}
+.rtende_display > img{
+  width:100vw;
+  height:100vw;
 }
 .rtende_info{
   display:flex;
