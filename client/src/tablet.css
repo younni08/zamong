@@ -1,0 +1,491 @@
+@media (min-width: 481px) and (max-width: 1261px) {
+  body, .root{
+    background: #fff;
+  }
+  .navi_level1{
+    background: #fff;
+  }
+  .navi_level2{
+    background: #fff;
+  }
+  .rtende, .map_expand, .map > div > div:first-child, .item{
+    background: #fff;
+  }
+  /*  ------------------------------------ rtende ------------------------------------- */
+  .rtem_level3 > div{
+    justify-content: space-between;
+  }
+  .rtem_level3 > div > a{
+    width: calc(33vw - 25px);
+    height: calc(33vw - 25px);
+  }
+  .rtem_level3 > div > a img{
+    width: calc(33vw - 25px);
+    height: calc(33vw - 25px);
+  }
+  .rtem_level3 > span{
+    font-size: 1.5rem;
+  }
+  .rtem_level4 > span{
+    font-size: 1.5rem;
+  }
+  .container{
+    height: calc(33vw - 28px);
+  }
+  .container img{
+    width: calc(30vw - 25px);
+  }
+  .item_main > div:first-child{
+    font-size: 1.5rem;
+  }
+  .item_main > div:first-child > select{
+    font-size: 1rem;
+  }
+  .itembox{
+    width: calc(33vw - 26px);
+  }
+  .itembox img{
+    height: calc(33vw - 36px);
+  }
+  .itembox > div{
+    height: calc(33vw - 46px);
+  }
+  .item > div > div:first-child{
+    font-size:1.5rem;
+  }
+  .item_ex > div{
+    border-top:solid 1px #000;
+    align-items: flex-end;
+  }
+  .item_ex > div > div:first-child{
+    display:flex;
+    padding:0px 20px;
+    width:calc(100% - 40px);
+  }
+  .item_ex_level1{
+    width:calc(50vw - 40px);
+    height:calc(50vw - 40px);
+  }
+  .item_ex_level1 > img{
+    width:calc(50vw - 20px);
+    height:calc(50vw - 20px);
+  }
+  .item_ex_level2 > span{
+    font-size: 1.5rem;
+  }
+  .item_ex_level3{
+    font-size: 1rem;
+  }
+  .item_ex_level4_element > div{
+    width:20vw;
+    height:20vw;
+  }
+  .item_ex_level4_element > div img{
+    width:20vw;
+    height:20vw;
+  }
+  .item_ex_level4_element > span{
+    font-size: 1rem;
+  }
+  .item_ex_level5 > span:nth-child(1){
+    font-size: 1rem;
+  }
+  .item_ex_level5 > span:nth-child(2){
+    font-size: 1.5rem;
+  }
+  .item_ex_level61{
+    font-size: 1rem;
+  }
+  .item_ex_level61 > div:first-child > span:nth-child(2){
+    width:50px;
+  }
+  .item_ex_level62{
+    font-size: 1rem;
+    flex-direction: row;
+  }
+  .item_ex_level62 > div:first-child > span:nth-child(2){
+    width:50px;
+  }
+  .item_ex_level62 > div:last-child{
+    align-items: center;
+    padding:0px;
+  }
+  .item_ex_level63{
+    font-size: 1rem;
+  }
+  .item_ex_level_qr > div:first-child{
+    justify-content: flex-start;
+  }
+  .item_ex_level_qr > div:first-child > img{
+    width:50px;
+    height:50px;
+    margin:0px 20px 0px 0px;
+  }
+  .item_ex_level7{
+    justify-content: flex-end;
+    width:calc(60% - 60px);
+  }
+  .item_ex_level8 > div:nth-child(1){
+    font-size: 1rem;
+  }
+  .item_ex_level8_element > div > img{
+    width:20vw;
+    height:20vw;
+  }
+  .item_ex_level8_element > div{
+    width:20vw;
+    height:20vw;
+  }
+  .item_ex_level8_element > span{
+    font-size: 1rem;
+  }
+  .item_ex_level10 > div{
+    width:50vw;
+  }
+  .item_ex_level10{
+    height: 40vw;
+  }
+  .item_ex_level9 > div:nth-child(1){
+    font-size: 1rem;
+  }
+  .item_ex_level9_element > span{
+    font-size: 1rem;
+  }
+  /*  ------------------------------------ map ------------------------------------- */
+  .map_main > div{
+    /* align-items: center; */
+  }
+  .map_popup{
+    width:60vw;
+    margin:40vh 20vw 0px 20vw;
+  }
+  .map_popup > div{
+    font-size: 2rem;
+  }
+  .map_main_navi > div > div > div > div{
+    width:100px;
+    height:100px;
+  }
+  .map_main_navi > div > div > div > img{
+    width:90px;
+    height:90px;
+  }
+  .map_main_navi > div > div > div > span{
+    font-size: 1rem;
+  }
+  .map_main_list_element > div:nth-child(1){
+    height:30vw;
+    width:30vw;
+  }
+  .map_main_list_element > div:nth-child(1) > img{
+    height:30vw;
+    width:30vw;
+  }
+  .map_main_list_element > div:nth-child(2){
+    width:calc(70vw - 40px);
+    padding:20px;
+  }
+  .map_main_list_element > div:nth-child(2) > div:nth-child(1){
+    font-size:2rem;
+    margin:20px 0px;
+  }
+  .map_main_list_element > div:nth-child(2) > span:nth-child(2){
+    font-size:1.5rem;
+    margin:10px 0px;
+  }
+  .map_main_list_element > div:nth-child(2) > span:nth-child(3){
+    font-size:1.5rem;
+  }
+  .Map_scale > span{
+    font-size:1.5rem;
+  }
+  .Map_scale > div > span{
+    font-size:1rem;
+    height:20px;
+  }
+  .map_main_table{
+    font-size:1.5rem;
+  }
+  .map_state_level1{
+    display:none;
+  }
+  .map_state_level2{
+    display:none;
+  }
+  .map_tablet{
+    display:flex;
+  }
+  .shop_level1tablet{
+    display:flex;
+  }
+  .shop_level1{
+    display:none;
+  }
+  .shop_level2{
+    display:none;
+  }
+  .shop_level2tablet{
+    display:flex;
+    width:calc(50vw - 40px);
+  }
+  .shop_level2tablet > span{
+    font-size: 2rem;
+  }
+  .shop_level2tablet > div{
+    font-size: 1.5rem;
+  }
+  .shop_level1tablet > span{
+    width:calc(50vw - 40px);
+  }
+  .shop_level3{
+    padding:20px;
+  }
+  .shop_level3 > img{
+    height:80px;
+    margin:0px 20px 0px 0px;
+  }
+  .shop_level4{
+    display:none;
+  }
+  .shop_level4tablet{
+    display:flex;
+    width:calc(50vw - 40px);
+    padding:0px 20px;
+    font-size: 1.2rem;
+  }
+  .shop_tablet{
+    display:flex;
+  }
+  .shop_level1tablet > div{
+    width:50vw;
+    height:50vw;
+  }
+  .shop_level1tablet > div img{
+    width:45vw;
+    height:45vw;
+  }
+  .shop_tablet > div:last-child{
+    width:50vw;
+  }
+  .shop_level5{
+    padding:0px 20px 20px 20px;
+  }
+  .shop_level5 > div{
+    width:calc(100% - 12px);
+  }
+  .shop_level6{
+    font-size: 1.5rem;
+  }
+  .shop_level6 > div{
+    padding:10px 0px 10px 10px
+  }
+  .shop_level6 > div > span:nth-child(2){
+    width:80px;
+  }
+  .shop_level7 > div:first-child{
+    font-size: 1.5rem;
+  }
+  .shop_level7 > div:last-child{
+    font-size: 1.2rem;
+  }
+  .shop_level7 > div:last-child > img{
+    width:20vw;
+    height:20vw;
+  }
+  /*  ------------------------------------ rtende ------------------------------------- */
+  .board_pick_item > a > span{
+    padding:50px 50px 150px 50px;
+    font-size: 2rem;
+    width: calc(100% - 100px);
+  }
+  .board_level12 > div:last-child > span{
+    border-bottom: 5px #eaeaea solid;
+  }
+  .rtem_level2 > div:last-child > span{
+    border-bottom: 5px #eaeaea solid;
+  }
+  .rtem_level2 > div:last-child > span.on{
+    border-bottom: 5px #00B775 solid;
+  }
+  .board_level12 > div:last-child > span.on{
+    border-bottom: 5px #2A5EBC solid;
+  }
+  .board_level2 > div{
+    font-size: 1.5rem;
+  }
+  .board_level3 > a{
+    padding:40px;
+    width:calc(100% - 80px);
+    font-size: 1.5rem;
+  }
+  .article_level4 > div > span:nth-child(2){
+    font-size: 1.5rem;
+  }
+  .article_level1 > div:nth-child(1){
+    font-size: 1.5rem;
+  }
+  .article_tablet{
+    display: flex;
+    border-top:solid 1px #000;
+    margin:0px 0px -10px 0px;
+  }
+  .article_level1{
+    width:calc(50vw - 40px)
+  }
+  .article_level1 > div:nth-child(2){
+    width:calc(50vw - 40px);
+    height:calc(50vw - 40px);
+  }
+  .article_level1 > div:nth-child(2) > img{
+    width:calc(50vw - 40px);
+    height:calc(50vw - 40px);
+  }
+  .article_level2{
+    width:calc(50vw - 40px);
+  }
+  .article_level2 > div > span{
+    font-size: 2rem;
+  }
+  .article_level2 > div > div{
+    font-size: 1.5rem;
+  }
+  .article_level2 > span{
+    font-size: 1.5rem;
+  }
+  .article_level3{
+    font-size: 1.5rem;
+  }
+  .article_level5 > span{
+    font-size: 1.5rem;
+  }
+  .article_level6 > span{
+    font-size: 1.5rem;
+    padding:5px 15px;
+  }
+  .item_ex_level_qr > div:last-child > span{
+    font-size: 1rem;
+  }
+  .article > div > div:first-child{
+    font-size: 1.5rem;
+  }
+  .project > div > span{
+    font-size: 1.5rem;
+  }
+  .project_11 > span, .project_22 > span, .project_21 > span, .project_12 > span{
+    font-size: 2rem;
+  }
+  .board_expand{
+    overflow-y: scroll;
+  }
+  .map_expand > div, .board_expand > div, .about > div > span, .about_video, .about_element a.sep, .about_element{
+    font-size: 1.5rem;
+  }
+  .rtem_level1 > input, .board_level1 > input{
+    font-size: 1.5rem;
+  }
+  .board > div > div:first-child > span, .rtem_level1 > button, .board_level1 > span{
+    font-size: 1.5rem;
+  }
+  .rtem_level01{
+    font-size: 1.5rem;
+    overflow-y: scroll;
+  }
+  /*  ------------------------------------ rtende ------------------------------------- */
+  .map > div > div:first-child, .map_main > div > span, .rtem_level0 > span, .rtende_navi{
+    font-size:1.5rem;
+  }
+  .rtende_subnavi{
+    justify-content: space-between;
+  }
+  .rtende_subnavi > div > img{
+    width:80px;
+  }
+  .rtende_subnavi > div > span{
+    font-size:1rem;
+  }
+  .rtende_main > div:nth-child(2){
+    display:flex;
+    padding:15px 0px 0px 0px;
+    margin:15px 0px 0px 0px;
+  }
+  .rtende_display{
+    width:50vw;
+    height:50vw;
+    border:none;
+  }
+  .rtende_display > img{
+    width:50vw;
+    height:50vw;
+  }
+  .rtende_info{
+    width:50vw;
+    background: #FFFEF8;
+  }
+  .rtende_info > div:first-child > div > img{
+    width:50px;
+    height:50px;
+  }
+  .rtende_info > div:first-child > span{
+    font-size:1.5rem;
+    font-weight: bold;
+  }
+  .rtende_info > div:last-child{
+    font-size:1.2rem;
+  }
+  .index{
+    justify-content: center;
+    background: #fff;
+  }
+  .index > div{
+    width:50vw;
+    overflow:visible;
+  }
+  .index_level2 > div:nth-child(1){
+    width:24.75vw;
+  }
+  .index_level2 > div:nth-child(2){
+    height:24.75vw;
+  }
+  .index_level2 > div:nth-child(2){
+    width:24.75vw;
+  }
+  .index_level3{
+    margin:-1px 0px 0px 0px;
+  }
+  .index_level3 > div:nth-child(1){
+    width:24.75vw;
+    height: 24.75vw;
+  }
+  .index_level3 > div:nth-child(2){
+    width:24.75vw;
+    margin: 80px 0px 0px 0px;
+  }
+  .index > div > div{
+    height: 24.75vw;
+  }
+  .index_level3 > div:nth-child(2) > span{
+    width:24.75vw;
+    height: 24.75vw;
+  }
+  .index_level4 > div:nth-child(1){
+    width:24.75vw;
+    height: 24.75vw;
+    margin: 20px 0px 0px 0px;
+  }
+  .index_level4 > a:nth-child(2){
+    width:24.75vw;
+    margin: 100px 0px 0px 0px;
+  }
+  .index_level4{
+    height: calc(24.75vw + 20px);
+  }
+  .index_level4 > a:nth-child(2) > div:nth-child(1){
+    font-size:2rem;
+  }
+  .index_level4 > a:nth-child(2) > div:nth-child(1) > span{
+    border:none;
+  }
+  .index_level4 > a:nth-child(2) > div > span{
+    border:none;
+  }
+}

@@ -224,9 +224,7 @@ const MapState = () => {
                             <div>
                                 <img src="./pics/kakaotalk.png" alt="link" />
                                 <img src="./pics/facebook.png" alt="link" />
-                                <img src="./pics/twitter.png" alt="link" />
                                 <img src="./pics/insta.png" alt="link" />
-                                <img src="./pics/email.png" alt="link" />
                                 <img src="./pics/link.png" alt="link" />
                             </div>
                             <div>
@@ -247,6 +245,17 @@ const MapState = () => {
                         </div>
                         <div className="map_state_level2">
                             <span onClick={oepnRegister}>요청하기</span>
+                        </div>
+                        <div className="map_tablet">
+                            <span>제로웨이스트샵이 필요해요</span>
+                            <div>
+                                <div>
+                                    <span>플라스틱과 배송 포장을 줄이기 위해서는 제로웨이스트 샵이 필요합니다.</span>
+                                    <span>내가 사는 지역에 아직 제로웨이스트샵이 없다면 이루자몽에 알려주세요</span>
+                                    <span>이렇게 모인 정보는 새로운 상점을 계획중인 사장님들께 도움이 될 수 있습니다.</span>
+                                </div>
+                                <span onClick={oepnRegister}>요청하기</span>
+                            </div>
                         </div>
                         <div className="map_register" id="map_register1">
                             <MapRegister />

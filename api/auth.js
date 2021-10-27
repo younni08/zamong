@@ -941,7 +941,7 @@ router.post("/rteminit",async(req,res)=>{
         if(req.body.key!=="randomkey") return res.send("fail")
         const db = await client.connect();
         if(req.body.shortcut===""){
-            let getpick = await db.query(`select rtem_t4_key,rtem_t4_type,rtem_t4_pk from rtem_t4 where rtem_t4_zamong_pick order by id desc limit 2`)
+            let getpick = await db.query(`select rtem_t4_key,rtem_t4_type,rtem_t4_pk from rtem_t4 where rtem_t4_zamong_pick order by id desc limit 3`)
             let getrtem = await db.query(`select rtem_t1_pk,rtem_t1_name from rtem_t1 where rtem_t1_zamong_pick=false`)
             if(getrtem.rows[0]===undefined){
                 await db.release();

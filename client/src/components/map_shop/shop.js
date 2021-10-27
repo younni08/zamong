@@ -89,6 +89,30 @@ const Shop = () => {
                     <MapNavi />
                 </div>
                 <div className="shop">
+                    <div className="shop_tablet">
+                        <div className="shop_level1tablet">
+                            <span>{shop.state_id} <i className="xi-angle-right-min"></i> {shop.title}</span>
+                            <div>
+                                {
+                                    sample?parser(sample):""
+                                }
+                            </div>
+                        </div>
+                        <div>
+                            <div className="shop_level2tablet">
+                                <span>{shop.title}</span>
+                                <div>
+                                    <span><i className="xi-heart"></i></span>
+                                    <span>0</span>
+                                </div>
+                            </div>
+                            <div className="shop_level4tablet">
+                                {
+                                    loading?parser(shop.shop_body):""
+                                }
+                            </div>
+                        </div>
+                    </div>
                     <div className="shop_level1">
                         <span>{shop.state_id} <i className="xi-angle-right-min"></i> {shop.title}</span>
                         <div>
@@ -120,7 +144,6 @@ const Shop = () => {
                             </div>
                         </div>:""
                     }
-                    
                     <div className="shop_level4">
                         {
                             loading?parser(shop.shop_body):""
@@ -163,9 +186,7 @@ const Shop = () => {
                         <div>
                             <img src="./pics/kakaotalk.png" alt="link" />
                             <img src="./pics/facebook.png" alt="link" />
-                            <img src="./pics/twitter.png" alt="link" />
                             <img src="./pics/insta.png" alt="link" />
-                            <img src="./pics/email.png" alt="link" />
                             <img src="./pics/link.png" alt="link" />
                         </div>
                         <div>

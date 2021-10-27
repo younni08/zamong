@@ -79,16 +79,20 @@ const Item = (props) => {
                 </div>
                 <div className="item_ex">
                     <div>
-                        <div className="item_ex_level1">
-                            {
-                                defaultImage?"":parser(sample)
-                            }
-                        </div>
-                        <div className="item_ex_level2">
-                            <span># 001 {item.rtem_t2_name}</span>
-                        </div>
-                        <div className="item_ex_level3">
-                            {parser(des1)}
+                        <div>
+                            <div className="item_ex_level1">
+                                {
+                                    defaultImage?"":parser(sample)
+                                }
+                            </div>
+                            <div>
+                                <div className="item_ex_level2">
+                                    <span># 001 {item.rtem_t2_name}</span>
+                                </div>
+                                <div className="item_ex_level3">
+                                    {parser(des1)}
+                                </div>
+                            </div>
                         </div>
                         <div className="item_ex_level4">
                             <div>
@@ -283,9 +287,7 @@ const Item = (props) => {
                             <div>
                                 <img src="./pics/kakaotalk.png" alt="link" />
                                 <img src="./pics/facebook.png" alt="link" />
-                                <img src="./pics/twitter.png" alt="link" />
                                 <img src="./pics/insta.png" alt="link" />
-                                <img src="./pics/email.png" alt="link" />
                                 <img src="./pics/link.png" alt="link" />
                             </div>
                             <div>

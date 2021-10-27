@@ -70,111 +70,112 @@ const Rtende = () => {
                             <span>재활용하기</span>
                         </div>
                     </div>
-                    <div className="rtende_display">
+                    <div>
+                        <div className="rtende_display">
+                            {
+                                function(rtype){
+                                    switch(rtype){
+                                        case 1:
+                                            return (
+                                                <img src="./pics/r1.gif" alt="rtende" />
+                                            )
+                                        case 2:
+                                            return (
+                                                <img src="./pics/r2.gif" alt="rtende" />
+                                            )
+                                        case 3:
+                                            return (
+                                                <img src="./pics/r3.gif" alt="rtende" />
+                                            )
+                                        case 4:
+                                            return (
+                                                <img src="./pics/r4.gif" alt="rtende" />
+                                            )
+                                        case 5:
+                                            return (
+                                                <img src="./pics/r5.gif" alt="rtende" />
+                                            )
+                                        case 6:
+                                            return (
+                                                <img src="./pics/r6.gif" alt="rtende" />
+                                            )
+                                        case 7:
+                                            return (
+                                                <img src="./pics/r7.gif" alt="rtende" />
+                                            )
+                                        case 8:
+                                            return (
+                                                <img src="./pics/r8.gif" alt="rtende" />
+                                            )
+                                        case 9:
+                                            return (
+                                                <img src="./pics/r9.gif" alt="rtende" />
+                                            )
+                                        case 10:
+                                            return (
+                                                <img src="./pics/r10.gif" alt="rtende" />
+                                            )
+                                        
+                                        default :
+                                            return (
+                                                <img src="./pics/r1.gif" alt="rtende" />
+                                            )
+                                    }
+                                }(rtype)
+                            }
+                        </div>
                         {
                             function(rtype){
                                 switch(rtype){
                                     case 1:
                                         return (
-                                            <img src="./pics/r1.gif" alt="rtende" />
+                                            <Rtende1 />
                                         )
                                     case 2:
                                         return (
-                                            <img src="./pics/r2.gif" alt="rtende" />
+                                            <Rtende2 />
                                         )
                                     case 3:
                                         return (
-                                            <img src="./pics/r3.gif" alt="rtende" />
+                                            <Rtende3 />
                                         )
                                     case 4:
                                         return (
-                                            <img src="./pics/r4.gif" alt="rtende" />
+                                            <Rtende4 />
                                         )
                                     case 5:
                                         return (
-                                            <img src="./pics/r5.gif" alt="rtende" />
+                                            <Rtende5 />
                                         )
                                     case 6:
                                         return (
-                                            <img src="./pics/r6.gif" alt="rtende" />
+                                            <Rtende6 />
                                         )
                                     case 7:
                                         return (
-                                            <img src="./pics/r7.gif" alt="rtende" />
+                                            <Rtende7 />
                                         )
                                     case 8:
                                         return (
-                                            <img src="./pics/r8.gif" alt="rtende" />
+                                            <Rtende8 />
                                         )
                                     case 9:
                                         return (
-                                            <img src="./pics/r9.gif" alt="rtende" />
+                                            <Rtende9 />
                                         )
                                     case 10:
                                         return (
-                                            <img src="./pics/r10.gif" alt="rtende" />
+                                            <Rtende10 />
                                         )
                                     
                                     default :
                                         return (
-                                            <img src="./pics/r1.gif" alt="rtende" />
+                                            <Rtende1 />
                                         )
                                 }
                             }(rtype)
                         }
                     </div>
-                    {
-                        function(rtype){
-                            switch(rtype){
-                                case 1:
-                                    return (
-                                        <Rtende1 />
-                                    )
-                                case 2:
-                                    return (
-                                        <Rtende2 />
-                                    )
-                                case 3:
-                                    return (
-                                        <Rtende3 />
-                                    )
-                                case 4:
-                                    return (
-                                        <Rtende4 />
-                                    )
-                                case 5:
-                                    return (
-                                        <Rtende5 />
-                                    )
-                                case 6:
-                                    return (
-                                        <Rtende6 />
-                                    )
-                                case 7:
-                                    return (
-                                        <Rtende7 />
-                                    )
-                                case 8:
-                                    return (
-                                        <Rtende8 />
-                                    )
-                                case 9:
-                                    return (
-                                        <Rtende9 />
-                                    )
-                                case 10:
-                                    return (
-                                        <Rtende10 />
-                                    )
-                                
-                                default :
-                                    return (
-                                        <Rtende1 />
-                                    )
-                            }
-                        }(rtype)
-                    }
-                    
                 </div>
             </div>
         </div>

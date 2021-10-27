@@ -20,7 +20,7 @@ const Index = () => {
                 </div>
                 <div className="index_level4">
                     <div></div>
-                    <Link to="/rtende">
+                    <Link to="/index">
                         <div>
                             시작
                             <span></span>

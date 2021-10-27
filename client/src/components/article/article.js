@@ -127,30 +127,30 @@ const Article = () => {
                             <span>알-템</span>
                             <span><i className="xi-caret-down-min"></i></span>
                         </div>
-                        <div className="article_level1">
-                            <div>
-                                <span>알-까 <i className="xi-angle-right-min"></i> {info.rka_cate}</span>
+                        <div className="article_tablet">
+                            <div className="article_level1">
+                                <div>
+                                    <span>알-까 <i className="xi-angle-right-min"></i> {info.rka_cate}</span>
+                                </div>
+                                <div>
+                                    {
+                                        sample?parser(sample):""
+                                    }
+                                </div>
                             </div>
-                            <div>
-                                {
-                                    sample?parser(sample):""
-                                }
+                            <div className="article_level2">
+                                <div>
+                                    <span>[{info.rka_cate}] {info.rka_title}</span>
+                                    <div><i className="xi-heart xi-x"></i><span>{info.rka_vote}</span></div>
+                                </div>
+                                <span>{yyyymmdd(info.rka_date)}</span>
                             </div>
-                        </div>
-                        <div className="article_level2">
-                            <div>
-                                <span>[{info.rka_cate}] {info.rka_title}</span>
-                                <div><i className="xi-heart xi-x"></i><span>{info.rka_vote}</span></div>
-                            </div>
-                            <span>{yyyymmdd(info.rka_date)}</span>
                         </div>
                         <div className="item_ex_level_qr">
                             <div>
                                 <img src="./pics/kakaotalk.png" alt="link" />
                                 <img src="./pics/facebook.png" alt="link" />
-                                <img src="./pics/twitter.png" alt="link" />
                                 <img src="./pics/insta.png" alt="link" />
-                                <img src="./pics/email.png" alt="link" />
                                 <img src="./pics/link.png" alt="link" />
                             </div>
                             <div>

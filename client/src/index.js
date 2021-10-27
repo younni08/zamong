@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {HashRouter} from "react-router-dom";
 import './index.css';
+import './tablet.css';
 import './pc.css';
 import Root from './root';
 
