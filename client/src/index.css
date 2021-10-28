@@ -413,12 +413,23 @@ p{
   width:100%;
   flex-wrap: wrap;
 }
+.project_main span{
+  display: flex;
+  background: rgba(0,0,0,0.4);
+  border-radius: 30px;
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 3px 8px;
+}
 .project_22{
   display:flex;
   position:relative;
   width:100vw;
   height:100vw;
-  border-bottom: solid 1px #000;
+}
+.project_22 > img{
+  width:100vw;
+  height:100vw;
 }
 .project_22 > span{
   position:absolute;
@@ -428,11 +439,12 @@ p{
 .project_11{
   display:flex;
   position:relative;
-  width:calc(50vw - 2px);
+  width:calc(50vw - 0px);
   height:50vw;
-  border-left: solid 1px #000;
-  border-right: solid 1px #000;
-  border-bottom: solid 1px #000;
+}
+.project_11 > img{
+  width:calc(50vw - 0px);
+  height:50vw;
 }
 .project_11 > span{
   position:absolute;
@@ -444,7 +456,10 @@ p{
   position:relative;
   width:100vw;
   height:50vw;
-  border-bottom: solid 1px #000;
+}
+.project_21 > img{
+  width:100vw;
+  height:50vw;
 }
 .project_21 > span{
   position:absolute;
@@ -454,11 +469,12 @@ p{
 .project_12{
   display:flex;
   position:relative;
-  width:calc(50vw - 2px);
+  width:calc(50vw - 0px);
   height:100vw;
-  border-left: solid 1px #000;
-  border-right: solid 1px #000;
-  border-bottom: solid 1px #000;
+}
+.project_12 > img{
+  width:calc(50vw - 0px);
+  height:100vw;
 }
 .project_12 > span{
   position:absolute;
@@ -929,8 +945,6 @@ p{
   animation:ani10 6s ease-in Infinite Alternate;
 }
 @keyframes ani1{
-  /* top:20px; */
-  /* left:calc(50vw - 25px); */
   0%{
     top:30px;
     left:calc(50vw + 5px);
@@ -945,8 +959,6 @@ p{
   }
 }
 @keyframes ani2{
-  /* bottom:20px; */
-  /* left:calc(50vw - 25px); */
   0%{
     bottom:30px;
     left:calc(50vw + 5px);
@@ -961,8 +973,6 @@ p{
   }
 }
 @keyframes ani3{
-  /* left:calc(20vw - 25px); */
-  /* bottom:calc(20vw - 25px); */
   0%{
     bottom:calc(20vw - 20px);
     left:calc(20vw + 5px);
@@ -977,8 +987,6 @@ p{
   }
 }
 @keyframes ani4{
-  /* left:calc(10vw - 25px); */
-  /* bottom:calc(40vw - 25px); */
   0%{
     bottom:calc(40vw - 10px);
     left:calc(10vw + 5px);
@@ -993,8 +1001,6 @@ p{
   }
 }
 @keyframes ani5{
-  /* left:calc(20vw - 25px); */
-  /* bottom:calc(20vw - 25px); */
   0%{
     bottom:calc(20vw - 15px);
     right:calc(20vw - 15px);
@@ -1009,8 +1015,6 @@ p{
   }
 }
 @keyframes ani6{
-  /* right:calc(10vw - 25px); */
-  /* bottom:calc(40vw - 25px); */
   0%{
     bottom:calc(40vw - 10px);
     right:calc(10vw - 10px);
@@ -1025,8 +1029,6 @@ p{
   }
 }
 @keyframes ani7{
-  /* right:calc(20vw - 25px); */
-  /* top:calc(20vw - 25px); */
   0%{
     top:calc(20vw - 10px);
     right:calc(20vw);
@@ -1041,8 +1043,6 @@ p{
   }
 }
 @keyframes ani8{
-  /* right:calc(10vw - 25px); */
-  /* top:calc(40vw - 25px); */
   0%{
     top:calc(40vw - 10px);
     right:calc(10vw);
@@ -1057,8 +1057,6 @@ p{
   }
 }
 @keyframes ani9{
-  /* right:calc(20vw - 25px); */
-  /* top:calc(20vw - 25px); */
   0%{
     top:calc(20vw - 10px);
     left:calc(20vw);
@@ -1073,8 +1071,6 @@ p{
   }
 }
 @keyframes ani10{
-  /* left:calc(20vw - 25px); */
-  /* top:calc(20vw - 25px); */
   0%{
     top:calc(40vw - 10px);
     left:calc(10vw - 10px);
@@ -1597,11 +1593,12 @@ p{
 .item_ex_level_qr > div:first-child{
   display:flex;
   width:calc(100% - 120px);
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 .item_ex_level_qr > div:first-child > img{
   width:30px;
   height:30px;
+  margin:0px 10px 0px 0px;
 }
 .item_ex_level_qr > div:last-child{
   display:flex;
@@ -1779,6 +1776,9 @@ p{
 }
 .mong_sidenavi span.mong_shop{
   background:#F27459;
+}
+.mong_sidenavi span.rmong_project{
+  background:#097dff;
 }
 .mong_sidenavi > a{
   display:flex;
@@ -2538,12 +2538,37 @@ p{
   display:flex;
   flex-direction: column;
   width:100%;
+  overflow:hidden;
 }
 .map_main > div > div{
   width:100%;
   position:relative;
 }
-.map_main > div > div > span{
+.map_main > div > div > span.title{
+  display:flex;
+  font-weight: bold;
+  color:#fff;
+  width:calc(100% - 30px);
+  padding:15px;
+  background:#F27459;
+  font-size:20px;
+}
+.map_main2{
+  display:flex;
+  width:100%;
+  justify-content: center;
+}
+.map_main2 > div{
+  display:flex;
+  flex-direction: column;
+  width:100%;
+  overflow:hidden;
+}
+.map_main2 > div {
+  width:100%;
+  position:relative;
+}
+.map_main2 span.title{
   display:flex;
   font-weight: bold;
   color:#fff;
@@ -2664,6 +2689,21 @@ p{
 .map_main_list_element > div:nth-child(2) > span:nth-child(3){
   font-size:0.7rem;
   color:#7f7f7f;
+}
+.map_main2_pc{
+  display:flex;
+  width:100%;
+  flex-direction: column;
+}
+.map_main2_pc1{
+  display:flex;
+  width:100%;
+  flex-direction: column;
+}
+.map_main2_pc2{
+  display:flex;
+  width:100%;
+  flex-direction: column;
 }
 .map_main_table{
   display:flex;

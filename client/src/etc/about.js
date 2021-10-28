@@ -38,8 +38,8 @@ const About = () => {
                             </span>
                         </div>
                         <span className="sep">이루자몽은 함께할 Z-generation을 찾고 그들의 삶을 지지합니다</span>
-                        <span className="sep">Z-generation의 구체적인 삶의 모습은 R-��입니다</span>
-                        <Link className="sep">R-10 더 알아보기(R-10) 페이지로 이동</Link>
+                        <span className="sep">Z-generation의 구체적인 삶의 모습은 R-10입니다</span>
+                        <Link to="/rtende" className="sep">R-10 더 알아보기(R-10) 페이지로 이동</Link>
                     </div>
                     <div className="about_element">
                         <span>1. 즐겁고 유쾌하게 Z-generation이 되는 방법을 안내합니다.</span>
@@ -65,8 +65,8 @@ const About = () => {
                                 소개하고자 합니다.
                             </span>
                         </div>
-                        <Link className="sep">쓸떼 페이지로 이동</Link>
-                        <Link className="sep">구매: 이루자몽 스토어로 이동</Link>
+                        <Link to="/project" className="sep">쓸떼 페이지로 이동</Link>
+                        <Link to="/project" className="sep">구매: 이루자몽 스토어로 이동</Link>
                     </div>
                     <div className="about_element">
                         <span>3. 친환경 상품 생산, 제조업체를 찾습니다</span>
@@ -78,7 +78,7 @@ const About = () => {
                             탄소저감기업은 경제적 부담을 줄이면서 친환경 상품을 쓸 수 
                             있는 기회가 될 수 있습니다.</span>
                         </div>
-                        <Link className="sep">알템 페이지로 이동</Link>
+                        <Link to="/rtem" className="sep">알템 페이지로 이동</Link>
                     </div>
                     <div className="about_element">
                         <span>4. 기후 위기에 공감하는 기업을 찾습니다. </span>

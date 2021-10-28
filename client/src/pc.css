@@ -276,6 +276,29 @@
     height:500px;
     border:none;
   }
+  .project_22 > img{
+    width:500px;
+    height:500px;
+    border:none;
+  }
+  .project_11 > img{
+    width:250px;
+    height:250px;
+    border:none;
+  }
+  .project_21 > img{
+    width:500px;
+    height:250px;
+    border:none;
+  }
+  .project_12 > img{
+    width:250px;
+    height:500px;
+    border:none;
+  }
+  .about_video{
+    height:500px;
+  }
   .project_main span{
     display:flex;
     background:rgba(0,0,0,0.4);
@@ -283,6 +306,55 @@
     color:#fff;
     font-size: 0.8rem;
     padding:3px 8px;
+    cursor: pointer;
+  }
+  /* ---------------------------------- map main -------------------------------------- */
+  .map_main2_pc{
+    display:flex;
+    width:100%;
+    flex-direction: row;
+  }
+  .map_main2_pc1{
+    display:flex;
+    width:500px;
+    flex-direction: column;
+  }
+  .map_main2_pc2{
+    display:flex;
+    width:500px;
+    flex-direction: column;
+  }
+  .map_main_table{
+    padding:0px 15px;
+  }
+  .map_expand > div:nth-child(2n-1), .map_expand > div:nth-child(1), .map_expand > div:nth-child(2){
+    border:solid 1px #ababab;
+  }
+  .map_expand > div{
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    justify-content: space-between;
+    font-weight: bold;
+    width: 458px;
+    font-size: 16px;
+    border:none;
+    border:solid 1px #ababab;
+  }
+  .Map_scale{
+    padding:20px;
+  }
+  .map_register{
+    width:1000px;
+  }
+  .map_state_level2 > span{
+    cursor: pointer;
+  }
+  .shoplist{
+    justify-content: center;
+  }
+  .shoplist > div{
+    width:1000px;
   }
   /* ---------------------------------- index -------------------------------------- */
   .index{
@@ -413,4 +485,156 @@
   .item_ex_level10 > div{
     width:400px;
   }
+  .index2 > div{
+    width:1000px;
+  }
+  .index2_star, .index2_video{
+    width:1000px;
+    height:500px;
+  }
+  .index2_star0{
+    left:480px;
+    bottom:200px;
+  }
+  
+@keyframes ani1{
+  0%{
+    top:30px;
+    left:480px;
+  }
+  50%{
+    top:50px;
+    left:460px;
+  }
+  100%{
+    top:35px;
+    left:480px
+  }
+}
+@keyframes ani2{
+  0%{
+    bottom:30px;
+    left:480px;
+  }
+  50%{
+    bottom:25px;
+    left:500px;
+  }
+  100%{
+    bottom:35px;
+    left:480px;
+  }
+}
+@keyframes ani3{
+  0%{
+    bottom:200px;
+    left:400px;
+  }
+  50%{
+    bottom:220px;
+    left:420px;
+  }
+  100%{
+    bottom:180px;
+    left:380px;
+  }
+}
+@keyframes ani4{
+  0%{
+    bottom:130px;
+    left:300px;
+  }
+  50%{
+    bottom:150px;
+    left:280px;
+  }
+  100%{
+    bottom:140px;
+    left:320px;
+  }
+}
+@keyframes ani5{
+  0%{
+    bottom:220px;
+    right:350px;
+  }
+  50%{
+    bottom:180px;
+    right:380px;
+  }
+  100%{
+    bottom:180px;
+    right:350px;
+  }
+}
+@keyframes ani6{
+  0%{
+    bottom:130px;
+    right:300px;
+  }
+  50%{
+    bottom:150px;
+    right:280px;
+  }
+  100%{
+    bottom:140px;
+    right:320px;
+  }
+}
+@keyframes ani7{
+  0%{
+    top:130px;
+    right:380px;
+  }
+  50%{
+    top:180px;
+    right:350px;
+  }
+  100%{
+    top:180px;
+    right:350px;
+  }
+}
+@keyframes ani8{
+  0%{
+    top:130px;
+    right:300px;
+  }
+  50%{
+    top:150px;
+    right:280px;
+  }
+  100%{
+    top:140px;
+    right:320px;
+  }
+}
+@keyframes ani9{
+  0%{
+    top:130px;
+    left:380px;
+  }
+  50%{
+    top:180px;
+    left:350px;
+  }
+  100%{
+    top:180px;
+    left:350px;
+  }
+}
+@keyframes ani10{
+  0%{
+    top:130px;
+    left:300px;
+  }
+  50%{
+    top:150px;
+    left:280px;
+  }
+  100%{
+    top:140px;
+    left:320px;
+  }
+}
 }

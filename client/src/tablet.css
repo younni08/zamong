@@ -155,6 +155,14 @@
   .map_main > div{
     /* align-items: center; */
   }
+  .index2_star, .index2_video{
+    height: 50vw;
+    width:100vw;
+  }
+  .index2_star0{
+    bottom:calc(25vw - 50px);
+    left:calc(50vw - 30px);
+  }
   .map_popup{
     width:60vw;
     margin:40vh 20vw 0px 20vw;

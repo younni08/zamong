@@ -935,6 +935,70 @@ router.post("/mong_rtem_recon",async(req,res)=>{
     }
 })
 
+router.post("/mong_project", upload.any(),async(req,res)=>{
+    try{
+        if(req.body.token===null||req.body.token===undefined||req.body.session===null||req.body.session===undefined) return res.send("fail")
+        jwt.verify(req.body.token,jwtConfig.key);
+        jwt.verify(req.body.session,jwtConfig.key);
+        let user_pk = req.body.token;
+        user_pk = user_pk.split(".")[1];
+        user_pk = user_pk.split(".")[0];
+        user_pk = atob(user_pk);
+        user_pk = user_pk.split('{"user_pk":"')[1];
+        user_pk = user_pk.split('","iat":')[0];
+
+        let session = req.body.session;
+        session = session.split(".")[1];
+        session = session.split(".")[0];
+        session = atob(session);
+        session = session.split('{"session":"')[1];
+        session = session.split('","iat":')[0];
+
+        const db = await client.connect();
+        let checkSession = await db.query(`select from users where session=$1 and user_id=$2`,[session,user_pk])
+        if(checkSession.rows[0]===undefined){
+            await db.release();
+            return res.send("fail")
+        }
+
+        let date = new Date();
+
+        let type = "default"
+        let cover = "default"
+        if(req.files[0]!==undefined){
+            if(req.files[0].fieldname === "t4image"){
+                let name = "#project" + date.getTime();
+                type=req.files[0].mimetype;
+                cover=name;
+                await uploadtoS3(req.files[0].buffer,name,req.files[0].mimetype)
+            }
+        }
+        
+        await db.query(`insert into rproject(title,shop_cover_key,shop_cover_type,cover_ratio,shop_address) values($1,$2,$3,$4,$5)`,[req.body.title,cover,type,req.body.ratio,req.body.addr])
+
+        await db.release();
+        return res.send("success")
+    }catch(err){
+        console.log("error on mongcateinit");
+        console.log(err)
+        return res.send("fail")
+    }
+})
+
+router.post("/projectinit",async(req,res)=>{
+    try{
+        console.log(req.body)
+        const db = await client.connect();
+        let getpick = await db.query(`select title,shop_cover_key,shop_cover_type,cover_ratio,shop_address from rproject`)
+        await db.release();
+        return res.send(getpick.rows)
+    }catch(err){
+        console.log("error on rteminit");
+        console.log(err)
+        return res.send("fail")
+    }
+})
+
 router.post("/rteminit",async(req,res)=>{
     try{
         console.log(req.body)

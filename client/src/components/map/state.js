@@ -121,103 +121,110 @@ const MapState = () => {
                 <div className="map_expand" id="map_expand">
                     <MapNavi />
                 </div>
-                <div className="map_main">
+                <div className="map_main2">
                     <div>
-                        <span>{kstate}</span>
-                        <div className="map_state">
-                            {
-                                function(s){
-                                        switch(s){
-                                            case "state1":
-                                                return(<KoreaState1 />);
-                                            case "state2":
-                                                return(<KoreaState2 />);
-                                            case "state3":
-                                                return(<KoreaState3 />);
-                                            case "state4":
-                                                return(<KoreaState4 />);
-                                            case "state5":
-                                                return(<KoreaState5 />);
-                                            case "state6":
-                                                return(<KoreaState6 />);
-                                            case "state7":
-                                                return(<KoreaState7 />);
-                                            case "state8":
-                                                return(<KoreaState8 />);
-                                            case "state9":
-                                                return(<KoreaState9 />);
-                                            case "state10":
-                                                return(<KoreaState10 />);
-                                            case "state11":
-                                                return(<KoreaState11 />);
-                                            case "state12":
-                                                return(<KoreaState12 />);
-                                            case "state13":
-                                                return(<KoreaState13 />);
-                                            case "state14":
-                                                return(<KoreaState14 />);
-                                            case "state15":
-                                                return(<KoreaState15 />);
-                                            case "state16":
-                                                return(<KoreaState16 />);
-                                            case "state17":
-                                                return(<KoreaState17 />);
-                                            default:
-                                                return(<KoreaState1 />);
-                                        }
-                                    }(kstate2)
-                            }
-                            
-                        </div>
-                        <MapScale />
-                        {
-                            noshop?<div className="map_popup" onClick={mapPop} id="map_popupanimation">
-                                <div>
-                                    <span>앗, 이런.</span>
-                                    <span>{kstate}에는 제로웨이스트샵이 하나도 없어요</span>
-                                    <span>우리 지역에도 제로웨이스트샵이 생길 수 있도록 이루자몽에 요청해주세요.</span>
+                        <div className="map_main2_pc">
+                            <div className="map_main2_pc1">
+                                <span className="title">{kstate}</span>
+                                {
+                                    noshop?<div className="map_popup" onClick={mapPop} id="map_popupanimation">
+                                        <div>
+                                            <span>앗, 이런.</span>
+                                            <span>{kstate}에는 제로웨이스트샵이 하나도 없어요</span>
+                                            <span>우리 지역에도 제로웨이스트샵이 생길 수 있도록 이루자몽에 요청해주세요.</span>
+                                        </div>
+                                    </div>:""
+                                }
+                                <div className="map_state">
+                                    {
+                                        function(s){
+                                                switch(s){
+                                                    case "state1":
+                                                        return(<KoreaState1 />);
+                                                    case "state2":
+                                                        return(<KoreaState2 />);
+                                                    case "state3":
+                                                        return(<KoreaState3 />);
+                                                    case "state4":
+                                                        return(<KoreaState4 />);
+                                                    case "state5":
+                                                        return(<KoreaState5 />);
+                                                    case "state6":
+                                                        return(<KoreaState6 />);
+                                                    case "state7":
+                                                        return(<KoreaState7 />);
+                                                    case "state8":
+                                                        return(<KoreaState8 />);
+                                                    case "state9":
+                                                        return(<KoreaState9 />);
+                                                    case "state10":
+                                                        return(<KoreaState10 />);
+                                                    case "state11":
+                                                        return(<KoreaState11 />);
+                                                    case "state12":
+                                                        return(<KoreaState12 />);
+                                                    case "state13":
+                                                        return(<KoreaState13 />);
+                                                    case "state14":
+                                                        return(<KoreaState14 />);
+                                                    case "state15":
+                                                        return(<KoreaState15 />);
+                                                    case "state16":
+                                                        return(<KoreaState16 />);
+                                                    case "state17":
+                                                        return(<KoreaState17 />);
+                                                    default:
+                                                        return(<KoreaState1 />);
+                                                }
+                                            }(kstate2)
+                                    }
+                                    
                                 </div>
-                            </div>:""
-                        }
-                        <div className="map_main_table">
-                            <div className="normal">
-                                <span>+</span>
-                                <span>매장수</span>
-                                <div>
-                                    <span>{kstate}</span>
-                                    <span>/</span>
-                                    <span>{shopSum}개</span>
-                                </div>
-                            </div> 
-                            <div className="normal">
-                                <span></span>
-                                <span>가장 많은 지역</span>
-                                <div>
-                                    <span>{bigcity.city_name}</span>
-                                    <span>/</span>
-                                    <span>{bigcity.shop_cnt}개</span>
-                                </div>
-                            </div> 
-                            <div className="map_list">
-                                <div>
-                                    <span>+</span>
-                                    <div>
-                                        <span>요청수</span>
-                                        <span>{shopSum}건</span>
+                                <MapScale />
+                                
+                            </div>
+                            <div className="map_main2_pc2">
+                                <div className="map_main_table">
+                                    <div className="normal">
+                                        <span>+</span>
+                                        <span>매장수</span>
+                                        <div>
+                                            <span>{kstate}</span>
+                                            <span>/</span>
+                                            <span>{shopSum}개</span>
+                                        </div>
+                                    </div> 
+                                    <div className="normal">
+                                        <span></span>
+                                        <span>가장 많은 지역</span>
+                                        <div>
+                                            <span>{bigcity.city_name}</span>
+                                            <span>/</span>
+                                            <span>{bigcity.shop_cnt}개</span>
+                                        </div>
+                                    </div> 
+                                    <div className="map_list">
+                                        <div>
+                                            <span>+</span>
+                                            <div>
+                                                <span>요청수</span>
+                                                <span>{shopSum}건</span>
+                                            </div>
+                                        </div>
+                                        <ul>
+                                            {
+                                                citylist?citylist.map(c=>{
+                                                    return(
+                                                        <li key={c.city_name}>
+                                                            <span>{c.city_name}</span>
+                                                            <span>{c.shop_cnt}건</span>
+                                                        </li>
+                                                    )
+                                                }):""
+                                            }
+                                        </ul>
                                     </div>
                                 </div>
-                                <ul>
-                                    {
-                                        citylist?citylist.map(c=>{
-                                            return(
-                                                <li key={c.city_name}>
-                                                    <span>{c.city_name}</span>
-                                                    <span>{c.shop_cnt}건</span>
-                                                </li>
-                                            )
-                                        }):""
-                                    }
-                                </ul>
                             </div>
                         </div>
                         <div className="item_ex_level_qr">

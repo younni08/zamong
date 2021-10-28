@@ -163,7 +163,7 @@ const Map = () => {
                 <div className="map_main">
                     <div>
                         <div>
-                            <span>전국</span>
+                            <span className="title">전국</span>
                             <div className="map_popup" onClick={mapPop} id="map_popupanimation">
                                 <div>
                                     <span>전국에는 다양한 개성을 가진 제로웨이스트샵이 운영되고 있습니다.</span>

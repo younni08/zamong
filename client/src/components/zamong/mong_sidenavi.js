@@ -55,6 +55,10 @@ const MongSidenavi = () => {
                 <span className="mong_shop">상-점</span>
                 <span>상점 등록</span>
             </Link>
+            <Link to="/rtem_project">
+                <span className="rmong_project">상-점</span>
+                <span>쓸때 등록</span>
+            </Link>
             {
                 redirect?<Redirect to="/login" />:""
             }
