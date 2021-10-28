@@ -13,18 +13,21 @@ const RtemPick = () => {
         if(e.currentTarget.getAttribute("id")==="rtem_pick_id2"){
             document.getElementById("rtem_pick_id2").className="on"
             let width = window.innerWidth
+            if(window.innerWidth>1200) width=500
             document.getElementById("rtem_pick").style.transform = `translateX(-${width}px)`;
 
         }
         if(e.currentTarget.getAttribute("id")==="rtem_pick_id3"){
             document.getElementById("rtem_pick_id3").className="on"
             let width = window.innerWidth
+            if(window.innerWidth>1200) width=500
             document.getElementById("rtem_pick").style.transform = `translateX(-${Number(width*2)}px)`;
 
         }
         if(e.currentTarget.getAttribute("id")==="rtem_pick_id4"){
             document.getElementById("rtem_pick_id4").className="on"
             let width = window.innerWidth
+            if(window.innerWidth>1200) width=500
             document.getElementById("rtem_pick").style.transform = `translateX(-${Number(width*3)}px)`;
 
         }

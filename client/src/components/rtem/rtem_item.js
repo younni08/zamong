@@ -47,7 +47,7 @@ const Rtem_pick = (props) => {
                                 max: 3000,
                                 min: 1024
                             },
-                            items: 2,
+                            items: 4,
                             partialVisibilityGutter: 40
                         },
                         mobile: {

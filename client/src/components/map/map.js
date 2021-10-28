@@ -162,132 +162,136 @@ const Map = () => {
                 </div>
                 <div className="map_main">
                     <div>
-                        <span>전국</span>
-                        <MapKorea 
-                            kstate={kstate}
-                        />
-                        <div className="map_popup" onClick={mapPop} id="map_popupanimation">
-                            <div>
-                                <span>전국에는 다양한 개성을 가진 제로웨이스트샵이 운영되고 있습니다.</span>
-                                <span>지도를 클릭해 나에게 맞는 제로웨이트스샵을 찾아보세요.</span>
-                            </div>
-                        </div>
-                        <div className="map_main_navi">
-                            <div>
-                                <div onClick={handleTaglist} id="all">
-                                    <div>
-                                        {
-                                            type1?<div className="on"><i className="xi-star xi-2x"></i></div>:<div><i className="xi-star xi-2x"></i></div>
-                                        }
-                                        <span>전체</span>
-                                    </div>
-                                    <span></span>
-                                </div>
-                                <div onClick={handleTaglist} id="세제">
-                                    <div>
-                                        {
-                                            type2?<img src="./pics/refill1on.png" alt="refill" />:<img src="./pics/refill1.png" alt="refill" />
-                                        }
-                                        <span>세제 리필</span>
-                                    </div>
-                                    <span></span>
-                                </div>
-                                <div onClick={handleTaglist} id="화장품">
-                                    <div>
-                                        {
-                                            type3?<img src="./pics/refill2on.png" alt="refill" />:<img src="./pics/refill2.png" alt="refill" />
-                                        }
-                                        <span>화장품 리필</span>
-                                    </div>
-                                    <span></span>
-                                </div>
-                                <div onClick={handleTaglist} id="곡류">
-                                    <div>
-                                        {
-                                            type4?<img src="./pics/refill3on.png" alt="refill" />:<img src="./pics/refill3.png" alt="refill" />
-                                        }
-                                        <span>곡류 리필</span>
-                                    </div>
-                                    <span></span>
-                                </div>
-                                <div onClick={handleTaglist} id="팝업">
-                                    <div>
-                                        {
-                                            type5?<img src="./pics/refill4on.png" alt="refill" />:<img src="./pics/refill4.png" alt="refill" />
-                                        }
-                                        <span>팝업</span>
-                                    </div>
-                                    <span></span>
-                                </div>
-                                <div onClick={handleTaglist} id="반려">
-                                    <div>
-                                        {
-                                            type6?<img src="./pics/refill5on.png" alt="refill" />:<img src="./pics/refill5.png" alt="refill" />
-                                        }
-                                        <span>반려용품</span>
-                                    </div>
-                                    <span></span>
-                                </div>
-                                <div onClick={handleTaglist} id="비건">
-                                    <div>
-                                        {
-                                            type7?<img src="./pics/refill6on.png" alt="refill" />:<img src="./pics/refill6.png" alt="refill" />
-                                        }
-                                        <span>비건</span>
-                                    </div>
-                                    <span></span>
-                                </div>
-                                <div onClick={handleTaglist} id="무포장">
-                                    <div>
-                                        {
-                                            type8?<img src="./pics/refill7on.png" alt="refill" />:<img src="./pics/refill7.png" alt="refill" />
-                                        }
-                                        <span>무포장</span>
-                                    </div>
-                                    <span></span>
-                                </div>
-                                <div onClick={handleTaglist} id="공작소">
-                                    <div>
-                                        {
-                                            type9?<img src="./pics/refill8on.png" alt="refill" />:<img src="./pics/refill8.png" alt="refill" />
-                                        }
-                                        <span>공작소</span>
-                                    </div>
-                                    <span></span>
+                        <div>
+                            <span>전국</span>
+                            <div className="map_popup" onClick={mapPop} id="map_popupanimation">
+                                <div>
+                                    <span>전국에는 다양한 개성을 가진 제로웨이스트샵이 운영되고 있습니다.</span>
+                                    <span>지도를 클릭해 나에게 맞는 제로웨이트스샵을 찾아보세요.</span>
                                 </div>
                             </div>
+                            <MapKorea 
+                                kstate={kstate}
+                            />
                         </div>
-                        <div className="shoplist_page">
-                            {
-                                pageArray ? pageArray.map(c=>{
-                                    if(c==currentPage){
-                                        return(
-                                            <span className="on" key={c+"ee"} id={"map_page"+c} onClick={handlePageClick}>{c}</span>
+                        <div>
+                            <div className="map_main_navi">
+                                <div>
+                                    <div onClick={handleTaglist} id="all">
+                                        <div>
+                                            {
+                                                type1?<div className="on"><i className="xi-star xi-2x"></i></div>:<div><i className="xi-star xi-2x"></i></div>
+                                            }
+                                            <span>전체</span>
+                                        </div>
+                                        <span></span>
+                                    </div>
+                                    <div onClick={handleTaglist} id="세제">
+                                        <div>
+                                            {
+                                                type2?<img src="./pics/refill1on.png" alt="refill" />:<img src="./pics/refill1.png" alt="refill" />
+                                            }
+                                            <span>세제 리필</span>
+                                        </div>
+                                        <span></span>
+                                    </div>
+                                    <div onClick={handleTaglist} id="화장품">
+                                        <div>
+                                            {
+                                                type3?<img src="./pics/refill2on.png" alt="refill" />:<img src="./pics/refill2.png" alt="refill" />
+                                            }
+                                            <span>화장품 리필</span>
+                                        </div>
+                                        <span></span>
+                                    </div>
+                                    <div onClick={handleTaglist} id="곡류">
+                                        <div>
+                                            {
+                                                type4?<img src="./pics/refill3on.png" alt="refill" />:<img src="./pics/refill3.png" alt="refill" />
+                                            }
+                                            <span>곡류 리필</span>
+                                        </div>
+                                        <span></span>
+                                    </div>
+                                    <div onClick={handleTaglist} id="팝업">
+                                        <div>
+                                            {
+                                                type5?<img src="./pics/refill4on.png" alt="refill" />:<img src="./pics/refill4.png" alt="refill" />
+                                            }
+                                            <span>팝업</span>
+                                        </div>
+                                        <span></span>
+                                    </div>
+                                    <div onClick={handleTaglist} id="반려">
+                                        <div>
+                                            {
+                                                type6?<img src="./pics/refill5on.png" alt="refill" />:<img src="./pics/refill5.png" alt="refill" />
+                                            }
+                                            <span>반려용품</span>
+                                        </div>
+                                        <span></span>
+                                    </div>
+                                    <div onClick={handleTaglist} id="비건">
+                                        <div>
+                                            {
+                                                type7?<img src="./pics/refill6on.png" alt="refill" />:<img src="./pics/refill6.png" alt="refill" />
+                                            }
+                                            <span>비건</span>
+                                        </div>
+                                        <span></span>
+                                    </div>
+                                    <div onClick={handleTaglist} id="무포장">
+                                        <div>
+                                            {
+                                                type8?<img src="./pics/refill7on.png" alt="refill" />:<img src="./pics/refill7.png" alt="refill" />
+                                            }
+                                            <span>무포장</span>
+                                        </div>
+                                        <span></span>
+                                    </div>
+                                    <div onClick={handleTaglist} id="공작소">
+                                        <div>
+                                            {
+                                                type9?<img src="./pics/refill8on.png" alt="refill" />:<img src="./pics/refill8.png" alt="refill" />
+                                            }
+                                            <span>공작소</span>
+                                        </div>
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="shoplist_page">
+                                {
+                                    pageArray ? pageArray.map(c=>{
+                                        if(c==currentPage){
+                                            return(
+                                                <span className="on" key={c+"ee"} id={"map_page"+c} onClick={handlePageClick}>{c}</span>
+                                            )
+                                        }else{
+                                            return(
+                                                <span key={c+"ee"} id={"map_page"+c} onClick={handlePageClick}>{c}</span>
+                                            )
+                                        }
+                                    }):""
+                                }
+                            </div>
+                            <div className="map_main_list">
+                                {
+                                    list?list.map(c=>{
+                                        return (
+                                            <ShopListElement 
+                                                key={c.shop_pk}
+                                                shop_cover_type={c.shop_cover_type}
+                                                shop_cover_key={c.shop_cover_key}
+                                                shop_pk={c.shop_pk}
+                                                shop_address={c.shop_address}
+                                                oneline={c.oneline}
+                                                title={c.title}
+                                            />
                                         )
-                                    }else{
-                                        return(
-                                            <span key={c+"ee"} id={"map_page"+c} onClick={handlePageClick}>{c}</span>
-                                        )
-                                    }
-                                }):""
-                            }
-                        </div>
-                        <div className="map_main_list">
-                            {
-                                list?list.map(c=>{
-                                    return (
-                                        <ShopListElement 
-                                            key={c.shop_pk}
-                                            shop_cover_type={c.shop_cover_type}
-                                            shop_cover_key={c.shop_cover_key}
-                                            shop_pk={c.shop_pk}
-                                            shop_address={c.shop_address}
-                                            oneline={c.oneline}
-                                            title={c.title}
-                                        />
-                                    )
-                                }):""
-                            }
+                                    }):""
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>

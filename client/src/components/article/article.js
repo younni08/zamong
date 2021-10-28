@@ -125,7 +125,7 @@ const Article = () => {
                     <div>
                         <div>
                             <span>알-템</span>
-                            <span><i className="xi-caret-down-min"></i></span>
+                            {/* <span><i className="xi-caret-down-min"></i></span> */}
                         </div>
                         <div className="article_tablet">
                             <div className="article_level1">

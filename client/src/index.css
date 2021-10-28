@@ -21,6 +21,10 @@ p{
 .navi{
   display:flex;
   width:100%;
+}
+.navi > div{
+  display:flex;
+  width:100%;
   flex-direction: column;
 }
 .navi_level1{
@@ -2535,7 +2539,12 @@ p{
   flex-direction: column;
   width:100%;
 }
-.map_main > div > span{
+.map_main > div > div{
+  width:100%;
+  position:relative;
+}
+.map_main > div > div > span{
+  display:flex;
   font-weight: bold;
   color:#fff;
   width:calc(100% - 30px);
@@ -2708,7 +2717,7 @@ p{
   justify-content: center;
   width:100vw;
   position:absolute;
-  margin:30vh 0px 0px 0px;
+  margin:20vh 0px 0px 0px;
   transition:all 0.6s;
 }
 .map_popup > div{
