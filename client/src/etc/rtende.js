@@ -7,19 +7,6 @@ const Rtende = () => {
         setRtype(Number(e.currentTarget.getAttribute("id").split("rtende")[1]))
     }
 
-    const hitest = () => {
-        document.getElementById("temp2").style.opacity="1";
-    }
-    const hitest2 = () => {
-        document.getElementById("temp3").style.opacity="1";
-    }
-    const hitest3 = () => {
-        document.getElementById("temp2").style.opacity="0";
-    }
-    const hitest4 = () => {
-        document.getElementById("temp2").style.opacity="1";
-    }
-
     return(
         <div className="rtende">
             <div>
