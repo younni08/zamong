@@ -112,7 +112,7 @@ p{
   width:100%;
   height:0px;
   transition:all 0.6s;
-  overflow: hidden;
+  overflow-y: hidden;
   z-index: 20;
   background:#FFFEF8;
 }
@@ -568,13 +568,15 @@ p{
   flex-direction: column;
   height:0px;
   transition: all 0.3s;
-  overflow:hidden;
+  overflow-y:scroll;
 }
-.rtem_level01 > div{
+.rtem_level01 > a{
   display:flex;
   padding:15px 20px;
   width:calc(100% - 40px);
   border-bottom:solid 1px #000;
+  color:#000;
+  text-decoration: none;
 }
 .rtem_level1{
   display:flex;
@@ -1191,6 +1193,7 @@ p{
   align-items: center;
   color:#2A5EBC;
   font-size:12px;
+  cursor: pointer;
 }
 .article_level2 > div > div > span{
   display:flex;
@@ -1419,7 +1422,7 @@ p{
   margin:0px 10px 0px 0px;
   overflow: hidden;
   border:solid 1px #000;
-  background:#7f7f7f;
+  cursor: pointer;
 }
 .item_ex_level4_element > div.on{
   border:solid 1px #00B775;
@@ -1435,20 +1438,35 @@ p{
 }
 .item_ex_level5{
   display:flex;
-  flex-direction: column;
+  justify-content: space-between;
   width:calc(100% - 40px);
   margin:5px 0px 0px 0px;
   padding:20px;
 }
-.item_ex_level5 > span:nth-child(1){
+.item_ex_level5 > div:first-child{
+  display:flex;
+  flex-direction: column;
+}
+.item_ex_level5 > div:first-child span:nth-child(1){
   font-size:12px;
   color:#808080;
 }
-.item_ex_level5 > span:nth-child(2){
+.item_ex_level5 > div:first-child span:nth-child(2){
   font-size:16px;
   display:flex;
   margin:5px 0px 0px 0px;
   font-weight: bold;
+}
+.item_ex_level5 > div:last-child{
+  display:flex;
+  align-items: flex-end;
+  font-size:12px;
+  color:#00B775;
+  cursor: pointer;
+}
+.item_ex_level5 > div:last-child > span:last-child{
+  display:flex;
+  margin:0px 0px 0px 5px;
 }
 .item_ex_level6{
   display:flex;
@@ -1599,6 +1617,10 @@ p{
   width:30px;
   height:30px;
   margin:0px 10px 0px 0px;
+  cursor: pointer;
+}
+.item_ex_level9_element > div > img{
+  cursor: pointer;
 }
 .item_ex_level_qr > div:last-child{
   display:flex;
@@ -1609,6 +1631,7 @@ p{
   font-size:12px;
   width:100%;
   margin:5px 0px 0px 0px;
+  cursor: pointer;
   justify-content: center;
 }
 .item_ex_level8{
@@ -1686,6 +1709,7 @@ p{
   flex-direction: column;
   color:#001717;
   margin:0px 10px 0px 0px;
+  text-decoration: none;
 }
 .item_ex_level9_element > div{
   display:flex;
@@ -1702,6 +1726,7 @@ p{
   display:block;
   margin:7px 0px 0px 0px;
   font-size:12px;
+  text-decoration: none;
 }
 .item_ex_level10{
   display:flex;
@@ -3133,6 +3158,7 @@ p{
   width:calc(100% - 25px);
   border:none;
   background:#2A5EBC;
+  color:#fff;
 }
 .board_level1 > input:focus{
   outline: none;

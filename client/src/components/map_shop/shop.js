@@ -19,6 +19,18 @@ const Shop = () => {
             setExpand(false)
         }
     }
+    const downloadQR = () => {
+        const canvas = document.getElementById("getqr");
+        const pngUrl = canvas
+          .toDataURL("image/png")
+          .replace("image/png", "image/octet-stream");
+        let downloadLink = document.createElement("a");
+        downloadLink.href = pngUrl;
+        downloadLink.download = "qrcode.png";
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+      };
 
     const init = async() => {
         let getpk = window.location.href.split("shop?s=")[1]
@@ -192,9 +204,10 @@ const Shop = () => {
                         <div>
                             <Qrcode value={"https://www.iroozamong.com/#/shop"}
                                 size={80}
+                                id="getqr"
                                 bgColor={"#FFFEF8"}
                             />
-                            <span>QR코드 복사</span>
+                            <span onClick={downloadQR}>QR코드 다운로드</span>
                         </div>
                     </div>
                     <div className="shop_level7">

@@ -74,6 +74,8 @@ const Rtem = () => {
                                             <RtemZamongPick 
                                                 key={c.rtem_t4_pk}
                                                 rtem_t4_pk={c.rtem_t4_pk}
+                                                rtem_t2_pk={c.rtem_t2_pk}
+                                                rtem_t3_pk={c.rtem_t3_pk}
                                                 rtem_t4_key={c.rtem_t4_key}
                                                 rtem_t4_type={c.rtem_t4_type}
                                             />

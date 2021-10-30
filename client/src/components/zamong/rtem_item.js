@@ -35,8 +35,8 @@ const Zamong = () => {
 
     const handleT3checkbox = () => {
         let tempString = ""
-        for(let i=0;i<t3list.length;i++){
-            if(document.getElementById(t3list[i].rtem_t3_pk).checked===true){tempString = tempString + t3list[i].rtem_t3_pk +","}
+        for(let i=0;i<1;i++){
+            if(document.getElementById(t3list[i].rtem_t3_pk).checked===true){tempString = tempString + t3list[i].rtem_t3_pk}
         }
         return tempString
     }
@@ -102,8 +102,6 @@ const Zamong = () => {
                                     }
                                 </div>
                             </div>
-                            
-                            
                             <div className="mong_item_manager3">
                                 <div className="mong_item_general">
                                     <div>

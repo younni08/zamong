@@ -330,6 +330,9 @@
   .map_expand > div:nth-child(2n-1), .map_expand > div:nth-child(1), .map_expand > div:nth-child(2){
     border:solid 1px #ababab;
   }
+  .map_main_table > div.normal > div{
+    width:200px;
+  }
   .map_expand > div{
     display: flex;
     align-items: center;
@@ -425,6 +428,10 @@
   .item_main > div:last-child{
     width:100%;
     padding:10px 0px;
+    justify-content: flex-start;
+  }
+  .item_main > div:last-child > a{
+    margin:5px;
   }
   .itembox{
     width:180px;

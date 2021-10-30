@@ -31,6 +31,18 @@ const MapState = () => {
     const [citylist,setCitylist] = useState([])
     const [shopSum,setShopSum] = useState(0)
     const [cstate,setCstate] = useState("")
+    const downloadQR = () => {
+        const canvas = document.getElementById("getqr");
+        const pngUrl = canvas
+          .toDataURL("image/png")
+          .replace("image/png", "image/octet-stream");
+        let downloadLink = document.createElement("a");
+        downloadLink.href = pngUrl;
+        downloadLink.download = "qrcode.png";
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+      };
 
     const handleExpand = () => {
         if(expand===false){
@@ -109,7 +121,7 @@ const MapState = () => {
 
     useEffect(()=>{
         init();
-    },[])
+    },[window.location.href])
 
     return (
         <div className="map">
@@ -237,9 +249,10 @@ const MapState = () => {
                             <div>
                                 <Qrcode value={"https://www.iroozamong.com/#/state?s="+cstate}
                                     size={80}
+                                    id="getqr"
                                     bgColor={"#FFFEF8"}
                                 />
-                                <span>QR코드 복사</span>
+                                <span onClick={downloadQR}>QR코드 다운로드</span>
                             </div>
                         </div>
                         <div className="map_state_level1">

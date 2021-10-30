@@ -15,6 +15,8 @@ import Map1 from "./components/map/state"
 
 import Login from "./components/login/login"
 import Rtem from "./components/rtem/rtme"
+import RtemT1 from "./components/rtem/rtem_t1_list"
+import RtemSearch from "./components/rtem/rten_search"
 import Rtende from "./etc/rtende"
 
 import Zamong1 from "./components/zamong/rtem_item"
@@ -40,6 +42,8 @@ const Root = () => {
                 <Route path ="/rtende" component={Rtende} />
                 <Route path ="/board" component={Board} />
                 <Route path ="/Rtem" component={Rtem} />
+                <Route path ="/rtem_search" component={RtemSearch} />
+                <Route path ="/rtemlist" component={RtemT1} />
                 <Route path ="/items" component={Items} />
                 <Route path ="/item" component={Item} />
                 <Route path ="/project" component={Sste} />

@@ -30,7 +30,7 @@ const RtemZamongPick = (props) => {
     },[props.rtem_t4_key])
 
     return (
-        <Link to={"/items?c="+props.rtem_t4_pk}>
+        <Link to={"/item?t2="+props.rtem_t2_pk+"&t3="+props.rtem_t3_pk}>
             {
                 sample?parser(sample):""
             }

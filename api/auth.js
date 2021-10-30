@@ -359,7 +359,7 @@ router.post("/addcatet3", upload.any(),async(req,res)=>{
             }
         }
 
-        await db.query(`insert into rtem_t3(rtem_t3_pk,rtem_desc,rtem_desc2,rtem_t3_name,rtem_t3_key,rtem_t3_type,rtem_t3_date,rtem_desc3,rtem_t3_r1,rtem_t3_r2,rtem_t3_r3,rtem_t3_r4,rtem_t3_r5,rtem_t3_r6,rtem_t3_r7,rtem_t3_r8,rtem_t3_r9,rtem_t3_r10,rtem_t2_pk) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19)`,[mana_pk,req.body.t3madeof,req.body.t3body,req.body.t3name,cover_key,cover_type,date,req.body.t4cmt,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,req.body.t2pk])
+        await db.query(`insert into rtem_t3(t3_tag,rtem_t3_pk,rtem_desc,rtem_desc2,rtem_t3_name,rtem_t3_key,rtem_t3_type,rtem_t3_date,rtem_desc3,rtem_t3_r1,rtem_t3_r2,rtem_t3_r3,rtem_t3_r4,rtem_t3_r5,rtem_t3_r6,rtem_t3_r7,rtem_t3_r8,rtem_t3_r9,rtem_t3_r10,rtem_t2_pk) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20)`,[req.body.t3tag,mana_pk,req.body.t3madeof,req.body.t3body,req.body.t3name,cover_key,cover_type,date,req.body.t4cmt,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,req.body.t2pk])
         await db.release();
         return res.send("success")
     }catch(err){
@@ -993,7 +993,7 @@ router.post("/projectinit",async(req,res)=>{
         await db.release();
         return res.send(getpick.rows)
     }catch(err){
-        console.log("error on rteminit");
+        console.log("error on projectinit");
         console.log(err)
         return res.send("fail")
     }
@@ -1005,7 +1005,8 @@ router.post("/rteminit",async(req,res)=>{
         if(req.body.key!=="randomkey") return res.send("fail")
         const db = await client.connect();
         if(req.body.shortcut===""){
-            let getpick = await db.query(`select rtem_t4_key,rtem_t4_type,rtem_t4_pk from rtem_t4 where rtem_t4_zamong_pick order by id desc limit 3`)
+            let getpick = await db.query(`select (select rtem_t2_pk from rtem_t3 where rtem_t3_pk=rtem_t3_pk limit 1) as rtem_t2_pk,rtem_t3_pk,rtem_t4_key,rtem_t4_type,rtem_t4_pk from rtem_t4 where rtem_t4_zamong_pick order by id desc limit 4`)
+            console.log(getpick.rows)
             let getrtem = await db.query(`select rtem_t1_pk,rtem_t1_name from rtem_t1 where rtem_t1_zamong_pick=false`)
             if(getrtem.rows[0]===undefined){
                 await db.release();
@@ -1067,18 +1068,39 @@ router.post("/itemsinit",async(req,res)=>{
     }
 })
 
+router.post("/rtemt1list",async(req,res)=>{
+    try{
+        console.log(req.body)
+        if(req.body.item===undefined||req.body.item===null||req.body.align===undefined||req.body.align===null) return res.send("fail")
+        const db = await client.connect();
+        let returnArray = []
+        if(req.body.align==="recent"){
+            let result = await db.query(`select (select rtem_t1_name from rtem_t1 where rtem_t1_pk='${req.body.item}') as rtem_t1_name,rtem_t2_pk,rtem_t2_name,rtem_t2_key,rtem_t2_type from rtem_t2 where rtem_t1_pk=$1 order by id ;`,[req.body.item])
+            returnArray = result.rows
+        }
+        if(req.body.align==="pop"){
+            let result = await db.query(`select (select rtem_t1_name from rtem_t1 where rtem_t1_pk='${req.body.item}') as rtem_t1_name,rtem_t2_pk,rtem_t2_name,rtem_t2_key,rtem_t2_type from rtem_t2 where rtem_t1_pk=$1 order by id;`,[req.body.item])
+            returnArray = result.rows
+        }
+
+        await db.release();
+        return res.send(returnArray)
+    }catch(err){
+        console.log("error on rtemt1list");
+        console.log(err)
+        return res.send("fail")
+    }
+})
+
 router.post("/searchrtem",async(req,res)=>{
     try{
         console.log(req.body)
         if(req.body.input===undefined||req.body.input===null) return res.send("fail")
         const db = await client.connect();
-        let string = '%'+req.body.input+'%'
-        let result = await db.query(`select rtem_t3_pk,rtem_t4_pk,rtem_t4_name,rtem_t4_key,rtem_t4_type from rtem_t4 where rtem_t4_name like $1;`,[string])
-        let result2 = await db.query(`select rtem_t2_pk,rtem_t3_pk,rtem_t3_name,rtem_t3_key,rtem_t3_type from rtem_t3; where rtem_t3_name like $1;`,[string])
+        let result2 = await db.query(`select rtem_t2_pk,rtem_t3_pk,rtem_t3_name,rtem_t3_key,rtem_t3_type from rtem_t3 where rtem_t3_name like '%${req.body.input}%';`)
         let returnArray = []
         returnArray = {
-            t3:result2.rows,
-            t4:result.rows
+            t3:result2.rows
         }
         await db.release();
         return res.send(returnArray)
@@ -1094,10 +1116,19 @@ router.post("/iteminit",async(req,res)=>{
         console.log(req.body)
         if(req.body.item===undefined||req.body.item===null) return res.send("fail")
         const db = await client.connect();
+        let result2 = []
+        if(req.body.t3==="default"){
+            result2 = await db.query(`select t3_vote,t3_tag,rtem_t3_pk,rtem_t3_name,rtem_t3_key,rtem_t3_type,rtem_t3_r1,rtem_t3_r2,rtem_t3_r3,rtem_t3_r4,rtem_t3_r5,rtem_t3_r6,rtem_t3_r7,rtem_t3_r8,rtem_t3_r9,rtem_t3_r10,rtem_desc,rtem_desc2,rtem_desc3 from rtem_t3 where rtem_t2_pk=$1 order by t3_vote desc limit 1`,[req.body.item])
+        }else{
+            result2 = await db.query(`select t3_vote,t3_tag,rtem_t3_pk,rtem_t3_name,rtem_t3_key,rtem_t3_type,rtem_t3_r1,rtem_t3_r2,rtem_t3_r3,rtem_t3_r4,rtem_t3_r5,rtem_t3_r6,rtem_t3_r7,rtem_t3_r8,rtem_t3_r9,rtem_t3_r10,rtem_desc,rtem_desc2,rtem_desc3 from rtem_t3 where rtem_t2_pk=$1 and rtem_t3_pk=$2`,[req.body.item,req.body.t3])
+        }
         let result = await db.query(`select rtem_t2_pk,rtem_t2_name,rtem_t2_key,rtem_t2_type,rtem_desc from rtem_t2 where rtem_t2_pk=$1`,[req.body.item])
-        let result2 = await db.query(`select rtem_t3_pk,rtem_t3_name,rtem_t3_key,rtem_t3_type,rtem_t3_r1,rtem_t3_r2,rtem_t3_r3,rtem_t3_r4,rtem_t3_r5,rtem_t3_r6,rtem_t3_r7,rtem_t3_r8,rtem_t3_r9,rtem_t3_r10,rtem_desc,rtem_desc2,rtem_desc3 from rtem_t3 where rtem_t2_pk=$1 order by id desc  limit 1`,[req.body.item])
-        let result3 = await db.query(`select rtem_t3_name,rtem_t3_pk,rtem_t3_key,rtem_t3_type from rtem_t3 where rtem_t2_pk=$1 order by id desc`,[req.body.item])
-
+        let result3 = await db.query(`select t3_vote,rtem_t3_name,rtem_t3_pk,rtem_t3_key,rtem_t3_type from rtem_t3 where rtem_t2_pk=$1 order by t3_vote desc`,[req.body.item])
+        let result4 = await db.query(`select rtem_t3_pk,rtem_t3_name,rtem_t3_key,rtem_t3_type,rtem_t3_r1,rtem_t3_r2,rtem_t3_r3,rtem_t3_r4,rtem_t3_r5,rtem_t3_r6,rtem_t3_r7,rtem_t3_r8,rtem_t3_r9,rtem_t3_r10,rtem_desc,rtem_desc2,rtem_desc3 from rtem_t3 where rtem_t2_pk!=$1 order by id desc limit 1`,[req.body.item])
+        let result5 = await db.query(`select rtem_t4_pk,rtem_t4_name,rtem_t4_key,rtem_t4_type,rtem_address from rtem_t4 where rtem_t3_pk=$1 order by id desc`,[req.body.t3])
+        let tag = ""
+        if(result2.rows[0].t3_tag!==null&&result2.rows[0].t3_tag!==undefined) tag = result2.rows[0].t3_tag
+        let result6 = await db.query(`select rka_pk,rka_title,rka_cover_key,rka_cover_type from rka_article where rka_tag like '%${tag}%';`)
         if(result.rows[0]===undefined){
             await db.release();
             return res.send("fail")
@@ -1105,12 +1136,52 @@ router.post("/iteminit",async(req,res)=>{
         let returnArray = {
             item:result.rows[0],
             detail:result2.rows[0],
-            list:result3.rows
+            list:result3.rows,
+            list2:result4.rows,
+            pick:result5.rows,
+            article:result6.rows
         }
         await db.release();
         return res.send(returnArray)
     }catch(err){
         console.log("error on itemsinit");
+        console.log(err)
+        return res.send("fail")
+    }
+})
+
+router.post("/vote",async(req,res)=>{
+    try{
+        console.log(req.body)
+        const db = await client.connect();
+        await db.query(`update rtem_t2 set t2_vote=t2_vote+1 where rtem_t2_pk=$1`,[req.body.t2])
+        if(req.body.t3==="default"){
+            await db.query(`update rtem_t3 set t3_vote=t3_vote+1 where rtem_t3_pk=(select rtem_t3_pk from rtem_t3 order by t3_vote desc limit 1)`)
+        }else{
+            await db.query(`update rtem_t3 set t3_vote=t3_vote+1 where rtem_t3_pk=$1`,[req.body.t3])
+        }
+        await db.release();
+        return res.send("success")
+    }catch(err){
+        console.log("error on itemsinit");
+        console.log(err)
+        return res.send("fail")
+    }
+})
+
+router.post("/rtemnaviinit",async(req,res)=>{
+    try{
+        console.log(req.body)
+        const db = await client.connect();
+        
+        let result = await db.query(`select rtem_t1_pk,rtem_t1_name from rtem_t1;`)
+        let returnArray = {
+            list:result.rows
+        }
+        await db.release();
+        return res.send(returnArray)
+    }catch(err){
+        console.log("error on rtemnaviinit");
         console.log(err)
         return res.send("fail")
     }

@@ -87,10 +87,10 @@
   .item_ex_level4_element > span{
     font-size: 1rem;
   }
-  .item_ex_level5 > span:nth-child(1){
+  .item_ex_level5 > div:first-child > span:nth-child(1){
     font-size: 1rem;
   }
-  .item_ex_level5 > span:nth-child(2){
+  .item_ex_level5 > div:first-child > span:nth-child(2){
     font-size: 1.5rem;
   }
   .item_ex_level61{

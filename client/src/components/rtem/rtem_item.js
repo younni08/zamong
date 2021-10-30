@@ -14,7 +14,6 @@ const Rtem_pick = (props) => {
 
     const init = () => {
         if(props.data===undefined) return 0
-        console.log(props)
         setArray(props.data)
         setTitle(props.data[0].rtem_t1_name)
     }

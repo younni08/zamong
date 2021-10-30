@@ -13,6 +13,19 @@ const Article = () => {
     const [page,setPage] = useState(1)
     const [loading,setLoading] = useState(false)
     const [listloading,setListLoading] = useState(false)
+    const downloadQR = () => {
+        const canvas = document.getElementById("getqr");
+        const pngUrl = canvas
+          .toDataURL("image/png")
+          .replace("image/png", "image/octet-stream");
+        let downloadLink = document.createElement("a");
+        downloadLink.href = pngUrl;
+        downloadLink.download = "qrcode.png";
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+      };
+      
     const init = async() => {
         setLoading(false)
         let url = "/api/mong/getArticle";
@@ -156,9 +169,10 @@ const Article = () => {
                             <div>
                                 <Qrcode value={"https://www.iroozamong.com/#/article?a="+info.rka_pk}
                                     size={100}
+                                    id="getqr"
                                     bgColor={"#FFFEF8"}
                                 />
-                                <span>QR코드 복사</span>
+                                <span onClick={downloadQR}>QR코드 다운로드</span>
                             </div>
                         </div>
                         <div className="article_level4">

@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState,useEffect } from "react";
 import parser from "html-react-parser"
 import ItemElement from "./item_element";
+import ItemElement2 from "./item_element_t4";
+import ItemElement3 from "./item_element_article";
 import Qrcode from "qrcode.react";
 
 const Item = (props) => {
@@ -15,18 +17,39 @@ const Item = (props) => {
     const [des3,setDes3] = useState("")
     const [des4,setDes4] = useState("")
     const [itempk,setitempk] = useState("")
+    const [list2,setList2] = useState([])
+    const [pick,setPick] = useState([])
+    const [article,setArticle] = useState([])
+    const [vote,setVote] = useState(0)
 
     useEffect(()=>{
         init()
     },[props])
-    
-    const init = async() => {
-        let url = "/api/mong/iteminit";
-        if(window.location.href.split("?c=")[1]===undefined) return alert("잘못된 접근입니다.")
-        let item_pk = window.location.href.split("?c=")[1]
-        setitempk(item_pk)
+
+    const downloadQR = () => {
+        const canvas = document.getElementById("getqr");
+        const pngUrl = canvas
+          .toDataURL("image/png")
+          .replace("image/png", "image/octet-stream");
+        let downloadLink = document.createElement("a");
+        downloadLink.href = pngUrl;
+        downloadLink.download = "qrcode.png";
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    };
+
+    const [clicked,setClick] = useState(false)
+    const voteup = async() => {
+        setClick(true)
+        if(clicked===true) return alert("이미 좋아요를 누르셨어요.")
+        setVote(vote+1)
+        let url = "/api/mong/vote";
+        let t2 = window.location.href.split("item?t2=")[1].split("&t3=")[0]
+        let t3 = window.location.href.split("&t3=")[1]
         let params = {
-            item:item_pk
+            t2:t2,
+            t3:t3
         }
         const config = {
             headers:{
@@ -34,7 +57,26 @@ const Item = (props) => {
             }
         }
         let res = await axios.post(url,params,config)
-
+        console.log(res.data)
+    }
+    
+    const init = async() => {
+        window.scroll(0,0)
+        let url = "/api/mong/iteminit";
+        if(window.location.href.split("?t2=")[1]===undefined) return alert("잘못된 접근입니다.")
+        let item_pk = window.location.href.split("item?t2=")[1].split("&t3=")[0]
+        let getitem = window.location.href.split("&t3=")[1]
+        setitempk(item_pk)
+        let params = {
+            item:item_pk,
+            t3:getitem
+        }
+        const config = {
+            headers:{
+                "content-type":"application/json"
+            }
+        }
+        let res = await axios.post(url,params,config)
         console.log(res.data)
         if(res.data==="fail") return alert("잘못된 접근입니다.")
         getimage(res.data.detail.rtem_t3_key,res.data.detail.rtem_t3_type)
@@ -45,6 +87,10 @@ const Item = (props) => {
         setDes4(res.data.detail.rtem_desc3)
         setDetail(res.data.detail)
         setItems(res.data.list)
+        setList2(res.data.list2)
+        setPick(res.data.pick)
+        setArticle(res.data.article)
+        setVote(res.data.detail.t3_vote)
     }
 
     const getimage = async(key,type) => {
@@ -67,8 +113,6 @@ const Item = (props) => {
             return setDefaultImage(true)
         }
     }
-
-    
 
     return (
         <div className="item">
@@ -114,8 +158,14 @@ const Item = (props) => {
                             </div>
                         </div>
                         <div className="item_ex_level5">
-                            <span>#001-1</span>
-                            <span>{detail.rtem_t3_name}</span>
+                            <div>
+                                <span>#001-1</span>
+                                <span>{detail.rtem_t3_name}</span>
+                            </div>
+                            <div onClick={voteup}>
+                                <span><i className="xi-heart xi-x"></i></span>
+                                <span>{vote}</span>
+                            </div>
                         </div>
                         <div className="item_ex_level6">
                             <div className="item_ex_level61">
@@ -293,9 +343,10 @@ const Item = (props) => {
                             <div>
                                 <Qrcode value={"https://www.iroozamong.com/#/item?c="+itempk}
                                     size={100}
+                                    id="getqr"
                                     bgColor={"#FFFEF8"}
                                 />
-                                <span>QR코드 복사</span>
+                                <span onClick={downloadQR}>QR코드 다운로드</span>
                             </div>
                         </div>
                         <div className="item_ex_level7">
@@ -312,24 +363,20 @@ const Item = (props) => {
                                 <span>이루자몽 PICK</span>
                             </div>
                             <div>
-                                <div className="item_ex_level8_element">
-                                    <div>
-                                        <img src="./pics/test.png" alt="test" />
-                                    </div>
-                                    <span>지구샵 대나무 칫솔</span>
-                                </div>
-                                <div className="item_ex_level8_element">
-                                    <div>
-                                        <img src="./pics/test.png" alt="test" />
-                                    </div>
-                                    <span>지구샵 대나무 칫솔</span>
-                                </div>
-                                <div className="item_ex_level8_element">
-                                    <div>
-                                        <img src="./pics/test.png" alt="test" />
-                                    </div>
-                                    <span>지구샵 대나무 칫솔</span>
-                                </div>
+                                {
+                                    pick?pick.map(c=>{
+                                        return (
+                                            <ItemElement2
+                                                key={c.rtem_t4_pk}
+                                                rtem_t4_pk={c.rtem_t4_pk}
+                                                rtem_address={c.rtem_address}
+                                                rtem_t4_key={c.rtem_t4_key}
+                                                rtem_t4_type={c.rtem_t4_type}
+                                                rtem_t4_name={c.rtem_t4_name}
+                                            />
+                                        )
+                                    }):""
+                                }
                             </div>
                         </div>
                         <div className="item_ex_level8">
@@ -338,24 +385,21 @@ const Item = (props) => {
                                 <span>함께쓰면 좋은 알-템</span>
                             </div>
                             <div>
-                                <div className="item_ex_level8_element">
-                                    <div>
-                                        <img src="./pics/test.png" alt="test" />
-                                    </div>
-                                    <span>지구샵 대나무 칫솔</span>
-                                </div>
-                                <div className="item_ex_level8_element">
-                                    <div>
-                                        <img src="./pics/test.png" alt="test" />
-                                    </div>
-                                    <span>지구샵 대나무 칫솔</span>
-                                </div>
-                                <div className="item_ex_level8_element">
-                                    <div>
-                                        <img src="./pics/test.png" alt="test" />
-                                    </div>
-                                    <span>지구샵 대나무 칫솔</span>
-                                </div>
+                                {
+                                    list2?list2.map(c=>{
+                                        return (
+                                            <ItemElement
+                                                key={c.rtem_t3_pk}
+                                                rtem_t3_pk={c.rtem_t3_pk}
+                                                rtem_t2_pk={item.rtem_t2_pk}
+                                                itempk={detail.rtem_t3_pk}
+                                                rtem_t3_key={c.rtem_t3_key}
+                                                rtem_t3_type={c.rtem_t3_type}
+                                                rtem_t3_name={c.rtem_t3_name}
+                                            />
+                                        )
+                                    }):""
+                                }
                             </div>
                         </div>
                         <div className="item_ex_level9">
@@ -364,24 +408,19 @@ const Item = (props) => {
                                 <span>읽어볼만한 알-까</span>
                             </div>
                             <div>
-                                <div className="item_ex_level9_element">
-                                    <div>
-                                        <img src="./pics/test.png" alt="test" />
-                                    </div>
-                                    <span>[알-까] 재활용 안되는 예쁜 쓰레기 …</span>
-                                </div>
-                                <div className="item_ex_level9_element">
-                                    <div>
-                                        <img src="./pics/test.png" alt="test" />
-                                    </div>
-                                    <span>[알-까] ESG 기업이 떠오른다…</span>
-                                </div>
-                                <div className="item_ex_level9_element">
-                                    <div>
-                                        <img src="./pics/test.png" alt="test" />
-                                    </div>
-                                    <span>[알-까] ESG 기업이 떠오른다…</span>
-                                </div>
+                                {
+                                    article?article.map(c=>{
+                                        return (
+                                            <ItemElement3
+                                                key={c.rka_pk}
+                                                rka_pk={c.rka_pk}
+                                                rka_cover_key={c.rka_cover_key}
+                                                rka_cover_type={c.rka_cover_type}
+                                                rka_title={c.rka_title}
+                                            />
+                                        )
+                                    }):""
+                                }
                             </div>
                         </div>
                         <div className="item_ex_level10">

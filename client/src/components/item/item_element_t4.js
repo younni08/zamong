@@ -1,7 +1,6 @@
 import React,{ useEffect, useMemo,useState } from "react";
 import parser from "html-react-parser"
 import axios from "axios"
-import {Link} from "react-router-dom"
 
 const Item_Element = (props) => {
     const [sample,setSample] = useState("")
@@ -29,37 +28,26 @@ const Item_Element = (props) => {
         }
     }
     
+    const goto = () => {
+        window.location.href="https://"+props.rtem_address;
+    }
+
     useMemo(()=>{
-        if(props.rtem_t3_key===undefined) return 0
-        if(props.rtem_t3_key==="default") return setDefaultImage(true)
-        getimage(props.rtem_t3_key,props.rtem_t3_type)
-    },[props.rtem_t3_key])
+        if(props.rtem_t4_key===undefined) return 0
+        if(props.rtem_t4_key==="default") return setDefaultImage(true)
+        getimage(props.rtem_t4_key,props.rtem_t4_type)
+    },[props.rtem_t4_key])
     
-    useEffect(()=>{
-        if(window.location.href.split("&t3=")[1]===props.rtem_t3_pk){
-            setMatch(true)
-        }else{
-            setMatch(false)
-        }
-    },[window.location.href])
     
     return (
-        <Link className="item_ex_level4_element" to={"/item?t2="+props.rtem_t2_pk+"&t3="+props.rtem_t3_pk}>
-            {
-                match?
-                <div className="on">
+        <div className="item_ex_level4_element" onClick={goto}>
+            <div>
                 {
                     defaultImage?"":parser(sample)
                 }
-                </div>:
-                <div>
-                    {
-                        defaultImage?"":parser(sample)
-                    }
-                </div>
-            }
-            <span>{props.rtem_t3_name}</span>
-        </Link>
+            </div>
+            <span>{props.rtem_t4_name}</span>
+        </div>
     )
 }
 

@@ -13,6 +13,9 @@ const Zamong = () => {
         init();
     },[])
 
+    const [t3tag,setT3tag] = useState("")
+    const handleT3tag = (e) => {setT3tag(e.target.value)}
+
     const init = async() => {
         let token = getCookie("token")
         let session = getCookie("session")
@@ -226,6 +229,7 @@ const Zamong = () => {
         formData.append("t3name",t3name)
         formData.append("t3madeof",q0)
         formData.append("t3body",q1)
+        formData.append("t3tag",t3tag)
 
         formData.append("t4cmt",q12);
         formData.append("t4r1",smong_r1);
@@ -481,6 +485,26 @@ const Zamong = () => {
                                         </div>
                                     </div>
                                 </div>
+                                <div className="mong_item_manager3">
+                                <div className="mong_item_general">
+                                    <div>
+                                        <span>테그*</span>
+                                        <span>,로 분리해주세요</span>
+                                    </div>
+                                    <div className="general_input">
+                                        <input type="text" onChange={handleT3tag} />
+                                    </div>
+                                </div>
+                                {/* <div className="mong_item_general">
+                                    <div>
+                                        <span>판매 아이템 사진*</span>
+                                        <span></span>
+                                    </div>
+                                    <div className="general_input">
+                                        <input type="file" className="image" id="mong_t4_image" />
+                                    </div>
+                                </div> */}
+                            </div>
                                 <div className="mong_item_general">
                                     <div>
                                         <span>R10*</span>
