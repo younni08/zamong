@@ -157,6 +157,7 @@
   .rtem_level3 > div{
     width:100%;
     padding:10px 0px;
+    overflow: hidden;
   }
   .rtem_level3 > div > a{
     width:240px;
