@@ -549,13 +549,61 @@ router.post("/shop_reg",upload.any(),async(req,res)=>{
 
 router.post("/getArticles",async(req,res)=>{
     try{
+        console.log(req.body)
         if(req.body.page===undefined||req.body.page===null) return res.send("fail")
         const db = await client.connect();
         let page_param = 0;
         if(req.body.page!==null){
             page_param = (Number(req.body.page)*10)-10;
         }
-        let result = await db.query(`select rka_pk,rka_title,rka_cate,zamong_pick from rka_article order by id desc limit 10 offset ${page_param};`)
+        let result = []
+        if(req.body.align==="recent"){
+            if(req.body.cate==="all"){
+                result = await db.query(`select rka_pk,rka_title,rka_cate,zamong_pick from rka_article order by id desc limit 10 offset ${page_param};`)
+            }else{
+                result = await db.query(`select rka_pk,rka_title,rka_cate,zamong_pick from rka_article where rka_cate like '%${req.body.cate}%' order by id desc limit 10 offset ${page_param};`)
+            }
+        }else{
+            if(req.body.cate==="all"){
+                result = await db.query(`select rka_pk,rka_title,rka_cate,zamong_pick from rka_article where order by rka_vote desc limit 10 offset ${page_param};`)
+            }else{
+                result = await db.query(`select rka_pk,rka_title,rka_cate,zamong_pick from rka_article where rka_cate like '%${req.body.cate}%' order by rka_vote desc limit 10 offset ${page_param};`)
+            }
+        }
+        let returnArray = {
+            list:result.rows
+        }
+        await db.release();
+        return res.send(returnArray)
+    }catch(err){
+        console.log("error on getArticles")
+        console.log(err)
+        return res.send("fail")
+    }
+})
+router.post("/getArticlesearch",async(req,res)=>{
+    try{
+        console.log(req.body)
+        if(req.body.page===undefined||req.body.page===null) return res.send("fail")
+        const db = await client.connect();
+        let page_param = 0;
+        if(req.body.page!==null){
+            page_param = (Number(req.body.page)*10)-10;
+        }
+        let result = []
+        if(req.body.align==="recent"){
+            if(req.body.cate==="all"){
+                result = await db.query(`select rka_pk,rka_title,rka_cate,zamong_pick from rka_article where rka_title like '%${req.body.query}%' order by id desc limit 10 offset ${page_param};`)
+            }else{
+                result = await db.query(`select rka_pk,rka_title,rka_cate,zamong_pick from rka_article where rka_cate like '%${req.body.cate}%' and rka_title like '%${req.body.query}%' order by id desc limit 10 offset ${page_param};`)
+            }
+        }else{
+            if(req.body.cate==="all"){
+                result = await db.query(`select rka_pk,rka_title,rka_cate,zamong_pick from rka_article where rka_title like '%${req.body.query}%' order by rka_vote desc limit 10 offset ${page_param};`)
+            }else{
+                result = await db.query(`select rka_pk,rka_title,rka_cate,zamong_pick from rka_article where rka_cate like '%${req.body.cate}%' and rka_title like '%${req.body.query}%' order by rka_vote desc limit 10 offset ${page_param};`)
+            }
+        }
         let returnArray = {
             list:result.rows
         }
@@ -681,12 +729,23 @@ router.post("/getArticle_pick",async(req,res)=>{
     }
 })
 
+router.post("/articlevote",async(req,res)=>{
+    try{
+        const db = await client.connect();
+        await db.query(`update rka_article set rka_vote=rka_vote+1 where rka_pk=$1`,[req.body.article_pk])
+        await db.release();
+        return res.send("success")
+    }catch(err){
+        return res.send("fail")
+    }
+})
+
 router.post("/getArticle", async(req,res)=>{
     try{
         if(req.body.article_pk===undefined||req.body.article_pk===null) return res.send("fail")
         console.log(req.body)
         const db = await client.connect();
-        await db.query(`update rka_article set rka_vote=rka_vote+1 where rka_pk=$1`,[req.body.article_pk])
+        
         let result = await db.query(`select rka_pk,rka_title,rka_tag,rka_content,rka_cover_key,rka_cover_type,rka_image_cnt,rka_image_key,rka_image_type,rka_file_key,rka_file_type,rka_vote,rka_date,rka_cate from rka_article where rka_pk=$1`,[req.body.article_pk])
         let temp = "알텐데"
         if(result.rows[0].rka_cate==="rtende"){
@@ -1151,6 +1210,7 @@ router.post("/iteminit",async(req,res)=>{
 })
 
 router.post("/vote",async(req,res)=>{
+    // item
     try{
         console.log(req.body)
         const db = await client.connect();
@@ -1160,6 +1220,20 @@ router.post("/vote",async(req,res)=>{
         }else{
             await db.query(`update rtem_t3 set t3_vote=t3_vote+1 where rtem_t3_pk=$1`,[req.body.t3])
         }
+        await db.release();
+        return res.send("success")
+    }catch(err){
+        console.log("error on itemsinit");
+        console.log(err)
+        return res.send("fail")
+    }
+})
+
+router.post("/shopvote",async(req,res)=>{
+    try{
+        console.log(req.body)
+        const db = await client.connect();
+        await db.query(`update shops set shop_vote=shop_vote+1 where shop_pk=$1`,[req.body.pk])
         await db.release();
         return res.send("success")
     }catch(err){
@@ -1260,9 +1334,21 @@ router.post("/shopinit",async(req,res)=>{
     try{
         console.log(req.body)
         const db = await client.connect();
-        let result = await db.query(`select k1.state_id,s1.title,s1.shop_cover_key,s1.shop_cover_type,s1.shop_body,s1.shop_address,s1.shop_web,s1.shop_tel,s1.shop_email,s1.shop_location from shops s1 inner join kstate k1 on s1.state_id=k1.state_name where shop_pk=$1;`,[req.body.shop_pk])
+        let result = await db.query(`select k1.state_id,s1.title,s1.shop_cover_key,s1.shop_cover_type,s1.shop_body,s1.shop_address,s1.shop_web,s1.shop_tel,s1.shop_email,s1.shop_location,s1.shop_vote,s1.shoptype from shops s1 inner join kstate k1 on s1.state_id=k1.state_name where shop_pk=$1;`,[req.body.shop_pk])
+        // let tagArray = []
+        let result2 = []
+        if(result.rows[0].shop_tag!==undefined&&result.rows[0].shop_tag!==null){
+            // tagArray = result.rows[0].split(",")
+            result2 = await db.query(`select rka_pk,rka_title,rka_cover_key,rka_cover_type from rka_article where rka_tag like '%${result.rows[0].shop_tag}%';`)
+        }
+        // for(let i=0;i<tagArray.length;i++){
+        // }
+        let returnArray = {
+            shop:result.rows[0],
+            article:result2.rows
+        }
         await db.release();
-        return res.send(result.rows[0])
+        return res.send(returnArray)
     }catch(err){
         console.log("error on shopinit");
         console.log(err)

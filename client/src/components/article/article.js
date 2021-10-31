@@ -1,9 +1,10 @@
 import axios from "axios";
-import React, { useEffect,useMemo,useState } from "react";
+import React, { useEffect,useState } from "react";
 import {Link} from "react-router-dom"
 import parser from "html-react-parser"
 import {yyyymmdd} from "./../common/dateReturn"
 import Qrcode from "qrcode.react";
+import { KakaoLinkDefault } from "react-kakao-link"
 
 const Article = () => {
     const [info,setInfo] = useState([])
@@ -12,7 +13,7 @@ const Article = () => {
     const [list,setList] = useState([])
     const [page,setPage] = useState(1)
     const [loading,setLoading] = useState(false)
-    const [listloading,setListLoading] = useState(false)
+    const [vote,setVote] = useState(0)
     const downloadQR = () => {
         const canvas = document.getElementById("getqr");
         const pngUrl = canvas
@@ -42,6 +43,7 @@ const Article = () => {
         console.log(res.data)
         if(res.data==="fail") return alert("잘못된 접근입니다.")
         setInfo(res.data)
+        setVote(res.data.rka_vote)
         // tag array로 변환해야함
         setTag([res.data.rka_tag])
         getImage(res.data.rka_cover_key,res.data.rka_cover_key)
@@ -91,10 +93,15 @@ const Article = () => {
         setPage(page + 1)
     }
 
-    const init2 = async() => {
-        let url = "/api/mong/getArticles";
+    const [clicked,setClick] = useState(false)
+    const voteup = async() => {
+        setClick(true)
+        if(clicked===true) return alert("이미 좋아요를 누르셨어요.")
+        setVote(vote+1)
+        let url = "/api/mong/vote";
+        let article_pk = window.location.href.split("article?a=")[1]
         let params = {
-            page:1
+            article_pk:article_pk
         }
         const config = {
             headers:{
@@ -102,6 +109,24 @@ const Article = () => {
             }
         }
         let res = await axios.post(url,params,config)
+        console.log(res.data)
+    }
+
+    const init2 = async() => {
+        let url = "/api/mong/getArticles";
+        let params = {
+            page:1,
+            align:"recent",
+            cate:"all"
+
+        }
+        const config = {
+            headers:{
+                "content-type":"application/json"
+            }
+        }
+        let res = await axios.post(url,params,config)
+        console.log(res.data)
         if(res.data==="fail") return alert("잘못된 접근입니다.")
         setList(res.data.list)
     }
@@ -131,6 +156,41 @@ const Article = () => {
         }
     }
 
+    const template = {
+        objectType: "feed",
+        content: {
+          title: "이루자몽",
+          description: "#친환경 #제로웨이스트 #이루자몽",
+          imageUrl:
+            "https://www.iroozamong.com/pics/rtende.svg",
+          link: {
+            mobileWebUrl: window.location.href,
+            webUrl: window.location.href,
+          },
+        },
+        social: {
+          likeCount: 286,
+          commentCount: 45,
+          sharedCount: 845,
+        },
+        buttons: [
+          {
+            title: "웹으로 보기",
+            link: {
+              mobileWebUrl: window.location.href,
+              webUrl: window.location.href,
+            }
+        }
+    ]}
+
+    const onClicFacebook = () => {
+        window.open('https://www.facebook.com/sharer/sharer.php?u='+window.location.href)
+    }
+    const shareTwitter = () => {
+        var sendText = "이루자몽";
+        window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + window.location.href);
+    }
+
     return (
         <div className="article">
             {
@@ -154,17 +214,22 @@ const Article = () => {
                             <div className="article_level2">
                                 <div>
                                     <span>[{info.rka_cate}] {info.rka_title}</span>
-                                    <div><i className="xi-heart xi-x"></i><span>{info.rka_vote}</span></div>
+                                    <div onClick={voteup}><i className="xi-heart xi-x"></i><span>{vote}</span></div>
                                 </div>
                                 <span>{yyyymmdd(info.rka_date)}</span>
                             </div>
                         </div>
                         <div className="item_ex_level_qr">
                             <div>
-                                <img src="./pics/kakaotalk.png" alt="link" />
-                                <img src="./pics/facebook.png" alt="link" />
-                                <img src="./pics/insta.png" alt="link" />
-                                <img src="./pics/link.png" alt="link" />
+                                <KakaoLinkDefault
+                                    className="template"
+                                    template={template}
+                                    jsKey={"2da59c35d299ade57ddccd5fef4bb3a3"}
+                                    >
+                                    <img src="./pics/kakaotalk.png" alt="link" />
+                                </KakaoLinkDefault>
+                                <img src="./pics/facebook.png" alt="link" onClick={onClicFacebook} />
+                                <img src="./pics/twitter.png" alt="link" onClick={shareTwitter} />
                             </div>
                             <div>
                                 <Qrcode value={"https://www.iroozamong.com/#/article?a="+info.rka_pk}

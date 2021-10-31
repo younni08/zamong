@@ -4,11 +4,15 @@ import Qrcode from "qrcode.react";
 import axios from "axios";
 import parser from "html-react-parser"
 import { RenderAfterNavermapsLoaded, NaverMap } from 'react-naver-maps'; 
+import ItemElement3 from "./shop_article";
+import { KakaoLinkDefault } from "react-kakao-link"
 
 const Shop = () => {
     const [expand,setExpand] = useState(false)
     const [expand2,setExpand2] = useState(false)
     const [loading,setLoading] = useState(false)
+    const [article,setArticle] = useState([])
+    const [vote,setVote] = useState(0)
     const [shop,setShop] = useState([])
     const handleExpand = () => {
         if(expand===false){
@@ -45,28 +49,83 @@ const Shop = () => {
         }
         let res = await axios.post(url,params,config)
         console.log(res.data)
-        setShop(res.data)
+        setShop(res.data.shop)
         setLoading(true)
-        getimage(res.data.shop_cover_key,res.data.shop_cover_type)
+        setVote(res.data.shop.shop_vote)
+        getimage(res.data.shop.shop_cover_key,res.data.shop.shop_cover_type)
+        setArticle(res.data.article)
+        handleRefill(res.data.shop.shoptype)
     }
 
-
+    
+    const [clicked,setClick] = useState(false)
+    const voteup = async() => {
+        if(clicked===true) return alert("이미 투표하셨습니다.")
+        setClick(true)
+        setVote(vote+1)
+        let url = "/api/mong/shopvote"
+        let getpk = window.location.href.split("shop?s=")[1]
+        let params = {
+            pk:getpk
+        }
+        const config = {
+            headers:{
+                "content-type":"application/json"
+            }
+        }
+        let res = await axios.post(url,params,config)
+        console.log(res.data)
+    }
 
     useEffect(()=>{
         init()
     },[])
 
-    const [refill1,setRefill1] = useState(false)
-    const [refill2,setRefill2] = useState(false)
-    const [refill3,setRefill3] = useState(false)
-    const [refill4,setRefill4] = useState(false)
-    const [refill5,setRefill5] = useState(false)
-    const [refill6,setRefill6] = useState(false)
-    const [refill7,setRefill7] = useState(false)
-    const [refill8,setRefill8] = useState(false)
-    const [refill9,setRefill9] = useState(false)
-    const handleRefillClick = () => {
+    const handleRefill = (string) => {
+        if(string.indexOf("세제")>-1) setRefill1on(true)
+        if(string.indexOf("화장품")>-1) setRefill2on(true)
+        if(string.indexOf("곡류")>-1) setRefill3on(true)
+        if(string.indexOf("팝업")>-1) setRefill4on(true)
+        if(string.indexOf("반려")>-1) setRefill5on(true)
+        if(string.indexOf("비건")>-1) setRefill6on(true)
+        if(string.indexOf("무포장")>-1) setRefill7on(true)
+        if(string.indexOf("공작소")>-1) setRefill8on(true)
+    }
 
+    const [refill1,setRefill1] = useState(false)
+    const [refill1on,setRefill1on] = useState(false)
+    const [refill2,setRefill2] = useState(false)
+    const [refill2on,setRefill2on] = useState(false)
+    const [refill3,setRefill3] = useState(false)
+    const [refill3on,setRefill3on] = useState(false)
+    const [refill4,setRefill4] = useState(false)
+    const [refill4on,setRefill4on] = useState(false)
+    const [refill5,setRefill5] = useState(false)
+    const [refill5on,setRefill5on] = useState(false)
+    const [refill6,setRefill6] = useState(false)
+    const [refill6on,setRefill6on] = useState(false)
+    const [refill7,setRefill7] = useState(false)
+    const [refill7on,setRefill7on] = useState(false)
+    const [refill8,setRefill8] = useState(false)
+    const [refill8on,setRefill8on] = useState(false)
+    const handleRefillClick = (e) => {
+        if(e.currentTarget.getAttribute("id")==="shop_refill1"){setRefill1(true);setExpand2(true);}
+        if(e.currentTarget.getAttribute("id")==="shop_refill2"){setRefill2(true);setExpand2(true);}
+        if(e.currentTarget.getAttribute("id")==="shop_refill3"){setRefill3(true);setExpand2(true);}
+        if(e.currentTarget.getAttribute("id")==="shop_refill4"){setRefill4(true);setExpand2(true);}
+        if(e.currentTarget.getAttribute("id")==="shop_refill5"){setRefill5(true);setExpand2(true);}
+        if(e.currentTarget.getAttribute("id")==="shop_refill6"){setRefill6(true);setExpand2(true);}
+        if(e.currentTarget.getAttribute("id")==="shop_refill7"){setRefill7(true);setExpand2(true);}
+        if(e.currentTarget.getAttribute("id")==="shop_refill8"){setRefill8(true);setExpand2(true);}
+
+        if(e.currentTarget.getAttribute("id")==="shop_refill1on"){setRefill1(false);setExpand2(false);}
+        if(e.currentTarget.getAttribute("id")==="shop_refill2on"){setRefill2(false);setExpand2(false);}
+        if(e.currentTarget.getAttribute("id")==="shop_refill3on"){setRefill3(false);setExpand2(false);}
+        if(e.currentTarget.getAttribute("id")==="shop_refill4on"){setRefill4(false);setExpand2(false);}
+        if(e.currentTarget.getAttribute("id")==="shop_refill5on"){setRefill5(false);setExpand2(false);}
+        if(e.currentTarget.getAttribute("id")==="shop_refill6on"){setRefill6(false);setExpand2(false);}
+        if(e.currentTarget.getAttribute("id")==="shop_refill7on"){setRefill7(false);setExpand2(false);}
+        if(e.currentTarget.getAttribute("id")==="shop_refill8on"){setRefill8(false);setExpand2(false);}
     }
 
     
@@ -88,6 +147,41 @@ const Shop = () => {
             let ttt = '<img src="data:'+type.replace("#",'').replace(",",'')+';base64,'+ res.data + '">'
             return setSample(ttt)
         }
+    }
+
+    const template = {
+        objectType: "feed",
+        content: {
+          title: "이루자몽",
+          description: "#친환경 #제로웨이스트 #이루자몽",
+          imageUrl:
+            "https://www.iroozamong.com/pics/rtende.svg",
+          link: {
+            mobileWebUrl: window.location.href,
+            webUrl: window.location.href,
+          },
+        },
+        social: {
+          likeCount: 286,
+          commentCount: 45,
+          sharedCount: 845,
+        },
+        buttons: [
+          {
+            title: "웹으로 보기",
+            link: {
+              mobileWebUrl: window.location.href,
+              webUrl: window.location.href,
+            }
+        }
+    ]}
+
+    const onClicFacebook = () => {
+        window.open('https://www.facebook.com/sharer/sharer.php?u='+window.location.href)
+    }
+    const shareTwitter = () => {
+        var sendText = "이루자몽";
+        window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + window.location.href);
     }
 
     return (
@@ -113,9 +207,9 @@ const Shop = () => {
                         <div>
                             <div className="shop_level2tablet">
                                 <span>{shop.title}</span>
-                                <div>
+                                <div onClick={voteup}>
                                     <span><i className="xi-heart"></i></span>
-                                    <span>0</span>
+                                    <span>{vote}</span>
                                 </div>
                             </div>
                             <div className="shop_level4tablet">
@@ -141,11 +235,30 @@ const Shop = () => {
                         </div>
                     </div>
                     <div className="shop_level3">
-                        <img src="./pics/refill1.png" alt="refill" id="shop_refill1" onClick={handleRefillClick} />
-                        <img src="./pics/refill2.png" alt="refill" id="shop_refill2" onClick={handleRefillClick} />
-                        <img src="./pics/refill3.png" alt="refill" id="shop_refill3" onClick={handleRefillClick} />
-                        <img src="./pics/refill4.png" alt="refill" id="shop_refill4" onClick={handleRefillClick} />
-                        <img src="./pics/refill5.png" alt="refill" id="shop_refill5" onClick={handleRefillClick} />
+                        {
+                            refill1on?refill1?<img src="./pics/refill1on.png" alt="refill" id="shop_refill1on" onClick={handleRefillClick} />:<img src="./pics/refill1.png" alt="refill" id="shop_refill1" onClick={handleRefillClick} />:""
+                        }
+                        {
+                            refill2on?refill2?<img src="./pics/refill2on.png" alt="refill" id="shop_refill2on" onClick={handleRefillClick} />:<img src="./pics/refill2.png" alt="refill" id="shop_refill2" onClick={handleRefillClick} />:""
+                        }
+                        {
+                            refill3on?refill3?<img src="./pics/refill3on.png" alt="refill" id="shop_refill3on" onClick={handleRefillClick} />:<img src="./pics/refill3.png" alt="refill" id="shop_refill3" onClick={handleRefillClick} />:""
+                        }
+                        {
+                            refill4on?refill4?<img src="./pics/refill4on.png" alt="refill" id="shop_refill4on" onClick={handleRefillClick} />:<img src="./pics/refill4.png" alt="refill" id="shop_refill4" onClick={handleRefillClick} />:""
+                        }
+                        {
+                            refill5on?refill5?<img src="./pics/refill5on.png" alt="refill" id="shop_refill5on" onClick={handleRefillClick} />:<img src="./pics/refill5.png" alt="refill" id="shop_refill5" onClick={handleRefillClick} />:""
+                        }
+                        {
+                            refill6on?refill6?<img src="./pics/refill6on.png" alt="refill" id="shop_refill6on" onClick={handleRefillClick} />:<img src="./pics/refill6.png" alt="refill" id="shop_refill6" onClick={handleRefillClick} />:""
+                        }
+                        {
+                            refill7on?refill7?<img src="./pics/refill7on.png" alt="refill" id="shop_refill7on" onClick={handleRefillClick} />:<img src="./pics/refill7.png" alt="refill" id="shop_refill7" onClick={handleRefillClick} />:""
+                        }
+                        {
+                            refill8on?refill8?<img src="./pics/refill8on.png" alt="refill" id="shop_refill8on" onClick={handleRefillClick} />:<img src="./pics/refill8.png" alt="refill" id="shop_refill8" onClick={handleRefillClick} />:""
+                        }
                     </div>
                     {
                         expand2?<div className="shop_level33">
@@ -196,10 +309,15 @@ const Shop = () => {
                     </div>
                     <div className="item_ex_level_qr">
                         <div>
-                            <img src="./pics/kakaotalk.png" alt="link" />
-                            <img src="./pics/facebook.png" alt="link" />
-                            <img src="./pics/insta.png" alt="link" />
-                            <img src="./pics/link.png" alt="link" />
+                            <KakaoLinkDefault
+                                className="template"
+                                template={template}
+                                jsKey={"2da59c35d299ade57ddccd5fef4bb3a3"}
+                                >
+                                <img src="./pics/kakaotalk.png" alt="link" />
+                            </KakaoLinkDefault>
+                            <img src="./pics/facebook.png" alt="link" onClick={onClicFacebook} />
+                            <img src="./pics/twitter.png" alt="link" onClick={shareTwitter} />
                         </div>
                         <div>
                             <Qrcode value={"https://www.iroozamong.com/#/shop"}
@@ -216,8 +334,19 @@ const Shop = () => {
                             <span>읽을 거리</span>
                         </div>
                         <div>
-                            <img src="./pics/test.png" alt="link" />
-                            <span>test</span>
+                            {
+                                article?article.map(c=>{
+                                    return (
+                                        <ItemElement3
+                                            key={c.rka_pk}
+                                            rka_pk={c.rka_pk}
+                                            rka_cover_key={c.rka_cover_key}
+                                            rka_cover_type={c.rka_cover_type}
+                                            rka_title={c.rka_title}
+                                        />
+                                    )
+                                }):""
+                            }
                         </div>
                     </div>
                 </div>

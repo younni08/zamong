@@ -15,6 +15,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-flip-page": "^1.6.4",
+    "react-kakao-link": "^0.1.0",
     "react-multi-carousel": "^2.6.5",
     "react-naver-maps": "0.0.13",
     "react-quill": "^1.3.5",

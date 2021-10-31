@@ -227,6 +227,7 @@ p{
   display:flex;
   color:#F27459;
   font-size:12px;
+  cursor: pointer;
 }
 .shop_level2tablet > div > span:first-child{
   display:block;
@@ -240,6 +241,7 @@ p{
 .shop_level3 > img{
   height:45px;
   margin:0px 10px 0px 0px;
+  cursor: pointer;
 }
 .shop_level33{
   display: flex;
@@ -344,12 +346,17 @@ p{
 }
 .shop_level7 > div:last-child{
   display:flex;
+  overflow-x: scroll;
+  width:100%;
+}
+.shop_level7 > div > div:last-child{
+  display:flex;
   flex-direction: column;
   width:calc(100% - 40px);
   margin:10px 0px 50px 0px;
   padding:0px 0px 0px 40px;
 }
-.shop_level7 > div:last-child > img{
+.shop_level7 > div > div:last-child > img{
   width:200px;
   height: 200px;
   border:solid 1px #000;
@@ -661,6 +668,7 @@ p{
   justify-content: space-between;
   width:calc(100% - 40px);
   padding:10px 20px;
+  overflow-x: scroll;
 }
 .rtem_level3 > div > a{
   display:flex;
@@ -669,6 +677,7 @@ p{
   background:#00B775;
   width:calc(50vw - 25px);
   height:calc(50vw - 25px);
+  margin:0px 10px 0px 0px;
 }
 .rtem_level3 > div > a img{
   width:calc(50vw - 25px);
@@ -1345,6 +1354,7 @@ p{
 }
 .container img{
   width:calc(50vw - 36px);
+  height:calc(50vw - 36px);
 }
 .container{
   display:flex;
@@ -1406,7 +1416,7 @@ p{
   display:flex;
   width:calc(100% - 20px);
   padding:0px 0px 0px 20px;
-  overflow: hidden;
+  overflow-x: scroll;
 }
 .item_ex_level4_element{
   display:flex;
@@ -1613,7 +1623,7 @@ p{
   width:calc(100% - 120px);
   /* justify-content: space-between; */
 }
-.item_ex_level_qr > div:first-child > img{
+.item_ex_level_qr > div:first-child img{
   width:30px;
   height:30px;
   margin:0px 10px 0px 0px;
@@ -1656,7 +1666,7 @@ p{
   display:flex;
   width:calc(100% - 55px);
   padding:5px 0px 5px 55px;
-  overflow:hidden;
+  overflow-x:scroll;
 }
 .item_ex_level8_element{
   display:flex;
@@ -3129,18 +3139,6 @@ p{
 }
 .board_expand > div:first-child{
   border-top: solid 1px #000;
-  background:#2A5EBC;
-  color:#fff;
-}
-.board_expand > div:first-child > input{
-  width:100%;
-  background:#2A5EBC;
-  border:none;
-  color:#fff;
-  letter-spacing: 1px;
-}
-.board_expand > div:first-child > input:focus{
-  outline: none;
 }
 .board_main{
   display:flex;
@@ -3166,8 +3164,11 @@ p{
 .board_level1 > input::placeholder{
   color:#fff;
 }
-.board_level1 > span{
+.board_level1 > button{
   color:#fff;
+  background:#2A5EBC;
+  border:none;
+
 }
 .board_level12{
   display:flex;
@@ -3246,20 +3247,14 @@ p{
 }
 .board_level2 > div{
   display:flex;
+}
+.board_level2 > div > div{
+  display:flex;
   font-size:13px;
+  margin:0px 10px;
 }
-.board_level2 > div >  div{
-  display:flex;
-  align-items: center;
-}
-.board_level2 > div >  div > span:nth-child(1){
-  display:flex;
-  margin:0px 0px 0px 20px;
-  letter-spacing:2px;
-}
-.board_level2 > div >  div > span:nth-child(2){
-  display:flex;
-  margin:0px 0px 0px 10px;
+.board_level2 select{
+  border:none;
 }
 .board_level3{
   display:flex;

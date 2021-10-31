@@ -21,6 +21,7 @@ import MapRegister from "./map_register";
 import MapScale from "./map_scale";
 import axios from "axios";
 import Qrcode from "qrcode.react";
+import { KakaoLinkDefault } from "react-kakao-link"
 
 const MapState = () => {
     const [expand,setExpand] = useState(false)
@@ -122,6 +123,41 @@ const MapState = () => {
     useEffect(()=>{
         init();
     },[window.location.href])
+
+    const template = {
+        objectType: "feed",
+        content: {
+          title: "이루자몽",
+          description: "#친환경 #제로웨이스트 #이루자몽",
+          imageUrl:
+            "https://www.iroozamong.com/pics/rtende.svg",
+          link: {
+            mobileWebUrl: window.location.href,
+            webUrl: window.location.href,
+          },
+        },
+        social: {
+          likeCount: 286,
+          commentCount: 45,
+          sharedCount: 845,
+        },
+        buttons: [
+          {
+            title: "웹으로 보기",
+            link: {
+              mobileWebUrl: window.location.href,
+              webUrl: window.location.href,
+            }
+        }
+    ]}
+
+    const onClicFacebook = () => {
+        window.open('https://www.facebook.com/sharer/sharer.php?u='+window.location.href)
+    }
+    const shareTwitter = () => {
+        var sendText = "이루자몽";
+        window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + window.location.href);
+    }
 
     return (
         <div className="map">
@@ -241,10 +277,15 @@ const MapState = () => {
                         </div>
                         <div className="item_ex_level_qr">
                             <div>
-                                <img src="./pics/kakaotalk.png" alt="link" />
-                                <img src="./pics/facebook.png" alt="link" />
-                                <img src="./pics/insta.png" alt="link" />
-                                <img src="./pics/link.png" alt="link" />
+                                <KakaoLinkDefault
+                                    className="template"
+                                    template={template}
+                                    jsKey={"2da59c35d299ade57ddccd5fef4bb3a3"}
+                                    >
+                                    <img src="./pics/kakaotalk.png" alt="link" />
+                                </KakaoLinkDefault>
+                                <img src="./pics/facebook.png" alt="link" onClick={onClicFacebook} />
+                                <img src="./pics/twitter.png" alt="link" onClick={shareTwitter} />
                             </div>
                             <div>
                                 <Qrcode value={"https://www.iroozamong.com/#/state?s="+cstate}

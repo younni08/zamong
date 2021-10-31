@@ -8,6 +8,7 @@ import Item from "./components/item/item"
 import Index2 from "./components/index/index2"
 import Article from "./components/article/article"
 import Board from "./components/board/board"
+import Boardsearch from "./components/board/board_search"
 
 import Map from "./components/map/map"
 import ShopList from "./components/map/shoplist"
@@ -41,6 +42,7 @@ const Root = () => {
                 <Route exact path="/index" component={Index2} />
                 <Route path ="/rtende" component={Rtende} />
                 <Route path ="/board" component={Board} />
+                <Route path ="/boardsearch" component={Boardsearch} />
                 <Route path ="/Rtem" component={Rtem} />
                 <Route path ="/rtem_search" component={RtemSearch} />
                 <Route path ="/rtemlist" component={RtemT1} />

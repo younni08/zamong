@@ -10,7 +10,7 @@ const Board = () => {
     const [list,setList] = useState([])
     const [align,setAlign] = useState("recent")
     const [cate,setCate] = useState("all")
-    const [redirect,setRedirect] = useState(false)
+    const [input,setInput] = useState("")
 
     const handleExpand = () => {
         if(expand===false){
@@ -28,12 +28,16 @@ const Board = () => {
 
     useEffect(()=>{
         init();
-    },[page,cate,align])
+    },[page,cate,align,window.location.href])
 
 
     const init = async() => {
-        let url = "/api/mong/getArticles";
+        let query = window.location.href.split("q=")[1]
+        query = decodeURI(query)
+        if(input!=="") query = input
+        let url = "/api/mong/getArticlesearch";
         let params = {
+            query:query,
             page:page,
             align:align,
             cate:cate
@@ -105,12 +109,10 @@ const Board = () => {
         }
     }
 
-    const [input,setInput] = useState("")
+    
 
     const handleInput = (e) => {setInput(e.target.value)}
-    const handleSubmit = () => {
-        setRedirect(true)
-    }
+  
 
     const handleAlign = (e) => {
         setAlign(e.target.value)
@@ -165,13 +167,10 @@ const Board = () => {
                         <span><i className="xi-arrow-up xi-rotate-45"></i></span>
                     </div>
                 </div>
-                {
-                    redirect?<Redirect to={"/boardsearch?q="+input} />:""
-                }
                 <div className="board_main">
                     <form className="board_level1">
                         <input type="text" placeholder="예) 대나무 칫솔" onChange={handleInput} />
-                        <button onClick={handleSubmit}><i className="xi-search"></i></button>
+                        <button onClick={init}><i className="xi-search"></i></button>
                     </form>
                     <div className="board_level12">
                         <div>
