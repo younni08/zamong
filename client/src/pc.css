@@ -26,6 +26,13 @@
     padding:10px;
     width:180px;
   }
+  .project > div > span{
+    border-bottom: solid 1px #000;
+    font-size:20px;
+  }
+  .about > div > span{
+    font-size:20px;
+  }
   /* ---------------------------------- article -------------------------------------- */
   .board_level12 > div:first-child{
     height:500px;
@@ -54,6 +61,9 @@
     cursor: pointer;
   }
   /* ---------------------------------- article -------------------------------------- */
+  .map_main{
+    border-top:solid 1px #000;
+  }
   .map_main > div{
     flex-direction: row;
   }
@@ -329,7 +339,11 @@
     padding:0px 15px;
   }
   .map_expand > div:nth-child(2n-1), .map_expand > div:nth-child(1), .map_expand > div:nth-child(2){
-    border:solid 1px #ababab;
+    /* border:solid 1px #ababab; */
+    /* border:none; */
+  }
+  .map_main_table > div.normal:first-child{
+    /* border-top:none; */
   }
   .map_main_table > div.normal > div{
     width:200px;
@@ -343,7 +357,17 @@
     width: 458px;
     font-size: 16px;
     border:none;
-    border:solid 1px #ababab;
+    border:solid 1px #000;
+    border-bottom:none;
+  }
+  .map_expand > div:nth-child(2n-1){
+    border-right:none;
+  }
+  .map_expand > div:nth-child(17){
+    border-bottom:solid 1px #000;
+  }
+  .map_expand > div:last-child{
+    border-bottom:solid 1px #000;
   }
   .Map_scale{
     padding:20px;

@@ -30,7 +30,7 @@ p{
 .navi_level1{
   display:flex;
   justify-content: space-between;
-  border-bottom:solid 2px #707070;
+  border-bottom:solid 1px #000;
   z-index: 10;
   background:#FFFEF8;
 }
@@ -73,7 +73,7 @@ p{
   font-size:20px;
   font-weight:bold;
   color:#001717;
-  border-bottom:solid 2px #707070;
+  border-bottom:solid 1px #000;
   text-decoration: none;
 }
 .navi_level2 > a > span:first-child{
@@ -413,7 +413,7 @@ p{
   padding:20px;
   font-size: 0.8rem;
   font-weight: bold;
-  border-bottom: solid 2px #000;
+  border-bottom: solid 1px #000;
 }
 .project_main{
   display:flex;
