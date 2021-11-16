@@ -125,7 +125,7 @@ const Zamong = () => {
                             <div className="mong_item_manager3">
                                 <div className="mong_item_general">
                                     <div>
-                                        <span>테그*</span>
+                                        <span>태그*</span>
                                         <span>,로 분리해주세요</span>
                                     </div>
                                     <div className="general_input">

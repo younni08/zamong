@@ -3,7 +3,11 @@
   body, .root{
     background: #fff;
   }
+  .root{
+    flex-direction: row;
+  }
   .navi_level1{
+    display:none;
     background: #fff;
   }
   .rtende, .map_expand, .map > div > div:first-child, .item{
@@ -12,8 +16,31 @@
   .navi{
     justify-content: center;
   }
-  .navi > div{
-    width:1000px;
+  .navi,.navi > div{
+    width:200px;
+    border-right:solid 1px #000;
+  }
+  .navi_pc{
+    display:flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  .navi_pc > a > img{
+    width:100px;
+  }
+  .navi_pc > a:first-child{
+    justify-content: center;
+    align-items: center;
+  }
+  .navi_pc > a{
+    display:flex;
+    width:139px;
+    border-bottom: solid 1px #000;
+    color:#000;
+    text-decoration: none;
+    /* justify-content: center; */
+    padding:10px 30px;
+    font-weight: bold;
   }
   .navi_level2{
     width:100%;
@@ -62,16 +89,20 @@
   }
   /* ---------------------------------- article -------------------------------------- */
   .map_main{
-    border-top:solid 1px #000;
+    /* border-top:solid 1px #000; */
+    /* flex-direction: column; */
   }
   .map_main > div{
-    flex-direction: row;
+    align-items: center;
   }
   .map_main > div > div:first-child{
-    width:500px;
+    width:100%;
   }
   .map_main > div > div:last-child{
-    width:500px;
+    width:800px;
+  }
+  .map_main > div > div > span.title{
+    display:none;
   }
   .map_popup{
     width:400px;
@@ -85,7 +116,20 @@
   }
   .map_main_list{
     height:610px;
-    overflow-y: scroll;
+    /* overflow-y: ; */
+  }
+  .map_main_navi > div{
+    overflow-x: hidden;
+  }
+  .map_main_navi > div > div > div > span{
+    font-size:0.8rem;
+  }
+  .map_main_navi > div > div > div > img{
+    width:57px;
+    height:55px;
+  }
+  .map_main_list_element > div:nth-child(1) > img{
+    
   }
   /* ---------------------------------- article -------------------------------------- */
   .shop_tablet{
@@ -138,6 +182,12 @@
     font-size: 1rem;
   }
   /* ---------------------------------- rtem -------------------------------------- */
+  .rtem_main{
+    margin:70px 0px 0px 0px;
+  }
+  .rtem_level0, .rtem_level1{
+    display:none;
+  }
   .rtem_level2 > div:first-child{
     height:250px;
   }
@@ -225,6 +275,18 @@
     height: 30px;
     margin:0px 10px 0px 0px;
   }
+  .item_ex_level2{
+    margin:30px 0px 10px 0px;
+  }
+  .item_ex_level2 > span{
+    font-size:1.3rem;
+  }
+  .item_ex_level4 > div{
+    overflow-x: hidden;
+  }
+  .item_ex_level5 > div:last-child{
+    display:none;
+  }
   .article_level4{
     width:100%;
     padding:0px;
@@ -237,7 +299,7 @@
   .rtende{
     justify-content: center;
   }
-  .item > div, .article > div, .board > div, .about > div, .map > div, .rtem > div, .project > div, .rtende > div{
+  .item > div, .article > div, .board > div, .about > div, .rtem > div, .project > div, .rtende > div{
     width:1000px;
   }
   .rtende_subnavi{
@@ -384,6 +446,22 @@
   .shoplist > div{
     width:1000px;
   }
+  .map > div{
+    width:100%;
+  }
+  .map > div > div:first-child{
+    display:none;
+  }
+  .map_korea{
+    display:flex;
+    justify-content: center;
+    width:100%;
+    padding:60px 0px 60px 0px;
+    background: #F27459;
+  }
+  .map_korea > svg{
+    width:500px;
+  }
   /* ---------------------------------- index -------------------------------------- */
   .index{
     justify-content: center;
@@ -516,6 +594,12 @@
   }
   .item_ex_level10 > div{
     width:400px;
+  }
+  .item > div{
+    margin:80px 0px 0px 0px;
+  }
+  .item > div > div:first-child{
+    display:none;
   }
   .index2 > div{
     width:1000px;
