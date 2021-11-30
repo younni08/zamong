@@ -10,7 +10,7 @@
     display:none;
     background: #fff;
   }
-  .rtende, .map_expand, .map > div > div:first-child, .item{
+  .rtende, .map_expand, .map > div > div:first-child{
     background: #fff;
   }
   .navi{
@@ -106,13 +106,13 @@
   }
   .map_popup{
     width:400px;
+    top:35vh;
+    right:calc(50% - 200px);
+    margin:0px;
   }
   .map_popup > div{
     width:370px;
     cursor: pointer;
-  }
-  .map_popup{
-    margin:20vh 0px 0px 50px;
   }
   .map_main_list{
     height:610px;
@@ -128,8 +128,16 @@
     width:57px;
     height:55px;
   }
+  .map_main_list_element > div:nth-child(1){
+    width:200px;
+    height:200px;
+  }
   .map_main_list_element > div:nth-child(1) > img{
-    
+    width:200px;
+    height:200px;
+  }
+  .map_main_list_element > div:nth-child(2){
+    width: calc(100% - 220px);
   }
   /* ---------------------------------- article -------------------------------------- */
   .shop_tablet{
@@ -182,6 +190,9 @@
     font-size: 1rem;
   }
   /* ---------------------------------- rtem -------------------------------------- */
+  .rtem{
+    background: #FFFEF8;
+  }
   .rtem_main{
     margin:70px 0px 0px 0px;
   }
@@ -246,7 +257,7 @@
   /* ---------------------------------- article -------------------------------------- */
   .article_tablet{
     display:flex;
-    border-top:solid 1px #000;
+    margin:50px 0px 0px 0px;
   }
   .article_level1{
     width:500px;
@@ -283,6 +294,8 @@
   }
   .item_ex_level4 > div{
     overflow-x: hidden;
+    padding:0px;
+    width:100%;
   }
   .item_ex_level5 > div:last-child{
     display:none;
@@ -294,6 +307,20 @@
   .article_level6{
     width:100%;
     margin:10px 0px;
+  }
+  .item_ex_level4_element > div{
+    height:240px;
+    width:240px;
+    border:solid 2px #000
+  }
+  .item_ex_level4_element > div.on{
+    border: solid 2px #00B775;
+  }
+  .item_ex_level4_element > div img{
+    height:240px;
+  }
+  .item_ex_level4_element > span{
+    font-size:1rem;
   }
   /* ---------------------------------- index -------------------------------------- */
   .rtende{
@@ -370,7 +397,11 @@
     border:none;
   }
   .about_video{
-    height:500px;
+    height:562px;
+  }
+  .about_youtube{
+    height:562px;
+    width:1000px;
   }
   .project_main span{
     display:flex;
@@ -447,7 +478,8 @@
     width:1000px;
   }
   .map > div{
-    width:100%;
+    width:1000px;
+    margin:50px 0px 0px 0px;
   }
   .map > div > div:first-child{
     display:none;
@@ -461,6 +493,13 @@
   }
   .map_korea > svg{
     width:500px;
+  }
+  .shop_level7 > div:last-child{
+    overflow:hidden;
+    margin:0px 0px 20vh 0px;
+  }
+  .article > div > div:first-child{
+    display:none;
   }
   /* ---------------------------------- index -------------------------------------- */
   .index{
@@ -520,6 +559,9 @@
   .index_level4 > a:nth-child(2) > div > span{
     border:none;
   }
+  .item{
+    background: #FFFEF8;
+  }
   .item_main > div:first-child > span{
     font-weight: bold;
     font-size: 1.3rem;
@@ -574,6 +616,7 @@
   .item_ex_level5{
     width:100%;
     padding:20px 0px;
+    margin:20px 0px 0px 0px;
   }
   .item_ex_level63, .item_ex_level62, .item_ex_level61{
     margin:0px;
@@ -604,13 +647,28 @@
   .index2 > div{
     width:1000px;
   }
-  .index2_star, .index2_video{
+  .index2_star{
+    margin:50px 0px 0px 0px;
     width:1000px;
     height:500px;
+  }
+  .index2_video{
+    display:flex;
+    margin:20px 0px 0px 0px;
+    width:1000px;
+    height:500px;
+  }
+  .index_youtube{
+    margin:20px 0px 0px 0px;
+    width:1000px;
+    height:562px;
   }
   .index2_star0{
     left:480px;
     bottom:200px;
+  }
+  .item_ex_level8 > div:nth-child(2){
+    overflow: hidden;
   }
   
 @keyframes ani1{

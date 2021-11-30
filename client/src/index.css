@@ -22,6 +22,9 @@ p{
   display:flex;
   width:100%;
 }
+.navi_pc{
+  display:none;
+}
 .navi > div{
   display:flex;
   width:100%;
@@ -515,6 +518,11 @@ p{
   background: #fff;
   height:55vw;
 }
+.about_youtube{
+  display:flex;
+  width:100vw;
+  height:55vw;
+}
 .about_main{
   display:flex;
   flex-direction: column;
@@ -886,8 +894,12 @@ p{
   display:flex;
   justify-content: center;
   align-items: center;
-  background:#f4f4f4;
-  height: 150vw;
+  /* background:#f4f4f4; */
+  height: 56vw;
+  width: 100vw;
+}
+.index_youtube{
+  height: 56vw;
   width: 100vw;
 }
 .index2_star{
@@ -2576,6 +2588,8 @@ p{
   overflow:hidden;
 }
 .map_main > div > div{
+  display:flex;
+  flex-direction: column;
   width:100%;
   position:relative;
 }

@@ -21,7 +21,7 @@ const Map = () => {
     }
 
     const mapPop = () => {
-        document.getElementById("map_popupanimation").style.margin="-35vh 0px 0px 0px"
+        document.getElementById("map_popupanimation").style.top="-500px"
     }
 
     const init = async() => {

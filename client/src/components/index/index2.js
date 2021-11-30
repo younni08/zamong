@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {Link} from "react-router-dom"
+import YouTube from 'react-youtube';
 
 const Index = () => {
     const [line1,setLine1] = useState("Relate")
@@ -40,11 +41,17 @@ const Index = () => {
     const handleClick9 = () => {reset();setR9(true);setLine1("Rot");setLine2("퇴비화하기");}
     const handleClick10 = () => {reset();setR10(true);setLine1("Recycle");setLine2("재활용하기");}
 
+    const opts = {
+        playerVars: {
+          autoplay: 1,
+        },
+    };
+
     return (
         <div className="index2">
             <div>
                 <div className="index2_video">
-                    <span>알텐데 영상</span>
+                    <YouTube videoId="bMM2yjkbdmU" opts={opts} className="index_youtube" />
                 </div>
                 <div className="index2_star">
                     <div className="index2_star0">

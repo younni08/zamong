@@ -1,13 +1,20 @@
 import React from "react"
 import {Link} from "react-router-dom"
+import YouTube from 'react-youtube';
 
 const About = () => {
+    const opts = {
+        playerVars: {
+          autoplay: 1,
+        },
+    };
+
     return (
         <div className="about">
             <div>
                 <span>About</span>
                 <div className="about_video">
-                    <span>영상</span>
+                    <YouTube videoId="TFmAyR1G_Vw" opts={opts} className="about_youtube" />
                 </div>
                 <div className="about_main">
                     <div className="about_element">
